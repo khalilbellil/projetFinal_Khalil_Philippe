@@ -105,3 +105,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a0bbe7817b64f40bff83ce13b4cef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive: 0
+  health: 0
+  maxHealth: 0
+  speed: 10
+  dashingSpeed: 0
+  dashTimer: 0
+  dashCDTimer: 0
+  critChance: 0
+  critMultipier: 0
+  hitableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  speedMultiplier: 1
+  rb: {fileID: 0}

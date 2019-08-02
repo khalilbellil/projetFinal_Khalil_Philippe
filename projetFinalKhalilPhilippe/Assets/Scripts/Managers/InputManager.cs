@@ -82,7 +82,7 @@ public class InputManager
         public bool middleMouseButtonPressed;
 
         //Movements inputs:
-        public Vector2 dirPressed;   //side to side and foward and back
+        public Vector3 dirPressed;   //side to side and foward and back
         public bool jumpPressed;  //If jump was pressed this frame
 
         //Interaction inputs:
