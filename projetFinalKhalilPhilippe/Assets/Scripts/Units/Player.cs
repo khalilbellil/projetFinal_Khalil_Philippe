@@ -4,35 +4,43 @@ using UnityEngine;
 
 public class Player : BaseUnit
 {
+    Level lvl;
+
     float jumpForce;
     float jumpCD = 0.5f;
     float timeOfNextValidJump;
     bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 1); } }
-    // Start is called before the first frame update
-    public void Init()
+
+
+    // BASIC FUNCTIONS //
+
+    public void PlayerInit()
     {
         base.Init();
-        rb = gameObject.GetComponent<Rigidbody>();
         jumpForce = 50;
+
+        //Init Leveling System:
+        lvl = new Level();
+        lvl.InitLevel(1, 10, 0, 100);
     }
 
-    // Update is called once per frame
-    public void PlayerUpdate(InputManager.InputPkg input)
+    public void PlayerUpdate()
     {
-        Debug.Log(input);
-        //UpdateMovement(input.dirPressed);
-        base.UnitUpdate(input.dirPressed);
+        base.UnitUpdate();
     }
 
-    public void PlayerFixedUpdate(InputManager.InputPkg input)
+    public void PlayerFixedUpdate()
     {
-        if(input.jumpPressed && canJump)
+        base.UnitFixedUpdate();
+        if (InputManager.Instance.fixedInputPressed.jumpPressed && canJump)
         {
             Jump();
         }
-        UpdateMovement(input.dirPressed);
-        base.UnitFixedUpdate();
+        UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
     }
+
+
+    // FUNCTIONS //
 
     public void Jump()
     {

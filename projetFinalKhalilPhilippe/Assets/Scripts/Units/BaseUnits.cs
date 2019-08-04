@@ -55,7 +55,7 @@ public class BaseUnit : MonoBehaviour
 
     }
 
-    virtual public void UnitUpdate(Vector3 dir)
+    virtual public void UnitUpdate()
     {
 
         if (!dashAvailable)
@@ -68,12 +68,11 @@ public class BaseUnit : MonoBehaviour
             }
         }
 
-
     }
 
     virtual public void UnitFixedUpdate()
     {
-        //Debug.Log("basic fixedupdate");
+
     }
 
     virtual public void Death()

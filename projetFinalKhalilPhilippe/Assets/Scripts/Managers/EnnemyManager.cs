@@ -2,43 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager
+public class EnnemyManager
 {
     #region Singleton Pattern
-    private static PlayerManager instance = null;
-    private PlayerManager() { }
-    public static PlayerManager Instance
+    private static EnnemyManager instance = null;
+    private EnnemyManager() { }
+    public static EnnemyManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new PlayerManager();
+                instance = new EnnemyManager();
             }
             return instance;
         }
     }
     #endregion
 
-    public Player player;
+    Ennemy testEnnemy;
 
     public void Initialize()
     {
-        SpawnPlayer();
+        SpawnEnnemy();
     }
 
     public void UpdateManager(float dt)
     {
-        if (player != null)
+        if (testEnnemy != null)
         {
-            player.PlayerUpdate();
+            testEnnemy.EnnemyUpdate();
         }
     }
 
     public void FixedUpdateManager(float dt)
     {
-        player.PlayerFixedUpdate();
-
+        testEnnemy.EnnemyFixedUpdate();
     }
 
     public void StopManager()
@@ -46,12 +45,10 @@ public class PlayerManager
         instance = null;
     }
 
-
-    void SpawnPlayer()
+    public void SpawnEnnemy()
     {
-        //Instantiate the Player(s)
-        player = GameObject.Find("Player").GetComponent<Player>();
-        player.Init();
+        testEnnemy = GameObject.Find("Ennemy").GetComponent<Ennemy>();
+        testEnnemy.EnnemyInit();
     }
 
 }
