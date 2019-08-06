@@ -36,6 +36,7 @@ public class InputManager
         inputPressed.leftMouseButtonPressed = Input.GetMouseButton(0);
         inputPressed.rightMouseButtonPressed = Input.GetMouseButton(1);
         inputPressed.middleMouseButtonPressed = Input.GetMouseButton(2);
+        inputPressed.mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
         //Movement inputs:
         inputPressed.dirPressed.x = Input.GetAxis("Horizontal");
@@ -80,6 +81,7 @@ public class InputManager
         public bool leftMouseButtonPressed;
         public bool rightMouseButtonPressed;
         public bool middleMouseButtonPressed;
+        public Vector3 mousePos;
 
         //Movements inputs:
         public Vector3 dirPressed;   //side to side and foward and back

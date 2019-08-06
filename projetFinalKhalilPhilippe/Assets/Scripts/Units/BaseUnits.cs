@@ -96,7 +96,9 @@ public class BaseUnit : MonoBehaviour
     virtual public void UpdateMovement(Vector2 dir)
     {
         Vector3 _dir = new Vector3(dir.x, 0, dir.y);
+        _dir = Camera.main.transform.TransformDirection(_dir);
         Vector3 _dir2 = new Vector3(0, rb.velocity.y, 0);
+        _dir2 = Camera.main.transform.TransformDirection(_dir2);
         if (!isDashing)
         {
             _dir = Vector3.ClampMagnitude(_dir * speed * speedMultiplier + _dir2, speed);
