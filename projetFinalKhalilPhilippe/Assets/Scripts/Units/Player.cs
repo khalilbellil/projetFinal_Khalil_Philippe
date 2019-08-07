@@ -9,7 +9,7 @@ public class Player : BaseUnit
     float jumpForce;
     float jumpCD = 0.5f;
     float timeOfNextValidJump;
-    bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 1); } }
+    bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 2); } }
 
 
     // BASIC FUNCTIONS //
@@ -19,7 +19,6 @@ public class Player : BaseUnit
         base.Init();
         cam = GameObject.Find("Main Camera").GetComponent<CameraControler>();
         cam.Init();
-        Debug.Log("yeet");
         jumpForce = 50;
 
         //Init Leveling System:

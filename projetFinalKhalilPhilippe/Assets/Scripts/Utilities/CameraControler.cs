@@ -19,12 +19,12 @@ public class CameraControler : MonoBehaviour
     {
         float dir =0;
         transform.position = player.transform.position + offSet;
-        if (InputManager.Instance.inputPressed.mousePos.x > 0.75f)
+        if (InputManager.Instance.inputPressed.deltaMouse.x > 0)
         {
             dir = -1;
         }
 
-        if (InputManager.Instance.inputPressed.mousePos.x < 0.25f)
+        if (InputManager.Instance.inputPressed.deltaMouse.x < 0)
         {
             dir = 1;
         }

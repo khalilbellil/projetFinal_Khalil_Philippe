@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 public class GameFlow : Flow
 {
     MainEntry mainEntry;
@@ -9,6 +10,7 @@ public class GameFlow : Flow
     public override void Initialize()
     {
         mainEntry = GameObject.FindObjectOfType<MainEntry>();
+  
         InputManager.Instance.Initialize();
         PlayerManager.Instance.Initialize();
         EnnemyManager.Instance.Initialize();
