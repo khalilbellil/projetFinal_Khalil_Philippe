@@ -21,29 +21,42 @@ public class UIManager
     }
     #endregion
 
-    UILinks uiLinks;
-    // Start is called before the first frame update
-    public void Init()
+    public UILinks uiLinks; //initialized by player (because can be instantiated after UIManager)
+
+    public void Initialize()
     {
-        uiLinks = GameObject.FindObjectOfType<UILinks>();
+
     }
 
-    // Update is called once per frame
     public void UpdateManager()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            PlayerManager.Instance.player.TakeDamage(10);
-            Debug.Log("new hp amount: " + PlayerManager.Instance.player.health);
-        }
-        float a = (float)PlayerManager.Instance.player.health / PlayerManager.Instance.player.maxHealth;
 
-
-
-
-        //Debug.Log("a: " + a);
-
-        //changes the health bar color from green to red
-        uiLinks.healthBar.fillAmount = a;
     }
+
+    public void FixedUpdateManager()
+    {
+
+    }
+
+    public void StopManager()
+    {//Reset everything
+        instance = null;
+    }
+
+    void AddQuestToUI(Quest _quest)
+    {
+        if (uiLinks.quest1Text.text != "")
+        {
+
+        }
+        if (uiLinks.quest2Text.text != "")
+        {
+
+        }
+        if (uiLinks.quest3Text.text != "")
+        {
+
+        }
+    }
+
 }

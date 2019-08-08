@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ennemy
+  - PNJ
   layers:
   - Default
   - TransparentFX

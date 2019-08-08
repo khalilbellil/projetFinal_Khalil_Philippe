@@ -5,6 +5,19 @@ using UnityEngine.UI;
 
 public class UILinks : MonoBehaviour
 {
+    [Header("Quests UI :")]
+    public GameObject QuestsUI;
+    public Text titleText;
+    public Text activeQuestsTitleText;
+    public Text quest1Text;
+    public Text quest2Text;
+    public Text quest3Text;
+
+    [Header("PNJ UI :")]
+    public GameObject dialogueUI;
+    public Text dialogueText, PnjNameText;
+
+    [Header("Player Stats UI :")]
     public Image healthBar;
     public Image ManaBar;
     public Image characterPic;
