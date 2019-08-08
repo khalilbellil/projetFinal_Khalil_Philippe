@@ -5,11 +5,11 @@ using UnityEngine;
 public class Player : BaseUnit
 {
     Level lvl;
-
+    CameraControler cam;
     float jumpForce;
     float jumpCD = 0.5f;
     float timeOfNextValidJump;
-    bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 1); } }
+    bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 2); } }
 
 
     // BASIC FUNCTIONS //
@@ -17,6 +17,8 @@ public class Player : BaseUnit
     public void PlayerInit()
     {
         base.Init();
+        cam = GameObject.Find("Main Camera").GetComponent<CameraControler>();
+        cam.Init();
         jumpForce = 50;
 
         //Init Leveling System:
@@ -27,6 +29,7 @@ public class Player : BaseUnit
     public void PlayerUpdate()
     {
         base.UnitUpdate();
+        cam.CameraUpdate();
     }
 
     public void PlayerFixedUpdate()

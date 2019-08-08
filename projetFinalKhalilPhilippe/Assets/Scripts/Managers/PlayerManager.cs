@@ -51,7 +51,7 @@ public class PlayerManager
     {
         //Instantiate the Player(s)
         player = GameObject.Find("Player").GetComponent<Player>();
-        player.Init();
+        player.PlayerInit();
     }
 
 }
