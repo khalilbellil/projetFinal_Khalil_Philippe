@@ -10,14 +10,15 @@ public class GameFlow : Flow
     public override void Initialize()
     {
         mainEntry = GameObject.FindObjectOfType<MainEntry>();
-  
         InputManager.Instance.Initialize();
         PlayerManager.Instance.Initialize();
+        UIManager.Instance.Init();
         EnnemyManager.Instance.Initialize();
     }
 
     public override void Update(float dt)
     {
+        UIManager.Instance.UpdateManager();
         InputManager.Instance.UpdateManager();
         PlayerManager.Instance.UpdateManager(dt);
         EnnemyManager.Instance.UpdateManager(dt);

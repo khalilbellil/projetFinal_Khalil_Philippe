@@ -90,7 +90,7 @@ public class BaseUnit : MonoBehaviour
     }
 
 
-    public void UseWeapon(Vector2 dir)
+    virtual public void UseWeapon(Vector2 dir)
     {
 
 
