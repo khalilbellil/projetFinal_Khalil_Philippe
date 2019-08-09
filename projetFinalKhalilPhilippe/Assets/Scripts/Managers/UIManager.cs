@@ -47,16 +47,26 @@ public class UIManager
     {
         if (uiLinks.quest1Text.text != "")
         {
-
+            uiLinks.quest1Text.text = _quest.questName;
         }
-        if (uiLinks.quest2Text.text != "")
+        else if (uiLinks.quest2Text.text != "")
         {
-
+            uiLinks.quest1Text.text = _quest.questName;
         }
-        if (uiLinks.quest3Text.text != "")
+        else if (uiLinks.quest3Text.text != "")
         {
-
+            uiLinks.quest1Text.text = _quest.questName;
         }
+    }
+
+    void ToggleQuestUI()
+    {
+
+    }
+
+    void ToggleDialogueUI(string _pnjName, string _description)
+    {
+
     }
 
 }
