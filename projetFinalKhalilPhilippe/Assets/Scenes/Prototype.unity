@@ -1947,9 +1947,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     - target: {fileID: 6949657695781332540, guid: 01d27ea47650f4148ad3559f93c19d85,
         type: 3}
       propertyPath: speed
@@ -1965,8 +1962,6 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 100
       objectReference: {fileID: 0}
->>>>>>> ee33ffd6ef28d23462f3dbb8b3a30bebd19ef08e
-=======
     - target: {fileID: 472840675, guid: 01d27ea47650f4148ad3559f93c19d85, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -1996,6 +1991,5 @@ PrefabInstance:
       propertyPath: m_Text
       value: 
       objectReference: {fileID: 0}
->>>>>>> parent of 344029d... commit before pull
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01d27ea47650f4148ad3559f93c19d85, type: 3}
