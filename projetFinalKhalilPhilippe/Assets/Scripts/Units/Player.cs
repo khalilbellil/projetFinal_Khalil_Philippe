@@ -17,13 +17,17 @@ public class Player : BaseUnit
     public void PlayerInit()
     {
         base.Init();
+
+        //Camera Controller Init
         cam = GameObject.Find("Main Camera").GetComponent<CameraControler>();
         cam.Init();
-        jumpForce = 50;
 
         //Init Leveling System:
         lvl = new Level();
         lvl.InitLevel(1, 10, 0, 100);
+
+        //Init UI:
+        UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>(); 
     }
 
     public void PlayerUpdate()

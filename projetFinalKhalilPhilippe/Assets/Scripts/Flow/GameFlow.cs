@@ -12,8 +12,9 @@ public class GameFlow : Flow
         mainEntry = GameObject.FindObjectOfType<MainEntry>();
         InputManager.Instance.Initialize();
         PlayerManager.Instance.Initialize();
-        UIManager.Instance.Init();
+        UIManager.Instance.Initialize();
         EnnemyManager.Instance.Initialize();
+        QuestManager.Instance.Initialize();
     }
 
     public override void Update(float dt)
@@ -22,6 +23,7 @@ public class GameFlow : Flow
         InputManager.Instance.UpdateManager();
         PlayerManager.Instance.UpdateManager(dt);
         EnnemyManager.Instance.UpdateManager(dt);
+        QuestManager.Instance.UpdateManager();
     }
 
     public override void FixedUpdate(float dt)
@@ -29,6 +31,7 @@ public class GameFlow : Flow
         InputManager.Instance.FixedUpdateManager();
         PlayerManager.Instance.FixedUpdateManager(dt);
         EnnemyManager.Instance.FixedUpdateManager(dt);
+        QuestManager.Instance.FixedUpdateManager();
     }
 
     public override void EndFlow()
@@ -36,6 +39,7 @@ public class GameFlow : Flow
         InputManager.Instance.StopManager();
         PlayerManager.Instance.StopManager();
         EnnemyManager.Instance.StopManager();
+        QuestManager.Instance.StopManager();
     }
 
 
