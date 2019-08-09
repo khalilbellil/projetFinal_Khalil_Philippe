@@ -32,8 +32,6 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] private float dashingSpeed;
     [SerializeField] private float dashTimer;       //set the time of the dash
     [SerializeField] private float dashCDTimer;     //set the time for after the dash
-    [SerializeField] private double critChance;
-    [SerializeField] public double critMultipier;
     [SerializeField] protected LayerMask hitableLayer;
     [HideInInspector] public float speedMultiplier = 1;
     #endregion
@@ -90,10 +88,9 @@ public class BaseUnit : MonoBehaviour
     }
 
 
-    virtual public void UseWeapon(Vector2 dir)
+    virtual public void UseWeapon()
     {
-
-
+        Debug.Log("yeet");
     }
 
     virtual public void UpdateMovement(Vector2 dir)

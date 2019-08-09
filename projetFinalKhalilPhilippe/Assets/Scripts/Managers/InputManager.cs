@@ -45,8 +45,8 @@ public class InputManager
         //Mouse inputs:
         inputPressed.deltaMouse.x = rewiredPlayer.GetAxis("Move Camera");
         inputPressed.mousePosToRay = inputPressed.MousePosToRay(Input.mousePosition);
-        inputPressed.leftMouseButtonPressed = Input.GetMouseButton(0);
-        inputPressed.rightMouseButtonPressed = Input.GetMouseButton(1);
+        inputPressed.leftMouseButtonPressed = rewiredPlayer.GetButtonDown("Attack");
+        inputPressed.rightMouseButtonPressed = rewiredPlayer.GetButtonDown("Ability");
         inputPressed.middleMouseButtonPressed = Input.GetMouseButton(2);
 
         //Movement inputs:
@@ -70,8 +70,8 @@ public class InputManager
         //Mouse inputs:
         fixedInputPressed.deltaMouse.x = rewiredPlayer.GetAxis("Move Camera");
         fixedInputPressed.mousePosToRay = inputPressed.MousePosToRay(Input.mousePosition);
-        fixedInputPressed.leftMouseButtonPressed = Input.GetMouseButton(0);
-        fixedInputPressed.rightMouseButtonPressed = Input.GetMouseButton(1);
+        fixedInputPressed.leftMouseButtonPressed = rewiredPlayer.GetButtonDown("Attack");
+        fixedInputPressed.rightMouseButtonPressed = rewiredPlayer.GetButtonDown("Attack");
         fixedInputPressed.middleMouseButtonPressed = Input.GetMouseButton(2);
 
         //Movement inputs:
