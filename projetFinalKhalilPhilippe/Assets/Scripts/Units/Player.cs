@@ -40,6 +40,10 @@ public class Player : BaseUnit
             Jump();
         }
         UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
+        if (InputManager.Instance.fixedInputPressed.leftMouseButtonPressed)
+        {
+            UseWeapon();
+        }
     }
 
 
