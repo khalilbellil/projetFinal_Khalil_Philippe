@@ -50,7 +50,7 @@ public class PlayerManager
     void SpawnPlayer()
     {
         //Instantiate the Player(s)
-        player = GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.FindObjectOfType<Player>();
         player.PlayerInit();
     }
 

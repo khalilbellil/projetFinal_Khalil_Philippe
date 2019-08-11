@@ -47,7 +47,7 @@ public class QuestManager
         instance = null;
     }
 
-    void LoadQuestsFromRsrc()
+    void LoadQuestsFromRsrc() //For Debuging purpose 
     {
         List<Quest> quests = new List<Quest>(Resources.LoadAll<Quest>("Quests"));
         allQuests = new Dictionary<int, Quest>();

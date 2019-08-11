@@ -6,8 +6,10 @@ public class Player : BaseUnit
 {
     Level lvl;
     CameraControler cam;
+    Animator animator;
     float jumpForce = 30f;
     float jumpCD = 0.5f;
+    bool isJumping = false;
     float timeOfNextValidJump;
     bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 2); } }
 
@@ -28,6 +30,11 @@ public class Player : BaseUnit
 
         //Init UI:
         UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>();
+
+        //Init Animator:
+        animator = GetComponent<Animator>();
+        animator.SetBool("isJumping", isJumping);
+        animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.z);
     }
 
     public void PlayerUpdate()
