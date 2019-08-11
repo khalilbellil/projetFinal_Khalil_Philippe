@@ -6,7 +6,7 @@ public class Player : BaseUnit
 {
     Level lvl;
     CameraControler cam;
-    float jumpForce;
+    float jumpForce = 30f;
     float jumpCD = 0.5f;
     float timeOfNextValidJump;
     bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 2); } }
@@ -27,7 +27,7 @@ public class Player : BaseUnit
         lvl.InitLevel(1, 10, 0, 100);
 
         //Init UI:
-        UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>(); 
+        UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>();
     }
 
     public void PlayerUpdate()

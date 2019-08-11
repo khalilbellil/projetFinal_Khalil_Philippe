@@ -53,16 +53,15 @@ public class InputManager
         inputPressed.dirPressed.x = rewiredPlayer.GetAxis("Move Horizontal");
         inputPressed.dirPressed.y = rewiredPlayer.GetAxis("Move Vertical");
         inputPressed.jumpPressed = rewiredPlayer.GetButtonDown("Jump");
-        //if (inputPressed.jumpPressed)
-            //Debug.Log("Yolo");
 
-            //Interactions inputs:
-            inputPressed.anyKeyPressed = Input.anyKeyDown;
+        //Interactions inputs:
+        inputPressed.anyKeyPressed = Input.anyKeyDown;
         inputPressed.inventoryPressed = Input.GetButtonDown("Inventory");
         inputPressed.interactPressed = Input.GetButtonDown("Interaction");
         inputPressed.previousSpellPressed = Input.GetButtonDown("Previous Spell");
         inputPressed.nextSpellPressed = Input.GetButtonDown("Next Spell");
-        inputPressed.questsPressed = Input.GetButtonDown("Quests");
+        inputPressed.questsPressed = rewiredPlayer.GetButtonDown("OpenQuests");
+        inputPressed.openDialogueTempPressed = rewiredPlayer.GetButtonDown("OpenDialogueTemp");
     }
 
     public void FixedUpdateManager()
@@ -106,8 +105,10 @@ public class InputManager
         public bool questsPressed;
         public bool previousSpellPressed;
         public bool nextSpellPressed;
+        public bool openDialogueTempPressed;
 
-        
+
+
         public Ray MousePosToRay(Vector3 mousePos)
         {
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
