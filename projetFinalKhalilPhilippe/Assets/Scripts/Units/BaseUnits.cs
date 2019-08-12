@@ -18,7 +18,7 @@ public class BaseUnit : MonoBehaviour
     private float dashCDTime;   //cooldown after once the dash is finished
     protected bool dashAvailable;
     public int playerId;
-    
+    float rot;
 
 
     #endregion
@@ -48,6 +48,7 @@ public class BaseUnit : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         // Debug.Log("basic init");
+        rot = Camera.main.transform.rotation.eulerAngles.y;
 
 
         isHolding = false;
@@ -97,10 +98,15 @@ public class BaseUnit : MonoBehaviour
     {
         Vector3 _dir = new Vector3(dir.x, 0, dir.y);
         _dir = Camera.main.transform.TransformDirection(_dir);
+        if(_dir != new Vector3())
+        {
+            rot = Mathf.Atan2(_dir.x, _dir.z) * Mathf.Rad2Deg;
+        }
         _dir.y = 0;
         Vector3 _dir2 = new Vector3(0, rb.velocity.y, 0);
         if (!isDashing)
         {
+            transform.rotation = Quaternion.Euler(0, rot, 0);
             _dir = Vector3.ClampMagnitude(_dir * speed * speedMultiplier + _dir2, speed);
             rb.velocity = _dir;
         }

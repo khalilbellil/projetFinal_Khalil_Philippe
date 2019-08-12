@@ -56,7 +56,7 @@ public class QuestManager
             allQuests.Add(i, quests[i]);
         }
 
-        UIManager.Instance.uiLinks.quest1Text.text = allQuests[0].questName;
+        //UIManager.Instance.uiLinks.quest1Text.text = allQuests[0].questName;
 
     }
     
