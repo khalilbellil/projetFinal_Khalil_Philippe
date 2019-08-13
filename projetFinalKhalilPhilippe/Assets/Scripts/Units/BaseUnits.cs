@@ -89,9 +89,17 @@ public class BaseUnit : MonoBehaviour
     }
 
 
-    virtual public void UseWeapon()
+    virtual public void UseWeapon(Vector3 dir)
     {
         Debug.Log("yeet");
+
+        Vector3 hitbox = transform.position + dir * 2;
+        Collider[] collider = Physics.OverlapBox(hitbox,new Vector3(1,2,1), new Quaternion(),hitableLayer);
+        foreach (Collider target in collider)
+        {
+
+            target.gameObject.GetComponent<BaseUnit>()?.TakeDamage(10);
+        }
     }
 
     virtual public void UpdateMovement(Vector2 dir)

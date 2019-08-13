@@ -53,7 +53,7 @@ public class Player : BaseUnit
         UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
         if (InputManager.Instance.fixedInputPressed.leftMouseButtonPressed)
         {
-            UseWeapon();
+            UseWeapon(transform.forward);
         }
     }
 
@@ -64,11 +64,6 @@ public class Player : BaseUnit
     {
         timeOfNextValidJump = Time.time + jumpCD;
         rb.AddForce(new Vector3(0, jumpForce, 0),ForceMode.Impulse);
-    }
-
-    public void UseWeapons()
-    {
-
     }
 
 }
