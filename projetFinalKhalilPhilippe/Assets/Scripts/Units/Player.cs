@@ -29,7 +29,7 @@ public class Player : BaseUnit
         lvl.InitLevel(1, 10, 0, 100);
 
         //Init UI:
-        UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>();
+        //UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>();
 
         //Init Animator:
         animator = GetComponent<Animator>();
