@@ -20,7 +20,7 @@ public class EnnemyManager
     }
     #endregion
 
-    Ennemy testEnnemy;
+    public Ennemy ennemy;
 
     public void Initialize()
     {
@@ -29,15 +29,15 @@ public class EnnemyManager
 
     public void UpdateManager(float dt)
     {
-        if (testEnnemy != null)
+        if (ennemy != null)
         {
-            testEnnemy.EnnemyUpdate();
+            ennemy.EnnemyUpdate();
         }
     }
 
     public void FixedUpdateManager(float dt)
     {
-        testEnnemy.EnnemyFixedUpdate();
+        ennemy.EnnemyFixedUpdate();
     }
 
     public void StopManager()
@@ -47,8 +47,8 @@ public class EnnemyManager
 
     public void SpawnEnnemy()
     {
-        testEnnemy = GameObject.Find("Ennemy").GetComponent<Ennemy>();
-        testEnnemy.EnnemyInit();
+        ennemy = GameObject.Find("Ennemy").GetComponent<Ennemy>();
+        ennemy.EnnemyInit();
     }
 
 }

@@ -40,6 +40,7 @@ public class UIManager
         
         uiLinks.healthBar.fillAmount = a;
 
+        EnnemiHpBar();
         OpenQuests();
         TestDialogue();
     }
@@ -99,6 +100,13 @@ public class UIManager
                 uiLinks.dialogueUI.SetActive(false);
             }
         }
+    }
+
+    //Temporary HealthBar for an Ennemi
+    void EnnemiHpBar()
+    {
+       float hpLeft = EnnemyManager.Instance.ennemy.health / EnnemyManager.Instance.ennemy.maxHealth;
+       EnnemyManager.Instance.ennemy.transform.GetChild(0).localScale = new Vector3(hpLeft,1,1);
     }
 
 }

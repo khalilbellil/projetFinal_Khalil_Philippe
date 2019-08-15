@@ -19,7 +19,13 @@ public class BaseUnit : MonoBehaviour
     protected bool dashAvailable;
     public int playerId;
     float rot;
+    public float range;
+    public float dmg;
 
+    bool canAttack;
+    float timeNextAttack;
+    public float attackCD;
+    float currentTime;
 
     #endregion
 
@@ -92,17 +98,29 @@ public class BaseUnit : MonoBehaviour
     virtual public void UseWeapon(Vector3 dir)
     {
         Debug.Log("yeet");
-
-        Vector3 hitbox = transform.position + dir * 2;
-        Collider[] collider = Physics.OverlapBox(hitbox,new Vector3(1,2,1), new Quaternion(),hitableLayer);
-        foreach (Collider target in collider)
+        if (canAttack)
         {
-
-            target.gameObject.GetComponent<BaseUnit>()?.TakeDamage(10);
+            Vector3 hitbox = transform.position + dir * range;
+            Collider[] collider = Physics.OverlapBox(hitbox, new Vector3(1, 2, 1), new Quaternion(), hitableLayer);
+            foreach (Collider target in collider)
+            {
+                target.gameObject.GetComponent<BaseUnit>()?.TakeDamage(dmg);
+            }
+            canAttack = false;
         }
+        else
+        {
+            currentTime += Time.deltaTime;
+            if( currentTime >= timeNextAttack)
+            {
+                canAttack = true;
+                currentTime = 0;
+            }
+        }
+       
     }
 
-    virtual public void UpdateMovement(Vector2 dir)
+    virtual public void UpdateMovement(Vector3 dir)
     {
         Vector3 _dir = new Vector3(dir.x, 0, dir.y);
         _dir = Camera.main.transform.TransformDirection(_dir);
