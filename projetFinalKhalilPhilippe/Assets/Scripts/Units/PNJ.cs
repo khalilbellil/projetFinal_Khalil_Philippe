@@ -9,11 +9,13 @@ public class PNJ : MonoBehaviour
 
     private void Start()
     {
-        if (pnjName == "")
-        {
-            pnjName = "Name not setted !";
-        } //verification
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Activate interaction UI
+        //if interaction pressed -> activate dialogue ui with the pnj quest -> And Desactivate interaction UI
     }
 
 }

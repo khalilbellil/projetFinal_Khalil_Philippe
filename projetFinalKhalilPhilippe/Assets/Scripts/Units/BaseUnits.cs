@@ -95,29 +95,31 @@ public class BaseUnit : MonoBehaviour
     }
 
 
-    virtual public void UseWeapon(Vector3 dir)
+    virtual public void UseWeapon(Vector3 dir, bool isUsed)
     {
-        Debug.Log("yeet");
-        if (canAttack)
+        if (isUsed)
         {
-            Vector3 hitbox = transform.position + dir * range;
-            Collider[] collider = Physics.OverlapBox(hitbox, new Vector3(1, 2, 1), new Quaternion(), hitableLayer);
-            foreach (Collider target in collider)
+            Debug.Log("yeet");
+            if (canAttack)
             {
-                target.gameObject.GetComponent<BaseUnit>()?.TakeDamage(dmg);
+                Vector3 hitbox = transform.position + dir * range;
+                Collider[] collider = Physics.OverlapBox(hitbox, new Vector3(1, 2, 1), new Quaternion(), hitableLayer);
+                foreach (Collider target in collider)
+                {
+                    target.gameObject.GetComponent<BaseUnit>()?.TakeDamage(dmg);
+                }
+                canAttack = false;
             }
-            canAttack = false;
-        }
-        else
-        {
-            currentTime += Time.deltaTime;
-            if( currentTime >= timeNextAttack)
+            else
             {
-                canAttack = true;
-                currentTime = 0;
+                currentTime += Time.deltaTime;
+                if (currentTime >= timeNextAttack)
+                {
+                    canAttack = true;
+                    currentTime = 0;
+                }
             }
         }
-       
     }
 
     virtual public void UpdateMovement(Vector3 dir)
