@@ -29,12 +29,10 @@ public class Player : BaseUnit
         lvl.InitLevel(1, 10, 0, 100);
 
         //Init UI:
-        //UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>();
+        UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>();
 
         //Init Animator:
-        animator = GetComponent<Animator>();
-        animator.SetBool("isJumping", isJumping);
-        animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.z);
+        InitAnimator();
     }
 
     public void PlayerUpdate()
@@ -46,15 +44,10 @@ public class Player : BaseUnit
     public void PlayerFixedUpdate()
     {
         base.UnitFixedUpdate();
-        if (InputManager.Instance.fixedInputPressed.jumpPressed && canJump)
-        {
-            Jump();
-        }
+
+        Jump();
         UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
-        if (InputManager.Instance.fixedInputPressed.leftMouseButtonPressed)
-        {
-            UseWeapon(transform.forward);
-        }
+        UseWeapon(transform.forward, InputManager.Instance.fixedInputPressed.leftMouseButtonPressed);
     }
 
 
@@ -62,8 +55,18 @@ public class Player : BaseUnit
 
     public void Jump()
     {
-        timeOfNextValidJump = Time.time + jumpCD;
-        rb.AddForce(new Vector3(0, jumpForce, 0),ForceMode.Impulse);
+        if (InputManager.Instance.fixedInputPressed.jumpPressed && canJump)
+        {
+            timeOfNextValidJump = Time.time + jumpCD;
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+        }
+    }
+
+    void InitAnimator() //Set of all animator variables
+    {
+        animator = GetComponent<Animator>();
+        animator.SetBool("isJumping", isJumping);
+        animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.y);
     }
 
 }

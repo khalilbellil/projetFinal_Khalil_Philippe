@@ -25,24 +25,13 @@ public class UIManager
 
     public void Initialize()
     {
-        //mainEntry = GameObject.FindObjectOfType<MainEntry>();
-        uiLinks = GameObject.FindObjectOfType<UILinks>();
+
     }
 
     public void UpdateManager()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            PlayerManager.Instance.player.TakeDamage(10);
-            Debug.Log("new hp amount: " + PlayerManager.Instance.player.health);
-        }
-        float a = (float)PlayerManager.Instance.player.health / PlayerManager.Instance.player.maxHealth;
-        
-        uiLinks.healthBar.fillAmount = a;
-
-        EnnemiHpBar();
-        OpenQuests();
-        TestDialogue();
+        TestEnnemiHpBar();
+        OpenCloseQuests();
     }
 
     public void FixedUpdateManager()
@@ -55,23 +44,25 @@ public class UIManager
         instance = null;
     }
 
+    //QUESTS FUNCTIONS:
+
     void AddQuestToUI(Quest _quest)
     {
         if (uiLinks.quest1Text.text != "")
         {
-
+            uiLinks.quest1Text.text = _quest.description;
         }
-        if (uiLinks.quest2Text.text != "")
+        else if (uiLinks.quest2Text.text != "")
         {
-
+            uiLinks.quest2Text.text = _quest.description;
         }
-        if (uiLinks.quest3Text.text != "")
+        else if (uiLinks.quest3Text.text != "")
         {
-
+            uiLinks.quest3Text.text = _quest.description;
         }
     }
 
-    void OpenQuests()
+    void OpenCloseQuests()
     {
         if (InputManager.Instance.inputPressed.questsPressed)
         {
@@ -87,26 +78,40 @@ public class UIManager
         }
     }
 
-    void TestDialogue()
+    //DIALOGUE FUNCTIONS:
+
+    void CreateDialogue(string pnjName, string dialogueText)
     {
-        if (InputManager.Instance.inputPressed.openDialogueTempPressed)
-        {
-            if (!uiLinks.dialogueUI.activeSelf)
-            {
-                uiLinks.dialogueUI.SetActive(true);
-            }
-            else
-            {
-                uiLinks.dialogueUI.SetActive(false);
-            }
-        }
+        uiLinks.PnjNameText.text = pnjName;
+        uiLinks.dialogueText.text = dialogueText;
+        uiLinks.dialogueUI.SetActive(true);
     }
 
-    //Temporary HealthBar for an Ennemi
-    void EnnemiHpBar()
+    void CloseDialogue()
     {
-       float hpLeft = EnnemyManager.Instance.ennemy.health / EnnemyManager.Instance.ennemy.maxHealth;
-       EnnemyManager.Instance.ennemy.transform.GetChild(0).localScale = new Vector3(hpLeft,1,1);
+        uiLinks.dialogueUI.SetActive(false);
+    }
+
+
+    //DEBUG FUNCTIONS:
+
+    //Temporary HealthBar for an Ennemi
+    void TestEnnemiHpBar()
+    {
+        float hpLeft = EnnemyManager.Instance.ennemy.health / EnnemyManager.Instance.ennemy.maxHealth;
+        EnnemyManager.Instance.ennemy.transform.GetChild(0).localScale = new Vector3(hpLeft, 1, 1);
+    }
+
+    void TestDamage()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            PlayerManager.Instance.player.TakeDamage(10);
+            Debug.Log("new hp amount: " + PlayerManager.Instance.player.health);
+        }
+        float a = (float)PlayerManager.Instance.player.health / PlayerManager.Instance.player.maxHealth;
+
+        uiLinks.healthBar.fillAmount = a;
     }
 
 }

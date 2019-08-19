@@ -30,16 +30,13 @@ public class Ennemy : BaseUnit
         if(EnnemiFound)
         {
             Debug.Log("gotcha");
-            if(Vector3.Distance(transform.position,hit.transform.position) <= range)
-            {
-                UseWeapon(transform.forward);
-            }
-            else
-            {
-                UpdateMovement(PlayerManager.Instance.player.transform.position);
-            }
+            UseWeapon(transform.forward, Vector3.Distance(transform.position, hit.transform.position) <= range);
         }
-       
+
+        else
+        {
+            UpdateMovement(PlayerManager.Instance.player.transform.position);
+        }
     }
 
     public override void UpdateMovement(Vector3 dir)
