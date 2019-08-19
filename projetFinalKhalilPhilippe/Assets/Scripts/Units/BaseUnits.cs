@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
 public class BaseUnit : MonoBehaviour
 {
     //To add more weapons, increase the size of the weaponList in the unity, on the character's prefab
