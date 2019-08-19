@@ -27,15 +27,17 @@ public class Ennemy : BaseUnit
     public void EnnemyFixedUpdate()
     {
         base.UnitFixedUpdate();
-        if(EnnemiFound)
+        if (EnnemiFound)
         {
             Debug.Log("gotcha");
-            UseWeapon(transform.forward, Vector3.Distance(transform.position, hit.transform.position) <= range);
-        }
-
-        else
-        {
-            UpdateMovement(PlayerManager.Instance.player.transform.position);
+            if (Vector3.Distance(transform.position, hit.transform.position) <= range)
+            {
+                UseWeapon(transform.forward);
+            }
+            else
+            {
+                UpdateMovement(PlayerManager.Instance.player.transform.position);
+            }
         }
     }
 

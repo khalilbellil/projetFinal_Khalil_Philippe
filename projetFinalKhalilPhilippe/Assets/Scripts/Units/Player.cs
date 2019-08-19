@@ -47,7 +47,10 @@ public class Player : BaseUnit
 
         Jump();
         UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
-        UseWeapon(transform.forward, InputManager.Instance.fixedInputPressed.leftMouseButtonPressed);
+        if (InputManager.Instance.fixedInputPressed.leftMouseButtonPressed)
+        {
+            UseWeapon(transform.forward);
+        }
     }
 
 

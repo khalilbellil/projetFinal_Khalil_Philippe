@@ -22,10 +22,9 @@ public class BaseUnit : MonoBehaviour
     public float range;
     public float dmg;
 
-    bool canAttack;
-    float timeNextAttack;
+    bool canAttack { get { return Time.time - timeLastAttack >= attackCD; } }
+    float timeLastAttack;
     public float attackCD;
-    float currentTime;
 
     #endregion
 
@@ -60,7 +59,7 @@ public class BaseUnit : MonoBehaviour
         isHolding = false;
         dashAvailable = true;
         dashTime = dashTimer;
-
+        timeLastAttack = 0;
     }
 
     virtual public void UnitUpdate()
@@ -95,31 +94,21 @@ public class BaseUnit : MonoBehaviour
     }
 
 
-    virtual public void UseWeapon(Vector3 dir, bool isUsed)
+    virtual public void UseWeapon(Vector3 dir)
     {
-        if (isUsed)
+        //Debug.Log("yeet");
+        if (canAttack)
         {
-            Debug.Log("yeet");
-            if (canAttack)
+            Debug.Log("hit");
+            Vector3 hitbox = transform.position + dir * range;
+            Collider[] collider = Physics.OverlapBox(hitbox, new Vector3(1, 2, 1), new Quaternion(), hitableLayer);
+            foreach (Collider target in collider)
             {
-                Vector3 hitbox = transform.position + dir * range;
-                Collider[] collider = Physics.OverlapBox(hitbox, new Vector3(1, 2, 1), new Quaternion(), hitableLayer);
-                foreach (Collider target in collider)
-                {
-                    target.gameObject.GetComponent<BaseUnit>()?.TakeDamage(dmg);
-                }
-                canAttack = false;
+                target.gameObject.GetComponent<BaseUnit>()?.TakeDamage(dmg);
             }
-            else
-            {
-                currentTime += Time.deltaTime;
-                if (currentTime >= timeNextAttack)
-                {
-                    canAttack = true;
-                    currentTime = 0;
-                }
-            }
+            timeLastAttack = Time.time;
         }
+       
     }
 
     virtual public void UpdateMovement(Vector3 dir)
