@@ -573,8 +573,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.3509887e-38, y: -6.3384464e+29, z: -5.169879e-26,
-    w: -1.7014118e+38}
+  m_BoundingSphereOverride: {x: 0.00000011920929, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1793,7 +1792,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763900028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.031, z: -4}
+  m_LocalPosition: {x: 0, y: 1, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 531332972}
@@ -1816,7 +1815,7 @@ MonoBehaviour:
   playerId: 0
   range: 2
   dmg: 5
-  attackCD: 100000
+  attackCD: 2
   health: 100
   maxHealth: 100
   speed: 10
@@ -1828,7 +1827,6 @@ MonoBehaviour:
     m_Bits: 512
   speedMultiplier: 1
   rb: {fileID: 0}
-  agent: {fileID: 1763900035}
   sightRange: 2
 --- !u!54 &1763900034
 Rigidbody:
