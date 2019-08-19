@@ -46,7 +46,7 @@ public class UIManager
 
     //QUESTS FUNCTIONS:
 
-    void AddQuestToUI(Quest _quest)
+    public void AddQuestToUI(Quest _quest)
     {
         if (uiLinks.quest1Text.text != "")
         {
@@ -62,7 +62,7 @@ public class UIManager
         }
     }
 
-    void OpenCloseQuests()
+    public void OpenCloseQuests()
     {
         if (InputManager.Instance.inputPressed.questsPressed)
         {
@@ -80,16 +80,35 @@ public class UIManager
 
     //DIALOGUE FUNCTIONS:
 
-    void CreateDialogue(string pnjName, string dialogueText)
+    public void CreateDialogue(string pnjName, string dialogueText)
     {
         uiLinks.PnjNameText.text = pnjName;
         uiLinks.dialogueText.text = dialogueText;
-        uiLinks.dialogueUI.SetActive(true);
     }
 
-    void CloseDialogue()
+    public void OpenCloseDialogue()
     {
-        uiLinks.dialogueUI.SetActive(false);
+        if (uiLinks.dialogueUI.activeSelf)
+        {
+            uiLinks.dialogueUI.SetActive(false);
+        }
+        else
+        {
+            uiLinks.dialogueUI.SetActive(true);
+        }
+        
+    }
+
+    public void OpenClosePressKeyUI()
+    {
+        if (uiLinks.pressKeyUI.activeSelf)
+        {
+            uiLinks.pressKeyUI.SetActive(false);
+        }
+        else
+        {
+            uiLinks.pressKeyUI.SetActive(true);
+        }
     }
 
 

@@ -22,4 +22,7 @@ public class UILinks : MonoBehaviour
     public Image ManaBar;
     public Image characterPic;
     public Image Ability;
+
+    [Header("Others :")]
+    public GameObject pressKeyUI;
 }
