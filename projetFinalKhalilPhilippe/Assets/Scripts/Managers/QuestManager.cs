@@ -9,7 +9,7 @@ public enum QuestType
 
 public class QuestManager
 {
-    public Dictionary<int, Quest> allQuests;
+    public Dictionary<int, Quest> playerActiveQuests;
 
     #region Singleton Pattern
     private static QuestManager instance = null;
@@ -29,7 +29,7 @@ public class QuestManager
 
     public void Initialize()
     {
-        LoadQuestsFromRsrc();
+        playerActiveQuests = new Dictionary<int, Quest>();
     }
 
     public void UpdateManager()
@@ -47,18 +47,31 @@ public class QuestManager
         instance = null;
     }
 
-    void LoadQuestsFromRsrc() //For Debuging purpose 
+    // FUNCTIONS //
+
+    public void AcceptQuest(PNJ pnjWhoGiveQuest, bool inputPressedToAccept)
     {
-        List<Quest> quests = new List<Quest>(Resources.LoadAll<Quest>("Quests"));
-        allQuests = new Dictionary<int, Quest>();
-        for (int i = 0; i < quests.Count; i++)
+        if (inputPressedToAccept && !pnjWhoGiveQuest.questAccepted)
         {
-            allQuests.Add(i, quests[i]);
+            playerActiveQuests.Add(playerActiveQuests.Count, pnjWhoGiveQuest.myQuest);
+            pnjWhoGiveQuest.questAccepted = true;
+            Debug.Log("Quest accepted");
+            UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST ACCEPTED, good luck !");
         }
-
-        //UIManager.Instance.uiLinks.quest1Text.text = allQuests[0].questName;
-
     }
-    
+
+    public void DeclineQuest(PNJ pnjWhoGiveQuest, bool inputPressedToDecline)
+    {
+        if (inputPressedToDecline && !pnjWhoGiveQuest.questAccepted)
+        {
+            pnjWhoGiveQuest.questAccepted = false;
+            Debug.Log("Quest declined");
+            UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST DECLINED, come back when you are ready...");
+        }
+    }
+
+    // DEBUG FUNCTIONS //
+
+
 
 }

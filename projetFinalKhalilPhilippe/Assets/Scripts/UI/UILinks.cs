@@ -9,8 +9,11 @@ public class UILinks : MonoBehaviour
     public GameObject QuestsUI;
     public Text titleText;
     public Text activeQuestsTitleText;
+    public Text quest1Title;
     public Text quest1Text;
+    public Text quest2Title;
     public Text quest2Text;
+    public Text quest3Title;
     public Text quest3Text;
 
     [Header("PNJ UI :")]

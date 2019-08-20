@@ -59,7 +59,10 @@ public class Ennemy : BaseUnit
                 break;
             case States.Chase:
                 UpdateSight();
-                UpdateMovement(target.position);
+                if (target)
+                {
+                    UpdateMovement(target.position);
+                }
                 break;
 
             case States.Wander:

@@ -21,18 +21,17 @@ public class UIManager
     }
     #endregion
 
-    public UILinks uiLinks; //initialized by player (because can be instantiated after UIManager)
+    public UILinks uiLinks;
 
     public void Initialize()
     {
-        //mainEntry = GameObject.FindObjectOfType<MainEntry>();
         uiLinks = GameObject.FindObjectOfType<UILinks>();
     }
 
     public void UpdateManager()
     {
         TestEnnemiHpBar();
-        OpenCloseQuests();
+        OpenCloseQuestsUI();
     }
 
     public void FixedUpdateManager()
@@ -63,12 +62,14 @@ public class UIManager
         }
     }
 
-    public void OpenCloseQuests()
+    public void OpenCloseQuestsUI()
     {
         if (InputManager.Instance.inputPressed.questsPressed)
         {
             if (!uiLinks.QuestsUI.activeSelf)
             {
+                LoadMyQuestInUI();
+
                 uiLinks.QuestsUI.SetActive(true);
             }
             else
@@ -79,6 +80,30 @@ public class UIManager
         }
     }
 
+    // QUESTS FUNCTIONS //
+
+    public void LoadMyQuestInUI()
+    {
+        if (QuestManager.Instance.playerActiveQuests.ContainsKey(0))
+        {
+            UIManager.instance.uiLinks.quest1Title.text = QuestManager.Instance.playerActiveQuests[0].questName;
+            UIManager.instance.uiLinks.quest1Text.text = QuestManager.Instance.playerActiveQuests[0].description;
+        }
+
+        if (QuestManager.Instance.playerActiveQuests.ContainsKey(1))
+        {
+            UIManager.instance.uiLinks.quest2Title.text = QuestManager.Instance.playerActiveQuests[1].questName;
+            UIManager.instance.uiLinks.quest2Text.text = QuestManager.Instance.playerActiveQuests[1].description;
+        }
+
+        if (QuestManager.Instance.playerActiveQuests.ContainsKey(2))
+        {
+            UIManager.instance.uiLinks.quest3Title.text = QuestManager.Instance.playerActiveQuests[2].questName;
+            UIManager.instance.uiLinks.quest3Text.text = QuestManager.Instance.playerActiveQuests[2].description;
+        }
+    }
+
+
     //DIALOGUE FUNCTIONS:
 
     public void CreateDialogue(string pnjName, string dialogueText)
@@ -87,15 +112,17 @@ public class UIManager
         uiLinks.dialogueText.text = dialogueText;
     }
 
-    public void OpenCloseDialogue()
+    public void OpenCloseDialogue(PNJ pnj)
     {
         if (uiLinks.dialogueUI.activeSelf)
         {
             uiLinks.dialogueUI.SetActive(false);
+            pnj.dialogueIsOpen = false;
         }
         else
         {
             uiLinks.dialogueUI.SetActive(true);
+            pnj.dialogueIsOpen = true;
         }
         
     }
