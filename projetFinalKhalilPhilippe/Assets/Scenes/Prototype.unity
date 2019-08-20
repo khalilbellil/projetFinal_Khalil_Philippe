@@ -332,7 +332,19 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.2000122
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6319665404509202866, guid: f7674366cf6a0e846a827f17be8d59cb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407468160025889851, guid: f7674366cf6a0e846a827f17be8d59cb,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3cc211087e543b8478d19b9ad28c65eb,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 8834894928729408244, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
 --- !u!114 &417590427 stripped
 MonoBehaviour:
@@ -496,6 +508,7 @@ MonoBehaviour:
   ManaBar: {fileID: 1222146829}
   characterPic: {fileID: 765612006}
   Ability: {fileID: 895098122}
+  pressKeyUI: {fileID: 1113567264}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +582,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.00000011920929, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1718,6 +1731,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1113567264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6319665404509202866, guid: f7674366cf6a0e846a827f17be8d59cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 263491471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1116610471 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8834894928314744250, guid: f7674366cf6a0e846a827f17be8d59cb,

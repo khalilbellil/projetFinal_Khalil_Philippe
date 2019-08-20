@@ -25,7 +25,8 @@ public class UIManager
 
     public void Initialize()
     {
-
+        //mainEntry = GameObject.FindObjectOfType<MainEntry>();
+        uiLinks = GameObject.FindObjectOfType<UILinks>();
     }
 
     public void UpdateManager()
