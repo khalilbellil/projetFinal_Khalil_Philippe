@@ -12,6 +12,6 @@ public class Quest : ScriptableObject
     public string questName;
     public string description;
     public int requiredLvl;
-   // public QuestType questType;
+    public QuestType questType;
 
 }

@@ -84,22 +84,22 @@ public class UIManager
 
     public void LoadMyQuestInUI()
     {
-        if (QuestManager.Instance.playerActiveQuests.ContainsKey(0))
+        if (QuestManager.Instance.myActiveQuests.ContainsKey(0))
         {
-            UIManager.instance.uiLinks.quest1Title.text = QuestManager.Instance.playerActiveQuests[0].questName;
-            UIManager.instance.uiLinks.quest1Text.text = QuestManager.Instance.playerActiveQuests[0].description;
+            UIManager.instance.uiLinks.quest1Title.text = QuestManager.Instance.myActiveQuests[0].questName;
+            UIManager.instance.uiLinks.quest1Text.text = QuestManager.Instance.myActiveQuests[0].description;
         }
 
-        if (QuestManager.Instance.playerActiveQuests.ContainsKey(1))
+        if (QuestManager.Instance.myActiveQuests.ContainsKey(1))
         {
-            UIManager.instance.uiLinks.quest2Title.text = QuestManager.Instance.playerActiveQuests[1].questName;
-            UIManager.instance.uiLinks.quest2Text.text = QuestManager.Instance.playerActiveQuests[1].description;
+            UIManager.instance.uiLinks.quest2Title.text = QuestManager.Instance.myActiveQuests[1].questName;
+            UIManager.instance.uiLinks.quest2Text.text = QuestManager.Instance.myActiveQuests[1].description;
         }
 
-        if (QuestManager.Instance.playerActiveQuests.ContainsKey(2))
+        if (QuestManager.Instance.myActiveQuests.ContainsKey(2))
         {
-            UIManager.instance.uiLinks.quest3Title.text = QuestManager.Instance.playerActiveQuests[2].questName;
-            UIManager.instance.uiLinks.quest3Text.text = QuestManager.Instance.playerActiveQuests[2].description;
+            UIManager.instance.uiLinks.quest3Title.text = QuestManager.Instance.myActiveQuests[2].questName;
+            UIManager.instance.uiLinks.quest3Text.text = QuestManager.Instance.myActiveQuests[2].description;
         }
     }
 

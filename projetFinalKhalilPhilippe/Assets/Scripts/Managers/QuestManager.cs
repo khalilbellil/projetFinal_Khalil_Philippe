@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum QuestType
-{
+{//PRIMARY: Activable (talk to someone, open a door/portal)
+ //SECONDARY: Kill 1+ ennemy
     Primary, Secondary
 }
 
 public class QuestManager
 {
-    public Dictionary<int, Quest> playerActiveQuests;
+    public Dictionary<int, Quest> myActiveQuests;
+    public Dictionary<int, Quest> myAchivedQuests;
 
     #region Singleton Pattern
     private static QuestManager instance = null;
@@ -29,7 +31,8 @@ public class QuestManager
 
     public void Initialize()
     {
-        playerActiveQuests = new Dictionary<int, Quest>();
+        myActiveQuests = new Dictionary<int, Quest>();
+        myAchivedQuests = new Dictionary<int, Quest>();
     }
 
     public void UpdateManager()
@@ -53,9 +56,8 @@ public class QuestManager
     {
         if (inputPressedToAccept && !pnjWhoGiveQuest.questAccepted)
         {
-            playerActiveQuests.Add(playerActiveQuests.Count, pnjWhoGiveQuest.myQuest);
+            myActiveQuests.Add(myActiveQuests.Count, pnjWhoGiveQuest.myQuest);
             pnjWhoGiveQuest.questAccepted = true;
-            Debug.Log("Quest accepted");
             UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST ACCEPTED, good luck !");
         }
     }
@@ -65,9 +67,17 @@ public class QuestManager
         if (inputPressedToDecline && !pnjWhoGiveQuest.questAccepted)
         {
             pnjWhoGiveQuest.questAccepted = false;
-            Debug.Log("Quest declined");
             UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST DECLINED, come back when you are ready...");
         }
+    }
+
+    public void CompleteQuest(int questKey)
+    {
+        myActiveQuests[questKey].isAchieved = true; //Update the scriptable object
+
+        //Transfering the quest from myActiveQuest to MyAchivedQuests:
+        myAchivedQuests.Add(myAchivedQuests.Count, myActiveQuests[questKey]);
+        myActiveQuests.Remove(questKey);
     }
 
     // DEBUG FUNCTIONS //
