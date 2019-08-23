@@ -8,6 +8,7 @@ public class PNJ : MonoBehaviour
     public Quest myQuest;
     public bool dialogueIsOpen;
     public bool questAccepted;
+    public LayerMask talkableLayer;
 
     private void Start()
     {

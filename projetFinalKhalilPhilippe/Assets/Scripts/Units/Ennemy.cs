@@ -47,12 +47,12 @@ public class Ennemy : BaseUnit
 
         if (target != null && Vector3.Distance(transform.position, target.transform.position) <= range)
         {
-            Debug.Log("dammit");
+            //Debug.Log("dammit");
             currentAction = States.Attack;
         }
         else
         {
-            currentAction = States.Chase;
+            UpdateSight();
         }
         Debug.Log(currentAction);
 
@@ -60,17 +60,11 @@ public class Ennemy : BaseUnit
         {
             case States.Attack:
                 UseWeapon(transform.forward);
+                UpdateSight();
                 break;
             case States.Chase:
-
-                UpdateMovement(target.position);
+                UpdateMovement(((transform.position- target.position).normalized * (range-.02f)) + target.position);
                 UpdateSight();
-
-                UpdateSight();
-                if (target)
-                {
-                    UpdateMovement(target.position);
-                }
                 break;
 
             case States.Wander:
@@ -83,6 +77,7 @@ public class Ennemy : BaseUnit
     public override void UpdateMovement(Vector3 dir)
     {
         Debug.Log("move");
+        Debug.Log(((transform.position - dir).normalized * range) + transform.position);
         agent.SetDestination(dir);
     }
 
