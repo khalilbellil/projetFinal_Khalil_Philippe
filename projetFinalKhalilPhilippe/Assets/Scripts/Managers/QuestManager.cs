@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum QuestType
-{
+{//PRIMARY: Activable (talk to someone, open a door/portal)
+ //SECONDARY: Kill 1+ ennemy
     Primary, Secondary
 }
 
 public class QuestManager
 {
-    public Dictionary<int, Quest> allQuests;
+    public Dictionary<int, Quest> myActiveQuests;
+    public Dictionary<int, Quest> myAchivedQuests;
 
     #region Singleton Pattern
     private static QuestManager instance = null;
@@ -29,7 +31,8 @@ public class QuestManager
 
     public void Initialize()
     {
-        LoadQuestsFromRsrc();
+        myActiveQuests = new Dictionary<int, Quest>();
+        myAchivedQuests = new Dictionary<int, Quest>();
     }
 
     public void UpdateManager()
@@ -47,18 +50,38 @@ public class QuestManager
         instance = null;
     }
 
-    void LoadQuestsFromRsrc() //For Debuging purpose 
+    // FUNCTIONS //
+
+    public void AcceptQuest(PNJ pnjWhoGiveQuest, bool inputPressedToAccept)
     {
-        List<Quest> quests = new List<Quest>(Resources.LoadAll<Quest>("Quests"));
-        allQuests = new Dictionary<int, Quest>();
-        for (int i = 0; i < quests.Count; i++)
+        if (inputPressedToAccept && !pnjWhoGiveQuest.questAccepted)
         {
-            allQuests.Add(i, quests[i]);
+            myActiveQuests.Add(myActiveQuests.Count, pnjWhoGiveQuest.myQuest);
+            pnjWhoGiveQuest.questAccepted = true;
+            UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST ACCEPTED, good luck !");
         }
-
-        //UIManager.Instance.uiLinks.quest1Text.text = allQuests[0].questName;
-
     }
-    
+
+    public void DeclineQuest(PNJ pnjWhoGiveQuest, bool inputPressedToDecline)
+    {
+        if (inputPressedToDecline && !pnjWhoGiveQuest.questAccepted)
+        {
+            pnjWhoGiveQuest.questAccepted = false;
+            UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST DECLINED, come back when you are ready...");
+        }
+    }
+
+    public void CompleteQuest(int questKey)
+    {
+        myActiveQuests[questKey].isAchieved = true; //Update the scriptable object
+
+        //Transfering the quest from myActiveQuest to MyAchivedQuests:
+        myAchivedQuests.Add(myAchivedQuests.Count, myActiveQuests[questKey]);
+        myActiveQuests.Remove(questKey);
+    }
+
+    // DEBUG FUNCTIONS //
+
+
 
 }

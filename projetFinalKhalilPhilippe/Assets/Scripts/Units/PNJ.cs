@@ -6,6 +6,8 @@ public class PNJ : MonoBehaviour
 {
     public string pnjName;
     public Quest myQuest;
+    public bool dialogueIsOpen;
+    public bool questAccepted;
 
     private void Start()
     {
@@ -22,16 +24,27 @@ public class PNJ : MonoBehaviour
         //if interaction pressed -> activate dialogue ui with the pnj quest -> And Desactivate interaction UI
         if (InputManager.Instance.inputPressed.interactPressed)
         {
-            UIManager.Instance.CreateDialogue(pnjName, myQuest.description);
-            UIManager.Instance.OpenCloseDialogue();
+            if (!questAccepted)
+            {
+                UIManager.Instance.CreateDialogue(pnjName, myQuest.description);
+            }
+            UIManager.Instance.OpenCloseDialogue(this);
             UIManager.Instance.OpenClosePressKeyUI();
         }
+
+        if (!questAccepted && dialogueIsOpen)
+        {
+            QuestManager.Instance.AcceptQuest(this, InputManager.Instance.inputPressed.leftMouseButtonPressed);
+            QuestManager.Instance.DeclineQuest(this, InputManager.Instance.inputPressed.rightMouseButtonPressed);
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         UIManager.Instance.uiLinks.pressKeyUI.SetActive(false); //Desactivate interaction UI
         UIManager.Instance.uiLinks.dialogueUI.SetActive(false); //Desactivate dialogue UI
+        dialogueIsOpen = false;
     }
 
 }

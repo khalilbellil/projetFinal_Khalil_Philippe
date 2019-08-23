@@ -62,8 +62,15 @@ public class Ennemy : BaseUnit
                 UseWeapon(transform.forward);
                 break;
             case States.Chase:
+
                 UpdateMovement(target.position);
                 UpdateSight();
+
+                UpdateSight();
+                if (target)
+                {
+                    UpdateMovement(target.position);
+                }
                 break;
 
             case States.Wander:
