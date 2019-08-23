@@ -38,17 +38,21 @@ public class Ennemy : BaseUnit
         base.UnitFixedUpdate();
         Debug.Log(wanderPos);
 
-        if(currentAction == States.Wander && transform.position == wanderPos || currentAction == States.Wander && wanderPos == new Vector3())
+        if (currentAction == States.Wander && transform.position == wanderPos || currentAction == States.Wander && wanderPos == new Vector3())
         {
             wanderPos = (Random.insideUnitSphere + transform.position) * 10;
             wanderPos.y = transform.position.y;
         }
 
 
-        if(target != null && transform.position*range == target.transform.position)
+        if (target != null && Vector3.Distance(transform.position, target.transform.position) <= range)
         {
             Debug.Log("dammit");
             currentAction = States.Attack;
+        }
+        else
+        {
+            currentAction = States.Chase;
         }
         Debug.Log(currentAction);
 
@@ -58,13 +62,13 @@ public class Ennemy : BaseUnit
                 UseWeapon(transform.forward);
                 break;
             case States.Chase:
-                UpdateSight();
                 UpdateMovement(target.position);
+                UpdateSight();
                 break;
 
             case States.Wander:
-                UpdateSight();
                 UpdateMovement(wanderPos);
+                UpdateSight();
                 break;
         }
     }
@@ -88,6 +92,11 @@ public class Ennemy : BaseUnit
         else
         {
             target = null;
+            if(currentAction == States.Chase)
+            {
+                Debug.Log("yolo");
+            }
+
             currentAction = States.Wander;
         }
 
