@@ -5,40 +5,47 @@ using UnityEngine;
 public class PNJ : MonoBehaviour
 {
     public string pnjName;
-    public Quest attachedQuest;
-    Dialogue pnjDialogue;
+    public Quest myQuest;
+    public bool dialogueIsOpen;
+    public bool questAccepted;
+    public LayerMask talkableLayer;
 
     private void Start()
     {
-        pnjDialogue = GetComponent<Dialogue>();
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            UIManager.Instance.OpenClosePressKeyUI();
-        }
-        
+        UIManager.Instance.OpenClosePressKeyUI(); //Activate interaction UI
 
     }
     private void OnTriggerStay(Collider other)
     {
-        if (InputManager.Instance.inputPressed.interactPressed && other.CompareTag("Player"))
+        //if interaction pressed -> activate dialogue ui with the pnj quest -> And Desactivate interaction UI
+        if (InputManager.Instance.inputPressed.interactPressed)
         {
-            UIManager.Instance.uiLinks.dialogueUI.SetActive(false);
-            UIManager.Instance.uiLinks.dialogueUI.SetActive(true);
-            pnjDialogue.LaunchDialogue(this);
+            if (!questAccepted)
+            {
+                UIManager.Instance.CreateDialogue(pnjName, myQuest.description);
+            }
+            UIManager.Instance.OpenCloseDialogue(this);
+            UIManager.Instance.OpenClosePressKeyUI();
         }
+
+        if (!questAccepted && dialogueIsOpen)
+        {
+            QuestManager.Instance.AcceptQuest(this, InputManager.Instance.inputPressed.leftMouseButtonPressed);
+            QuestManager.Instance.DeclineQuest(this, InputManager.Instance.inputPressed.rightMouseButtonPressed);
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
-            UIManager.Instance.uiLinks.dialogueUI.SetActive(false);
-        }
+        UIManager.Instance.uiLinks.pressKeyUI.SetActive(false); //Desactivate interaction UI
+        UIManager.Instance.uiLinks.dialogueUI.SetActive(false); //Desactivate dialogue UI
+        dialogueIsOpen = false;
     }
-}
 
+}
