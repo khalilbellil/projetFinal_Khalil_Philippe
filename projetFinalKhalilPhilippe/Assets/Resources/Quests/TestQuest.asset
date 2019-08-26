@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: TestQuest
   m_EditorClassIdentifier: 
   isAchieved: 0
-  id: 0
-  questName: Welcome !
-  description: This is a test quest. You can either accept it with Left Mouse or Decline
-    it with the Right Mouse.
+  questName: TestQuest
+  description: testetststst
   requiredLvl: 1
+  questType: 0
+  talkTo: 
+  talkToDone: 0
+  pickUpItem: 

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum QuestType
-{//PRIMARY: Activable (talk to someone, open a door/portal)
- //SECONDARY: Kill 1+ ennemy
+{
     Primary, Secondary
 }
 
@@ -52,24 +51,24 @@ public class QuestManager
 
     // FUNCTIONS //
 
-    public void AcceptQuest(PNJ pnjWhoGiveQuest, bool inputPressedToAccept)
-    {
-        if (inputPressedToAccept && !pnjWhoGiveQuest.questAccepted)
-        {
-            myActiveQuests.Add(myActiveQuests.Count, pnjWhoGiveQuest.myQuest);
-            pnjWhoGiveQuest.questAccepted = true;
-            UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST ACCEPTED, good luck !");
-        }
-    }
+    //public void AcceptQuest(PNJ pnjWhoGiveQuest, bool inputPressedToAccept)
+    //{
+    //    if (inputPressedToAccept && !pnjWhoGiveQuest.questAccepted)
+    //    {
+    //        myActiveQuests.Add(myActiveQuests.Count, pnjWhoGiveQuest.myQuest);
+    //        pnjWhoGiveQuest.questAccepted = true;
+    //        UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST ACCEPTED, good luck !");
+    //    }
+    //}
 
-    public void DeclineQuest(PNJ pnjWhoGiveQuest, bool inputPressedToDecline)
-    {
-        if (inputPressedToDecline && !pnjWhoGiveQuest.questAccepted)
-        {
-            pnjWhoGiveQuest.questAccepted = false;
-            UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST DECLINED, come back when you are ready...");
-        }
-    }
+    //public void DeclineQuest(PNJ pnjWhoGiveQuest, bool inputPressedToDecline)
+    //{
+    //    if (inputPressedToDecline && !pnjWhoGiveQuest.questAccepted)
+    //    {
+    //        pnjWhoGiveQuest.questAccepted = false;
+    //        UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST DECLINED, come back when you are ready...");
+    //    }
+    //}
 
     public void CompleteQuest(int questKey)
     {
@@ -79,9 +78,5 @@ public class QuestManager
         myAchivedQuests.Add(myAchivedQuests.Count, myActiveQuests[questKey]);
         myActiveQuests.Remove(questKey);
     }
-
-    // DEBUG FUNCTIONS //
-
-
 
 }
