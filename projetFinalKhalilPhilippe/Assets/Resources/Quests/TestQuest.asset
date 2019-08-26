@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAchieved: 0
   questName: TestQuest
-  description: testetststst
+  description: There is the TestQuest !
   requiredLvl: 1
   questType: 0
   talkTo: 

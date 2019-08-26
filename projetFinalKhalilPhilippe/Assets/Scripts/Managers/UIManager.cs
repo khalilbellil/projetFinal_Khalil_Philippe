@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UIManager
 {
-
     #region Singleton Pattern
     private static UIManager instance = null;
     private UIManager() { }
@@ -44,7 +43,7 @@ public class UIManager
         instance = null;
     }
 
-    //QUESTS FUNCTIONS:
+    // QUESTS FUNCTIONS //
 
     public void AddQuestToUI(Quest _quest)
     {
@@ -79,9 +78,7 @@ public class UIManager
             
         }
     }
-
-    // QUESTS FUNCTIONS //
-
+    
     public void LoadMyQuestInUI()
     {
         if (QuestManager.Instance.myActiveQuests.ContainsKey(0))
@@ -104,15 +101,15 @@ public class UIManager
     }
 
 
-    //DIALOGUE FUNCTIONS:
+    //DIALOGUE FUNCTIONS //
 
-    public void CreateDialogue(string pnjName, string dialogueText)
+    public void SetDialogueUI(string title, string dialogueText)
     {
-        uiLinks.PnjNameText.text = pnjName;
+        uiLinks.PnjNameText.text = title;
         uiLinks.dialogueText.text = dialogueText;
     }
 
-    public void OpenCloseDialogue()
+    public void OpenCloseDialogueUI()
     {
         if (uiLinks.dialogueUI.activeSelf)
         {
@@ -123,6 +120,16 @@ public class UIManager
             uiLinks.dialogueUI.SetActive(true);
         }
         
+    }
+
+    public void CloseDialogueUI()
+    {
+        uiLinks.dialogueUI.SetActive(false);
+    }
+
+    public void OpenDialogueUI()
+    {
+        uiLinks.dialogueUI.SetActive(true);
     }
 
     public void OpenClosePressKeyUI()
@@ -137,8 +144,18 @@ public class UIManager
         }
     }
 
+    public void ClosePressKeyUI()
+    {
+        uiLinks.pressKeyUI.SetActive(false);
+    }
 
-    //DEBUG FUNCTIONS:
+    public void OpenPressKeyUI()
+    {
+        uiLinks.pressKeyUI.SetActive(true);
+    }
+
+
+    //DEBUG FUNCTIONS //
 
     //Temporary HealthBar for an Ennemi
     void TestEnnemiHpBar()

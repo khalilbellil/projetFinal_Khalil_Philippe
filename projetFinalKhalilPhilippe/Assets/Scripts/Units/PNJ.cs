@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PNJ : MonoBehaviour
+public class PNJ : BaseUnit
 {
     public string pnjName;
     public Quest myQuest;
@@ -12,40 +12,29 @@ public class PNJ : MonoBehaviour
 
     private void Start()
     {
+        base.Init();
+        unitName = pnjName;
+    }
 
+    private void Update()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        UIManager.Instance.OpenClosePressKeyUI(); //Activate interaction UI
-
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        //if interaction pressed -> activate dialogue ui with the pnj quest -> And Desactivate interaction UI
-        if (InputManager.Instance.inputPressed.interactPressed)
+        if (other.CompareTag("Player"))
         {
-            if (!questAccepted)
-            {
-                UIManager.Instance.CreateDialogue(pnjName, myQuest.description);
-            }
-            UIManager.Instance.OpenCloseDialogue(this);
-            UIManager.Instance.OpenClosePressKeyUI();
+            UIManager.Instance.uiLinks.pressKeyUI.SetActive(true);
         }
-
-        if (!questAccepted && dialogueIsOpen)
-        {
-            QuestManager.Instance.AcceptQuest(this, InputManager.Instance.inputPressed.leftMouseButtonPressed);
-            QuestManager.Instance.DeclineQuest(this, InputManager.Instance.inputPressed.rightMouseButtonPressed);
-        }
-
     }
 
     private void OnTriggerExit(Collider other)
     {
-        UIManager.Instance.uiLinks.pressKeyUI.SetActive(false); //Desactivate interaction UI
-        UIManager.Instance.uiLinks.dialogueUI.SetActive(false); //Desactivate dialogue UI
-        dialogueIsOpen = false;
+        if (other.CompareTag("Player"))
+        {
+            UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
+        }
     }
 
 }

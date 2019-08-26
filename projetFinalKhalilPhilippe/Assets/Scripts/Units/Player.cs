@@ -13,6 +13,9 @@ public class Player : BaseUnit
     float timeOfNextValidJump;
     bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 2); } }
 
+    public GameObject target;
+    bool targetSetted = false;
+
 
     // BASIC FUNCTIONS //
 
@@ -28,17 +31,18 @@ public class Player : BaseUnit
         lvl = new Level();
         lvl.InitLevel(1, 10, 0, 100);
 
-        //Init UI:
-        //UIManager.Instance.uiLinks = GetComponentInChildren<UILinks>();
-
         //Init Animator:
         InitAnimator();
+
+        target = null;
     }
 
     public void PlayerUpdate()
     {
         base.UnitUpdate();
         cam.CameraUpdate();
+
+        UpdateTarget();
     }
 
     public void PlayerFixedUpdate()
@@ -70,6 +74,46 @@ public class Player : BaseUnit
         animator = GetComponent<Animator>();
         animator.SetBool("isJumping", isJumping);
         animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.y);
+    }
+
+    // Interaction Functions //
+
+    public GameObject GetTargetFromRayCastForward()
+    {
+        GameObject retour = null;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 3f))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
+            retour = hit.collider.gameObject;
+        }
+
+        return retour;
+    }
+
+    void UpdateTarget()
+    {
+        if (InputManager.Instance.inputPressed.interactPressed)
+        {
+            target = GetTargetFromRayCastForward(); //Get the target in front of us
+            if (target != null && !targetSetted)
+            {
+                UIManager.Instance.uiLinks.targetUI.text += target.GetComponent<BaseUnit>().unitName;
+                targetSetted = true;
+                if (target.CompareTag("PNJ"))
+                {
+                    UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
+                }
+            }
+            else
+            {
+                UIManager.Instance.uiLinks.targetUI.text = "LOCKED TARGET: ";
+                target = null;
+                targetSetted = false;
+            }
+        }
     }
 
 }

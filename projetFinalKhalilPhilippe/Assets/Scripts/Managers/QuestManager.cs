@@ -9,9 +9,6 @@ public enum QuestType
 
 public class QuestManager
 {
-    public Dictionary<int, Quest> myActiveQuests;
-    public Dictionary<int, Quest> myAchivedQuests;
-
     #region Singleton Pattern
     private static QuestManager instance = null;
     private QuestManager() { }
@@ -27,6 +24,9 @@ public class QuestManager
         }
     }
     #endregion
+
+    public Dictionary<int, Quest> myActiveQuests;
+    public Dictionary<int, Quest> myAchivedQuests;
 
     public void Initialize()
     {
@@ -51,24 +51,15 @@ public class QuestManager
 
     // FUNCTIONS //
 
-    //public void AcceptQuest(PNJ pnjWhoGiveQuest, bool inputPressedToAccept)
-    //{
-    //    if (inputPressedToAccept && !pnjWhoGiveQuest.questAccepted)
-    //    {
-    //        myActiveQuests.Add(myActiveQuests.Count, pnjWhoGiveQuest.myQuest);
-    //        pnjWhoGiveQuest.questAccepted = true;
-    //        UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST ACCEPTED, good luck !");
-    //    }
-    //}
+    public void AcceptQuest()
+    {
 
-    //public void DeclineQuest(PNJ pnjWhoGiveQuest, bool inputPressedToDecline)
-    //{
-    //    if (inputPressedToDecline && !pnjWhoGiveQuest.questAccepted)
-    //    {
-    //        pnjWhoGiveQuest.questAccepted = false;
-    //        UIManager.Instance.CreateDialogue(pnjWhoGiveQuest.pnjName, "QUEST DECLINED, come back when you are ready...");
-    //    }
-    //}
+    }
+
+    public void DeclineQuest()
+    {
+
+    }
 
     public void CompleteQuest(int questKey)
     {

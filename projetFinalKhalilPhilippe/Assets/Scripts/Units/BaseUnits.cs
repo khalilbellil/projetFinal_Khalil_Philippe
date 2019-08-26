@@ -11,6 +11,7 @@ public class BaseUnit : MonoBehaviour
     //public Weapon[] weaponList;
 
     #region VARIABLES
+    public string unitName;
     public bool isAlive;
     protected bool isDashing;
     protected bool isHolding;
@@ -25,6 +26,8 @@ public class BaseUnit : MonoBehaviour
     bool canAttack { get { return Time.time - timeLastAttack >= attackCD; } }
     float timeLastAttack;
     public float attackCD;
+
+    public bool targetedByPlayer = false;
 
     #endregion
 
