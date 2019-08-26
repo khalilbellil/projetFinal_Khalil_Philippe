@@ -5,46 +5,40 @@ using UnityEngine;
 public class PNJ : MonoBehaviour
 {
     public string pnjName;
-    public Quest myQuest;
-    public bool dialogueIsOpen;
-    public bool questAccepted;
+    public Quest attachedQuest;
+    Dialogue pnjDialogue;
 
     private void Start()
     {
-
+        pnjDialogue = GetComponent<Dialogue>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        UIManager.Instance.OpenClosePressKeyUI(); //Activate interaction UI
+        if (other.CompareTag("Player"))
+        {
+            UIManager.Instance.OpenClosePressKeyUI();
+        }
+        
 
     }
     private void OnTriggerStay(Collider other)
     {
-        //if interaction pressed -> activate dialogue ui with the pnj quest -> And Desactivate interaction UI
-        if (InputManager.Instance.inputPressed.interactPressed)
+        if (InputManager.Instance.inputPressed.interactPressed && other.CompareTag("Player"))
         {
-            if (!questAccepted)
-            {
-                UIManager.Instance.CreateDialogue(pnjName, myQuest.description);
-            }
-            UIManager.Instance.OpenCloseDialogue(this);
-            UIManager.Instance.OpenClosePressKeyUI();
+            UIManager.Instance.uiLinks.dialogueUI.SetActive(false);
+            UIManager.Instance.uiLinks.dialogueUI.SetActive(true);
+            pnjDialogue.LaunchDialogue(this);
         }
-
-        if (!questAccepted && dialogueIsOpen)
-        {
-            QuestManager.Instance.AcceptQuest(this, InputManager.Instance.inputPressed.leftMouseButtonPressed);
-            QuestManager.Instance.DeclineQuest(this, InputManager.Instance.inputPressed.rightMouseButtonPressed);
-        }
-
     }
 
     private void OnTriggerExit(Collider other)
     {
-        UIManager.Instance.uiLinks.pressKeyUI.SetActive(false); //Desactivate interaction UI
-        UIManager.Instance.uiLinks.dialogueUI.SetActive(false); //Desactivate dialogue UI
-        dialogueIsOpen = false;
+        if (other.CompareTag("Player"))
+        {
+            UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
+            UIManager.Instance.uiLinks.dialogueUI.SetActive(false);
+        }
     }
-
 }
+

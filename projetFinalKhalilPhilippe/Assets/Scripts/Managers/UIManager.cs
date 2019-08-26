@@ -112,17 +112,15 @@ public class UIManager
         uiLinks.dialogueText.text = dialogueText;
     }
 
-    public void OpenCloseDialogue(PNJ pnj)
+    public void OpenCloseDialogue()
     {
         if (uiLinks.dialogueUI.activeSelf)
         {
             uiLinks.dialogueUI.SetActive(false);
-            pnj.dialogueIsOpen = false;
         }
         else
         {
             uiLinks.dialogueUI.SetActive(true);
-            pnj.dialogueIsOpen = true;
         }
         
     }
