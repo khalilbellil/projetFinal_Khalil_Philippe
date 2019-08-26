@@ -29,14 +29,14 @@ public class PNJ : MonoBehaviour
             {
                 UIManager.Instance.CreateDialogue(pnjName, myQuest.description);
             }
-            UIManager.Instance.OpenCloseDialogue(this);
+            //UIManager.Instance.OpenCloseDialogue(this);
             UIManager.Instance.OpenClosePressKeyUI();
         }
 
         if (!questAccepted && dialogueIsOpen)
         {
-            QuestManager.Instance.AcceptQuest(this, InputManager.Instance.inputPressed.leftMouseButtonPressed);
-            QuestManager.Instance.DeclineQuest(this, InputManager.Instance.inputPressed.rightMouseButtonPressed);
+            //QuestManager.Instance.AcceptQuest(this, InputManager.Instance.inputPressed.leftMouseButtonPressed);
+            //QuestManager.Instance.DeclineQuest(this, InputManager.Instance.inputPressed.rightMouseButtonPressed);
         }
 
     }

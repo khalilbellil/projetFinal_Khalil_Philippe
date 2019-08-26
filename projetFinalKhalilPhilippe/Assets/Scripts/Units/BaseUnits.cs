@@ -25,6 +25,7 @@ public class BaseUnit : MonoBehaviour
     bool canAttack { get { return Time.time - timeLastAttack >= attackCD; } }
     float timeLastAttack;
     public float attackCD;
+    public float width;
 
     #endregion
 
@@ -100,11 +101,11 @@ public class BaseUnit : MonoBehaviour
         if (canAttack)
         {
             Debug.Log("hit");
-            Vector3 hitbox = transform.position + dir * range;
-            Collider[] collider = Physics.OverlapBox(hitbox, new Vector3(1, 2, 1), new Quaternion(), hitableLayer);
-            foreach (Collider target in collider)
+            Vector3 hitbox = transform.position + dir;
+            RaycastHit[] hits =Physics.BoxCastAll(hitbox,new Vector3(1,1,width),transform.forward,new Quaternion(),range,hitableLayer);
+            foreach (RaycastHit target in hits)
             {
-                target.gameObject.GetComponent<BaseUnit>()?.TakeDamage(dmg);
+                target.transform.gameObject.GetComponent<BaseUnit>()?.TakeDamage(dmg);
             }
             timeLastAttack = Time.time;
         }
