@@ -30,6 +30,7 @@ public class UIManager
     public void UpdateManager()
     {
         TestEnnemiHpBar();
+        TestDamage();
         OpenCloseQuestsUI();
     }
 

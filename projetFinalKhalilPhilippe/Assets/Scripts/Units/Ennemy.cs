@@ -50,28 +50,23 @@ public class Ennemy : BaseUnit
             //Debug.Log("dammit");
             currentAction = States.Attack;
         }
-        else
-        {
-            UpdateSight();
-        }
+
         Debug.Log(currentAction);
 
         switch (currentAction)
         {
             case States.Attack:
                 UseWeapon(transform.forward);
-                UpdateSight();
                 break;
             case States.Chase:
-                UpdateMovement(((transform.position- target.position).normalized * (range-.02f)) + target.position);
-                UpdateSight();
+                UpdateMovement(((transform.position - target.position).normalized * (range-.02f)) + target.position);
                 break;
 
             case States.Wander:
                 UpdateMovement(wanderPos);
-                UpdateSight();
                 break;
         }
+        UpdateSight();
     }
 
     public override void UpdateMovement(Vector3 dir)
@@ -81,14 +76,32 @@ public class Ennemy : BaseUnit
         agent.SetDestination(dir);
     }
 
-    public void UpdateSight()
+    bool SensesCheck()
     {
         Vector3 rayDir = (target) ? (target.position - transform.position).normalized : transform.forward;
 
         if (Physics.Raycast(transform.position, rayDir, out hit, sightRange, sightLayer) && (hitableLayer == (hitableLayer | (1 << hit.transform.gameObject.layer))))
         {
-
             target = hit.transform;
+            return true;
+        }
+
+        Collider[] temp = Physics.OverlapSphere(transform.position, 3, hitableLayer);
+        if (temp.Length >0)
+        {
+            target = temp[0].transform;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void UpdateSight()
+    {
+        Vector3 rayDir = (target) ? (target.position - transform.position).normalized : transform.forward;
+
+        if (SensesCheck())
+        {
             currentAction = States.Chase;
         }
         else
