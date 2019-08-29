@@ -16,6 +16,9 @@ public class Ennemy : BaseUnit
     RaycastHit player;
     NavMeshAgent agent;
     Transform target;
+    Transform[] walkpatern;
+    int walkPaternIndex = 0;
+    public Transform walk;
     States currentAction;
     Vector3 wanderPos;
     public float sightRange;
@@ -26,24 +29,19 @@ public class Ennemy : BaseUnit
         base.Init();
         Debug.Log("Ennemy Init");
         agent = GetComponent<NavMeshAgent>();
+        InitializeWalkPatern();
     }
 
     public void EnnemyUpdate()
     {
         base.UnitUpdate();
+        TestEnnemiHpBar();
     }
 
     public void EnnemyFixedUpdate()
     {
         base.UnitFixedUpdate();
         Debug.Log(wanderPos);
-
-        if (currentAction == States.Wander && transform.position == wanderPos || currentAction == States.Wander && wanderPos == new Vector3())
-        {
-            wanderPos = (Random.insideUnitSphere + transform.position) * 10;
-            wanderPos.y = transform.position.y;
-        }
-
 
         if (target != null && Vector3.Distance(transform.position, target.transform.position) <= range)
         {
@@ -59,11 +57,11 @@ public class Ennemy : BaseUnit
                 UseWeapon(transform.forward);
                 break;
             case States.Chase:
-                UpdateMovement(((transform.position - target.position).normalized * (range-.02f)) + target.position);
+                UpdateMovement(((transform.position - target.position).normalized * (range - .02f)) + target.position);
                 break;
 
             case States.Wander:
-                UpdateMovement(wanderPos);
+                UpdateMovement(WalkToBalise());
                 break;
         }
         UpdateSight();
@@ -71,8 +69,8 @@ public class Ennemy : BaseUnit
 
     public override void UpdateMovement(Vector3 dir)
     {
-        Debug.Log("move");
-        Debug.Log(((transform.position - dir).normalized * range) + transform.position);
+        //Debug.Log("move");
+        //Debug.Log(((transform.position - dir).normalized * range) + transform.position);
         agent.SetDestination(dir);
     }
 
@@ -87,7 +85,7 @@ public class Ennemy : BaseUnit
         }
 
         Collider[] temp = Physics.OverlapSphere(transform.position, 3, hitableLayer);
-        if (temp.Length >0)
+        if (temp.Length > 0)
         {
             target = temp[0].transform;
             return true;
@@ -107,7 +105,7 @@ public class Ennemy : BaseUnit
         else
         {
             target = null;
-            if(currentAction == States.Chase)
+            if (currentAction == States.Chase)
             {
                 Debug.Log("yolo");
             }
@@ -117,4 +115,40 @@ public class Ennemy : BaseUnit
 
     }
 
+    void InitializeWalkPatern()
+    {
+        walkpatern = new Transform[walk.childCount];
+        for (int i = 0; i < walk.childCount; i++)
+        {
+            walkpatern[i] = walk.GetChild(i);
+        }
+    }
+
+    Vector3 WalkToBalise()
+    {
+        Vector3 wtf = walkpatern[walkPaternIndex].position;
+        wtf.y = transform.position.y;
+        if (Vector3.Distance(transform.position,wtf) <= 0.1)
+        {
+            if (walkPaternIndex < walk.childCount-1)
+            {
+                walkPaternIndex++;
+            }
+            else
+            {
+                walkPaternIndex = 0;
+            }
+        }
+
+        wanderPos = walkpatern[walkPaternIndex].position;
+        wanderPos.y = transform.position.y;
+
+        return wanderPos;
+    }
+
+    void TestEnnemiHpBar()
+    {
+        float hpLeft = health / maxHealth;
+        transform.GetChild(0).localScale = new Vector3(hpLeft, 1, 1);
+    }
 }

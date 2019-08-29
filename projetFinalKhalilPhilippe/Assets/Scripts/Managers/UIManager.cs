@@ -29,7 +29,6 @@ public class UIManager
 
     public void UpdateManager()
     {
-        TestEnnemiHpBar();
         TestDamage();
         OpenCloseQuestsUI();
     }
@@ -159,11 +158,7 @@ public class UIManager
     //DEBUG FUNCTIONS //
 
     //Temporary HealthBar for an Ennemi
-    void TestEnnemiHpBar()
-    {
-        float hpLeft = EnnemyManager.Instance.ennemy.health / EnnemyManager.Instance.ennemy.maxHealth;
-        EnnemyManager.Instance.ennemy.transform.GetChild(0).localScale = new Vector3(hpLeft, 1, 1);
-    }
+    
 
     void TestDamage()
     {
