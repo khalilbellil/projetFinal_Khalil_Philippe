@@ -25149,7 +25149,7 @@ PrefabInstance:
         type: 3}
       propertyPath: walk
       value: 
-      objectReference: {fileID: 5925767731552372748}
+      objectReference: {fileID: 7544770238764510528}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db718aaba4e301d4784427889cf8bbb5, type: 3}
 --- !u!1 &1447236909
@@ -47523,6 +47523,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2388bc629d49b6346b9167b3a1126dd5, type: 3}
+--- !u!4 &7544770238764510528 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2183632810011052545, guid: d99220e8530c5794da6179399dc6043f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8573088932506871617}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8573088932506871617
 PrefabInstance:
   m_ObjectHideFlags: 0
