@@ -10,7 +10,7 @@ public class Player : BaseUnit
     float jumpForce = 30f;
     float jumpCD = 0.5f;
     bool isJumping = false;
-    float timeOfNextValidJump;
+    float timeOfNextValidJump = 0;
     bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 2); } }
 
     public GameObject target;
@@ -54,6 +54,7 @@ public class Player : BaseUnit
         if (InputManager.Instance.fixedInputPressed.leftMouseButtonPressed)
         {
             UseWeapon(transform.forward);
+            animator.SetTrigger("AttackTrigger");
         }
     }
 
@@ -62,18 +63,22 @@ public class Player : BaseUnit
 
     public void Jump()
     {
+        
         if (InputManager.Instance.fixedInputPressed.jumpPressed && canJump)
         {
             timeOfNextValidJump = Time.time + jumpCD;
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            animator.SetTrigger("jumpTrigger");
         }
     }
 
     void InitAnimator() //Set of all animator variables
     {
         animator = GetComponent<Animator>();
-        animator.SetBool("isJumping", isJumping);
-        animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.y);
+        animator.SetBool("runBool", isRunning);
+        animator.SetFloat("PlayerHp", health);
+        //animator.SetBool("isJumping", isJumping);
+        //animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.y);
     }
 
     // Interaction Functions //
@@ -113,4 +118,9 @@ public class Player : BaseUnit
         }
     }
 
+    public override void Death()
+    {
+        base.Death();
+
+    }
 }

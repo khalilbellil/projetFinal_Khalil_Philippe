@@ -22,6 +22,7 @@ public class BaseUnit : MonoBehaviour
     float rot;
     public float range;
     public float dmg;
+    protected bool isRunning;
 
     bool canAttack { get { return Time.time - timeLastAttack >= attackCD; } }
     float timeLastAttack;

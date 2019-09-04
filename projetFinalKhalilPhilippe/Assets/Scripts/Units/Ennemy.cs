@@ -17,6 +17,7 @@ public class Ennemy : BaseUnit
     NavMeshAgent agent;
     Transform target;
     Transform[] walkpatern;
+    Vector3 startPos;
     int walkPaternIndex = 0;
     public Transform walk;
     States currentAction;
@@ -30,6 +31,7 @@ public class Ennemy : BaseUnit
         Debug.Log("Ennemy Init");
         agent = GetComponent<NavMeshAgent>();
         InitializeWalkPatern();
+        startPos = transform.position;
     }
 
     public void EnnemyUpdate()
@@ -41,7 +43,7 @@ public class Ennemy : BaseUnit
     public void EnnemyFixedUpdate()
     {
         base.UnitFixedUpdate();
-        Debug.Log(wanderPos);
+        //Debug.Log(wanderPos);
 
         if (target != null && Vector3.Distance(transform.position, target.transform.position) <= range)
         {
@@ -65,6 +67,7 @@ public class Ennemy : BaseUnit
                 break;
         }
         UpdateSight();
+        
     }
 
     public override void UpdateMovement(Vector3 dir)
@@ -150,5 +153,12 @@ public class Ennemy : BaseUnit
     {
         float hpLeft = health / maxHealth;
         transform.GetChild(0).localScale = new Vector3(hpLeft, 1, 1);
+    }
+
+    public override void Death()
+    {
+        base.Death();
+        transform.gameObject.SetActive(false);
+        transform.position = startPos;
     }
 }
