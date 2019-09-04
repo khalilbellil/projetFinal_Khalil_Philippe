@@ -51,12 +51,23 @@ public class QuestManager
 
     // FUNCTIONS //
 
-    public void AcceptQuest()
+    public void AcceptQuest(Quest questToAccept)
     {
-
+        if (myActiveQuests[0] == null)
+        {
+            myActiveQuests[0] = questToAccept;
+        }
+        else if (myActiveQuests[1] == null)
+        {
+            myActiveQuests[1] = questToAccept;
+        }
+        else if (myActiveQuests[2] == null)
+        {
+            myActiveQuests[2] = questToAccept;
+        }
     }
 
-    public void DeclineQuest()
+    public void DeclineQuest(Quest questToDecline)
     {
 
     }

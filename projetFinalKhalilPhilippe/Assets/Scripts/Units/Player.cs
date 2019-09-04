@@ -102,10 +102,7 @@ public class Player : BaseUnit
             {
                 UIManager.Instance.uiLinks.targetUI.text += target.GetComponent<BaseUnit>().unitName;
                 targetSetted = true;
-                if (target.CompareTag("PNJ"))
-                {
-                    UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
-                }
+                UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
             }
             else
             {

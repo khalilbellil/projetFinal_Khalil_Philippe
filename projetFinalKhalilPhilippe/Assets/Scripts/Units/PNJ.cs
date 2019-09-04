@@ -6,6 +6,7 @@ public class PNJ : BaseUnit
 {
     public string pnjName;
     public Quest myQuest;
+    public List<string> dialogue;
     public bool dialogueIsOpen;
     public bool questAccepted;
     public LayerMask talkableLayer;
