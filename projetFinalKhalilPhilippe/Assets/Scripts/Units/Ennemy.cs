@@ -15,7 +15,7 @@ public class Ennemy : BaseUnit
     RaycastHit hit;
     RaycastHit player;
     NavMeshAgent agent;
-    Transform target;
+    public Transform target;
     Transform[] walkpatern;
     Vector3 startPos;
     int walkPaternIndex = 0;
@@ -26,62 +26,80 @@ public class Ennemy : BaseUnit
     public LayerMask sightLayer;
     Animator anim;
 
-    public TaskEventHandler OnDeathEventHandler;
-
     public void EnnemyInit()
     {
         base.Init();
         Debug.Log("Ennemy Init");
         agent = GetComponent<NavMeshAgent>();
-
-        if (walk != null)
-            InitializeWalkPatern();
-
+        InitializeWalkPatern();
         startPos = transform.position;
+        anim = GetComponent<Animator>();
     }
 
     public void EnnemyUpdate()
     {
-        base.UnitUpdate();
-        TestEnnemiHpBar();
+        if (isAlive)
+        {
+            base.UnitUpdate();
+            TestEnnemiHpBar();
+
+        }
     }
 
     public void EnnemyFixedUpdate()
     {
-        base.UnitFixedUpdate();
         //Debug.Log(wanderPos);
-
-        if (target != null && Vector3.Distance(transform.position, target.transform.position) <= range)
+        if (isAlive)
         {
-            //Debug.Log("dammit");
-            currentAction = States.Attack;
-        }
 
-        Debug.Log(currentAction);
+            base.UnitFixedUpdate();
+            if (target != null && Vector3.Distance(transform.position, target.transform.position) <= range)
+            {
+                //Debug.Log("dammit");
+                currentAction = States.Attack;
+            }
 
-        switch (currentAction)
-        {
-            case States.Attack:
-                UseWeapon(transform.forward);
-                break;
-            case States.Chase:
-                UpdateMovement(((transform.position - target.position).normalized * (range - .02f)) + target.position);
-                break;
+            if(unitName == "1")
+            Debug.Log(currentAction);
+            UpdateAnims();
 
-            case States.Wander:
-                if (walk != null)
+            switch (currentAction)
+            {
+                case States.Attack:
+                    transform.LookAt(target);
+                    UseWeapon(transform.forward);
+                    currentSpeed = 0;
+                    anim.SetTrigger("AttackTrigger");
+                    break;
+                case States.Chase:
+                    UpdateMovement(((transform.position - target.position).normalized * (range - .02f)) + target.position);
+                    break;
+
+                case States.Wander:
                     UpdateMovement(WalkToBalise());
-                break;
+                    break;
+            }
+            UpdateSight();
+
         }
-        UpdateSight();
-        
     }
 
-    public override void UpdateMovement(Vector3 dir)
+    public override void UpdateMovement(Vector3 goalPos)
     {
         //Debug.Log("move");
         //Debug.Log(((transform.position - dir).normalized * range) + transform.position);
-        agent.SetDestination(dir);
+        agent.SetDestination(goalPos);
+        if (!isAlive)
+        {
+            agent.SetDestination(transform.position);
+            currentSpeed = 0;
+        }
+        else
+        {
+            if (unitName == "1")
+                Debug.Log("b");
+            currentSpeed = speed;
+        }
     }
 
     bool SensesCheck()
@@ -134,13 +152,20 @@ public class Ennemy : BaseUnit
         }
     }
 
+    void UpdateAnims()
+    {
+        if (unitName == "1")
+            Debug.Log(currentSpeed);
+        anim.SetFloat("forward", currentSpeed);
+    }
+
     Vector3 WalkToBalise()
     {
         Vector3 wtf = walkpatern[walkPaternIndex].position;
         wtf.y = transform.position.y;
-        if (Vector3.Distance(transform.position,wtf) <= 0.1)
+        if (Vector3.Distance(transform.position, wtf) <= 0.1)
         {
-            if (walkPaternIndex < walk.childCount-1)
+            if (walkPaternIndex < walk.childCount - 1)
             {
                 walkPaternIndex++;
             }
@@ -165,8 +190,6 @@ public class Ennemy : BaseUnit
     public override void Death()
     {
         base.Death();
-        transform.gameObject.SetActive(false);
-        transform.position = startPos;
-        OnDeathEventHandler?.Invoke();
+        anim.SetTrigger("DeathTrigger");
     }
 }

@@ -7,11 +7,11 @@ public class Player : BaseUnit
     Level lvl;
     CameraControler cam;
     Animator animator;
-    float jumpForce = 30f;
+    float jumpForce = 40f;
     float jumpCD = 0.5f;
     bool isJumping = false;
     float timeOfNextValidJump = 0;
-    bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position + new Vector3(0,.1f,0), new Vector3(0, -1, 0), 2,LayerMask.GetMask("Ground")); } }
+    bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position + new Vector3(0, .1f, 0), new Vector3(0, -1, 0), 2, LayerMask.GetMask("Ground")); } }
 
     public GameObject target;
     bool targetSetted = false;
@@ -42,23 +42,32 @@ public class Player : BaseUnit
 
     public void PlayerUpdate()
     {
-        base.UnitUpdate();
-        cam.CameraUpdate();
+        if (isAlive)
+        {
 
-        //UpdateTarget();
-        UpdateInteractions();
+            base.UnitUpdate();
+            cam.CameraUpdate();
+
+            //UpdateTarget();
+            UpdateInteractions();
+        }
     }
 
     public void PlayerFixedUpdate()
     {
-        base.UnitFixedUpdate();
-
-        Jump();
-        UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
-        if (InputManager.Instance.fixedInputPressed.leftMouseButtonPressed)
+        if (isAlive)
         {
-            UseWeapon(transform.forward);
-            animator.SetTrigger("AttackTrigger");
+
+            base.UnitFixedUpdate();
+
+            Jump();
+            UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
+            UpdateAnims();
+            if (InputManager.Instance.fixedInputPressed.leftMouseButtonPressed)
+            {
+                UseWeapon(transform.forward);
+                animator.SetTrigger("AttackTrigger");
+            }
         }
     }
 
@@ -67,7 +76,6 @@ public class Player : BaseUnit
 
     public void Jump()
     {
-        
         if (InputManager.Instance.fixedInputPressed.jumpPressed && canJump)
         {
             timeOfNextValidJump = Time.time + jumpCD;
@@ -79,10 +87,14 @@ public class Player : BaseUnit
     void InitAnimator() //Set of all animator variables
     {
         animator = GetComponent<Animator>();
-        animator.SetFloat("RunFloat",currentSpeed);
+        animator.SetFloat("RunFloat", currentSpeed);
+
+    }
+
+    void UpdateAnims()
+    {
+        animator.SetFloat("RunFloat", currentSpeed);
         animator.SetFloat("PlayerHp", health);
-        //animator.SetBool("isJumping", isJumping);
-        //animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.y);
     }
 
     // Interaction Functions //
@@ -179,6 +191,7 @@ public class Player : BaseUnit
     public override void Death()
     {
         base.Death();
-
+        animator.SetTrigger("DeathTrigger");
+        transform.position = new Vector3(transform.position.x, -1, transform.position.z);
     }
 }
