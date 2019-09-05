@@ -1973,7 +1973,7 @@ MonoBehaviour:
   range: 3
   dmg: 1
   attackCD: 1
-  width: 0
+  width: 1
   targetedByPlayer: 0
   health: 1
   maxHealth: 1
@@ -1986,6 +1986,7 @@ MonoBehaviour:
     m_Bits: 512
   speedMultiplier: 1
   rb: {fileID: 0}
+  target: {fileID: 0}
   walk: {fileID: 0}
   sightRange: 5
   sightLayer:

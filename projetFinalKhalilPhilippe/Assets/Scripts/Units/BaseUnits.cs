@@ -90,7 +90,7 @@ public class BaseUnit : MonoBehaviour
 
     virtual public void Death()
     {
-        Debug.Log("basic isDead");
+        //Debug.Log("basic isDead");
         isAlive = false;
     }
 

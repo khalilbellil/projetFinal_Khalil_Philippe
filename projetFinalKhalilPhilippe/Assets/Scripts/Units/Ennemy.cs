@@ -33,42 +33,52 @@ public class Ennemy : BaseUnit
         agent = GetComponent<NavMeshAgent>();
         InitializeWalkPatern();
         startPos = transform.position;
+        anim = GetComponent<Animator>();
     }
 
     public void EnnemyUpdate()
     {
-        base.UnitUpdate();
-        TestEnnemiHpBar();
+        if (isAlive)
+        {
+            base.UnitUpdate();
+            TestEnnemiHpBar();
+
+        }
     }
 
     public void EnnemyFixedUpdate()
     {
-        base.UnitFixedUpdate();
         //Debug.Log(wanderPos);
-
-        if (target != null && Vector3.Distance(transform.position, target.transform.position) <= range)
+        if (isAlive)
         {
-            //Debug.Log("dammit");
-            currentAction = States.Attack;
+
+            base.UnitFixedUpdate();
+            if (target != null && Vector3.Distance(transform.position, target.transform.position) <= range)
+            {
+                //Debug.Log("dammit");
+                currentAction = States.Attack;
+            }
+
+            Debug.Log(currentAction);
+            UpdateAnims();
+
+            switch (currentAction)
+            {
+                case States.Attack:
+                    UseWeapon(transform.forward);
+                    anim.SetTrigger("AttackTrigger");
+                    break;
+                case States.Chase:
+                    UpdateMovement(((transform.position - target.position).normalized * (range - .02f)) + target.position);
+                    break;
+
+                case States.Wander:
+                    UpdateMovement(WalkToBalise());
+                    break;
+            }
+            UpdateSight();
+
         }
-
-        Debug.Log(currentAction);
-
-        switch (currentAction)
-        {
-            case States.Attack:
-                UseWeapon(transform.forward);
-                break;
-            case States.Chase:
-                UpdateMovement(((transform.position - target.position).normalized * (range - .02f)) + target.position);
-                break;
-
-            case States.Wander:
-                UpdateMovement(WalkToBalise());
-                break;
-        }
-        UpdateSight();
-        
     }
 
     public override void UpdateMovement(Vector3 dir)
@@ -76,6 +86,18 @@ public class Ennemy : BaseUnit
         //Debug.Log("move");
         //Debug.Log(((transform.position - dir).normalized * range) + transform.position);
         agent.SetDestination(dir);
+        if (!isAlive)
+        {
+            agent.SetDestination(transform.position);
+        }
+        if(transform.position != dir)
+        {
+            currentSpeed = speed;
+        }
+        else
+        {
+            currentSpeed = 0;
+        }
     }
 
     bool SensesCheck()
@@ -128,13 +150,18 @@ public class Ennemy : BaseUnit
         }
     }
 
+    void UpdateAnims()
+    {
+        anim.SetFloat("forward", currentSpeed);
+    }
+
     Vector3 WalkToBalise()
     {
         Vector3 wtf = walkpatern[walkPaternIndex].position;
         wtf.y = transform.position.y;
-        if (Vector3.Distance(transform.position,wtf) <= 0.1)
+        if (Vector3.Distance(transform.position, wtf) <= 0.1)
         {
-            if (walkPaternIndex < walk.childCount-1)
+            if (walkPaternIndex < walk.childCount - 1)
             {
                 walkPaternIndex++;
             }
@@ -159,7 +186,6 @@ public class Ennemy : BaseUnit
     public override void Death()
     {
         base.Death();
-        transform.gameObject.SetActive(false);
-        transform.position = startPos;
+        anim.SetTrigger("DeathTrigger");
     }
 }
