@@ -16,6 +16,8 @@ public class Player : BaseUnit
     public GameObject target;
     bool targetSetted = false;
 
+    public bool pressKeyAvailable;
+
 
     // BASIC FUNCTIONS //
 
@@ -35,6 +37,7 @@ public class Player : BaseUnit
         InitAnimator();
 
         target = null;
+        pressKeyAvailable = false;
     }
 
     public void PlayerUpdate()
@@ -42,7 +45,8 @@ public class Player : BaseUnit
         base.UnitUpdate();
         cam.CameraUpdate();
 
-        UpdateTarget();
+        //UpdateTarget();
+        UpdateInteractions();
     }
 
     public void PlayerFixedUpdate()
@@ -83,6 +87,60 @@ public class Player : BaseUnit
 
     // Interaction Functions //
 
+    public void UpdateInteractions()
+    {
+        if (InputManager.Instance.inputPressed.leftMouseButtonPressed)
+        {
+            if (DialogueManager.Instance.questWasProposed)
+            {
+                QuestManager.Instance.AcceptQuest(target.GetComponent<PNJ>());
+                DialogueManager.Instance.FinishDialogue();
+            }
+        }
+        else if (InputManager.Instance.inputPressed.rightMouseButtonPressed)
+        {
+            if (DialogueManager.Instance.questWasProposed)
+            {
+                QuestManager.Instance.DeclineQuest(target.GetComponent<PNJ>().myQuest);
+                DialogueManager.Instance.FinishDialogue();
+            }
+        }
+
+        if (InputManager.Instance.inputPressed.interactPressed)
+        {
+            if (target != null)
+            {
+                if (pressKeyAvailable)
+                {
+                    DialogueManager.Instance.SetNewDialogue(target.GetComponent<PNJ>().dialogue, target.GetComponent<PNJ>().pnjName);
+                    DialogueManager.Instance.LaunchDialogue();
+                    UIManager.Instance.ClosePressKeyUI();
+                    pressKeyAvailable = false;
+                }
+                else if (UIManager.Instance.dialogueUIActive)
+                {
+                    if (DialogueManager.Instance.thereIsTextToShow)
+                    {
+                        DialogueManager.Instance.LaunchDialogue();
+                    }
+                    else
+                    {
+                        if (target.GetComponent<PNJ>().thereIsQuestToPropose && !DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questAccepted)
+                        {
+                            DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().myQuest.questName, target.GetComponent<PNJ>().myQuest.description);
+                            DialogueManager.Instance.questWasProposed = true;
+                        }
+                        else
+                        {
+                            DialogueManager.Instance.FinishDialogue();
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
     public GameObject GetTargetFromRayCastForward()
     {
         GameObject retour = null;
@@ -107,10 +165,7 @@ public class Player : BaseUnit
             {
                 UIManager.Instance.uiLinks.targetUI.text += target.GetComponent<BaseUnit>().unitName;
                 targetSetted = true;
-                if (target.CompareTag("PNJ"))
-                {
-                    UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
-                }
+                UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
             }
             else
             {

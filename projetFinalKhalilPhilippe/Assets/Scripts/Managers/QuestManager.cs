@@ -51,12 +51,26 @@ public class QuestManager
 
     // FUNCTIONS //
 
-    public void AcceptQuest()
+    public void AcceptQuest(PNJ pnj)
     {
-
+        if (!myActiveQuests.ContainsKey(0))
+        {
+            myActiveQuests[0] = pnj.myQuest;
+            pnj.questAccepted = true;
+        }
+        else if (!myActiveQuests.ContainsKey(1))
+        {
+            myActiveQuests[1] = pnj.myQuest;
+            pnj.questAccepted = true;
+        }
+        else if (!myActiveQuests.ContainsKey(2))
+        {
+            myActiveQuests[2] = pnj.myQuest;
+            pnj.questAccepted = true;
+        }
     }
 
-    public void DeclineQuest()
+    public void DeclineQuest(Quest questToDecline)
     {
 
     }
