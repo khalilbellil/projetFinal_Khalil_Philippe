@@ -22,9 +22,13 @@ public class UIManager
 
     public UILinks uiLinks;
 
+    public bool dialogueUIActive;
+
     public void Initialize()
     {
         uiLinks = GameObject.FindObjectOfType<UILinks>();
+
+        dialogueUIActive = false;
     }
 
     public void UpdateManager()
@@ -83,19 +87,19 @@ public class UIManager
     {
         if (QuestManager.Instance.myActiveQuests.ContainsKey(0))
         {
-            UIManager.instance.uiLinks.quest1Title.text = QuestManager.Instance.myActiveQuests[0].questName;
+            //UIManager.instance.uiLinks.quest1Title.text = QuestManager.Instance.myActiveQuests[0].questName;
             UIManager.instance.uiLinks.quest1Text.text = QuestManager.Instance.myActiveQuests[0].description;
         }
 
         if (QuestManager.Instance.myActiveQuests.ContainsKey(1))
         {
-            UIManager.instance.uiLinks.quest2Title.text = QuestManager.Instance.myActiveQuests[1].questName;
+            //UIManager.instance.uiLinks.quest2Title.text = QuestManager.Instance.myActiveQuests[1].questName;
             UIManager.instance.uiLinks.quest2Text.text = QuestManager.Instance.myActiveQuests[1].description;
         }
 
         if (QuestManager.Instance.myActiveQuests.ContainsKey(2))
         {
-            UIManager.instance.uiLinks.quest3Title.text = QuestManager.Instance.myActiveQuests[2].questName;
+            //UIManager.instance.uiLinks.quest3Title.text = QuestManager.Instance.myActiveQuests[2].questName;
             UIManager.instance.uiLinks.quest3Text.text = QuestManager.Instance.myActiveQuests[2].description;
         }
     }
@@ -114,10 +118,12 @@ public class UIManager
         if (uiLinks.dialogueUI.activeSelf)
         {
             uiLinks.dialogueUI.SetActive(false);
+            dialogueUIActive = false;
         }
         else
         {
             uiLinks.dialogueUI.SetActive(true);
+            dialogueUIActive = true;
         }
         
     }
@@ -125,11 +131,13 @@ public class UIManager
     public void CloseDialogueUI()
     {
         uiLinks.dialogueUI.SetActive(false);
+        dialogueUIActive = false;
     }
 
     public void OpenDialogueUI()
     {
         uiLinks.dialogueUI.SetActive(true);
+        dialogueUIActive = true;
     }
 
     public void OpenClosePressKeyUI()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +25,9 @@ public class DialogueManager
     List<string> actualDialogue;
     int actualDialogueIndex;
     string actualDialogueTitle;
-    bool thereIsTextToShow;
+    public bool thereIsTextToShow;
+    public bool questWasProposed = false;
+
 
     public void Initialize()
     {
@@ -45,6 +48,10 @@ public class DialogueManager
     {//Reset everything
         instance = null;
     }
+
+    // END //
+
+    //DIALOGUE SYSTEM FUNCTIONS:
 
     public void SetNewDialogue(List<string> newDialogue, string dialogueTitle)
     {
@@ -84,6 +91,7 @@ public class DialogueManager
         actualDialogue = null;
         actualDialogueTitle = null;
         actualDialogueIndex = 0;
+        questWasProposed = false;
     }
     
 }

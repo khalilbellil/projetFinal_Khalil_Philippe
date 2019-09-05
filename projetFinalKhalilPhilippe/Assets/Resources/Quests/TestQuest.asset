@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: TestQuest
   m_EditorClassIdentifier: 
   isAchieved: 0
+  wasAccepted: 0
   questName: TestQuest
-  description: There is the TestQuest !
+  description: There is the TestQuest !qegwrghrhaehjaetjhaetjaetjaetja
   requiredLvl: 1
   questType: 0
   talkTo: 

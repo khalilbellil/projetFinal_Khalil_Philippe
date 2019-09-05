@@ -51,19 +51,22 @@ public class QuestManager
 
     // FUNCTIONS //
 
-    public void AcceptQuest(Quest questToAccept)
+    public void AcceptQuest(PNJ pnj)
     {
-        if (myActiveQuests[0] == null)
+        if (!myActiveQuests.ContainsKey(0))
         {
-            myActiveQuests[0] = questToAccept;
+            myActiveQuests[0] = pnj.myQuest;
+            pnj.questAccepted = true;
         }
-        else if (myActiveQuests[1] == null)
+        else if (!myActiveQuests.ContainsKey(1))
         {
-            myActiveQuests[1] = questToAccept;
+            myActiveQuests[1] = pnj.myQuest;
+            pnj.questAccepted = true;
         }
-        else if (myActiveQuests[2] == null)
+        else if (!myActiveQuests.ContainsKey(2))
         {
-            myActiveQuests[2] = questToAccept;
+            myActiveQuests[2] = pnj.myQuest;
+            pnj.questAccepted = true;
         }
     }
 

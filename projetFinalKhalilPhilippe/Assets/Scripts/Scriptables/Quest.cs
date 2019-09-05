@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 [CreateAssetMenu(fileName = "QuestAsset", menuName = "MyScriptable/Quest")]
 public class Quest : ScriptableObject
@@ -20,5 +21,17 @@ public class Quest : ScriptableObject
     public string pickUpItem;
     [HideInInspector]
     bool pickUpItemDone = false;
+
+    public event EventHandler<EventArgs> Task1IsDone;
+
+    private void OnEnable()
+    {
+        Debug.Log("ALLO");
+    }
+    protected virtual void OnTask1IsDone()
+    {
+        Task1IsDone.Invoke(this, EventArgs.Empty);
+    }
+    
 
 }
