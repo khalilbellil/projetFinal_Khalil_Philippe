@@ -59,13 +59,16 @@ public class Ennemy : BaseUnit
                 currentAction = States.Attack;
             }
 
+            if(unitName == "1")
             Debug.Log(currentAction);
             UpdateAnims();
 
             switch (currentAction)
             {
                 case States.Attack:
+                    transform.LookAt(target);
                     UseWeapon(transform.forward);
+                    currentSpeed = 0;
                     anim.SetTrigger("AttackTrigger");
                     break;
                 case States.Chase:
@@ -81,22 +84,21 @@ public class Ennemy : BaseUnit
         }
     }
 
-    public override void UpdateMovement(Vector3 dir)
+    public override void UpdateMovement(Vector3 goalPos)
     {
         //Debug.Log("move");
         //Debug.Log(((transform.position - dir).normalized * range) + transform.position);
-        agent.SetDestination(dir);
+        agent.SetDestination(goalPos);
         if (!isAlive)
         {
             agent.SetDestination(transform.position);
-        }
-        if(transform.position != dir)
-        {
-            currentSpeed = speed;
+            currentSpeed = 0;
         }
         else
         {
-            currentSpeed = 0;
+            if (unitName == "1")
+                Debug.Log("b");
+            currentSpeed = speed;
         }
     }
 
@@ -152,6 +154,8 @@ public class Ennemy : BaseUnit
 
     void UpdateAnims()
     {
+        if (unitName == "1")
+            Debug.Log(currentSpeed);
         anim.SetFloat("forward", currentSpeed);
     }
 
