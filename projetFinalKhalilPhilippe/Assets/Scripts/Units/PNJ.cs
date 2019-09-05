@@ -12,6 +12,8 @@ public class PNJ : BaseUnit
     public bool questAccepted;
     public LayerMask talkableLayer;
 
+    public TaskEventHandler talkTo;
+
     private void Start()
     {
         base.Init();
@@ -24,11 +26,18 @@ public class PNJ : BaseUnit
         {
             thereIsQuestToPropose = false;
         }
+
+        myQuest = GetComponent<Quest>();
     }
 
     private void Update()
     {
         
+    }
+
+    public void WasTalkedTo()
+    {
+        talkTo?.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)

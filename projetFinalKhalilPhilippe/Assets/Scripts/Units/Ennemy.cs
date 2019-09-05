@@ -26,12 +26,17 @@ public class Ennemy : BaseUnit
     public LayerMask sightLayer;
     Animator anim;
 
+    public TaskEventHandler OnDeathEventHandler;
+
     public void EnnemyInit()
     {
         base.Init();
         Debug.Log("Ennemy Init");
         agent = GetComponent<NavMeshAgent>();
-        InitializeWalkPatern();
+
+        if (walk != null)
+            InitializeWalkPatern();
+
         startPos = transform.position;
     }
 
@@ -64,7 +69,8 @@ public class Ennemy : BaseUnit
                 break;
 
             case States.Wander:
-                UpdateMovement(WalkToBalise());
+                if (walk != null)
+                    UpdateMovement(WalkToBalise());
                 break;
         }
         UpdateSight();
@@ -161,5 +167,6 @@ public class Ennemy : BaseUnit
         base.Death();
         transform.gameObject.SetActive(false);
         transform.position = startPos;
+        OnDeathEventHandler?.Invoke();
     }
 }

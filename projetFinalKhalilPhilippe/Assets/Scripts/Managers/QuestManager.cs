@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,6 +58,7 @@ public class QuestManager
         {
             myActiveQuests[0] = pnj.myQuest;
             pnj.questAccepted = true;
+
         }
         else if (!myActiveQuests.ContainsKey(1))
         {
