@@ -7,7 +7,7 @@ public class Player : BaseUnit
     Level lvl;
     CameraControler cam;
     Animator animator;
-    float jumpForce = 30f;
+    float jumpForce = 40f;
     float jumpCD = 0.5f;
     bool isJumping = false;
     float timeOfNextValidJump = 0;
@@ -55,6 +55,7 @@ public class Player : BaseUnit
 
         Jump();
         UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
+        UpdateAnims();
         if (InputManager.Instance.fixedInputPressed.leftMouseButtonPressed)
         {
             UseWeapon(transform.forward);
@@ -67,7 +68,6 @@ public class Player : BaseUnit
 
     public void Jump()
     {
-        
         if (InputManager.Instance.fixedInputPressed.jumpPressed && canJump)
         {
             timeOfNextValidJump = Time.time + jumpCD;
@@ -80,9 +80,14 @@ public class Player : BaseUnit
     {
         animator = GetComponent<Animator>();
         animator.SetFloat("RunFloat",currentSpeed);
-        animator.SetFloat("PlayerHp", health);
         //animator.SetBool("isJumping", isJumping);
         //animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.y);
+    }
+
+    void UpdateAnims()
+    {
+        animator.SetFloat("RunFloat", currentSpeed);
+        animator.SetFloat("PlayerHp", health);
     }
 
     // Interaction Functions //
@@ -179,6 +184,7 @@ public class Player : BaseUnit
     public override void Death()
     {
         base.Death();
-
+        animator.SetTrigger("DeathTrigger");
+        transform.position = new Vector3(transform.position.x, -1, transform.position.z);
     }
 }

@@ -21,6 +21,7 @@ public class EnnemyManager
     #endregion
 
     public Ennemy[] ennemy;
+    Transform _target;
 
     public void Initialize()
     {
@@ -34,6 +35,10 @@ public class EnnemyManager
             foreach (Ennemy e in ennemy)
             {
                 e.EnnemyUpdate();
+                //if(e.target != null && _target == null)
+                //{
+                   // _target = e.target;
+                //}
             }
         }
     }

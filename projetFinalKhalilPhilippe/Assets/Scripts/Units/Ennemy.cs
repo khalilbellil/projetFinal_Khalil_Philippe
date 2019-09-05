@@ -15,7 +15,7 @@ public class Ennemy : BaseUnit
     RaycastHit hit;
     RaycastHit player;
     NavMeshAgent agent;
-    Transform target;
+    public Transform target;
     Transform[] walkpatern;
     Vector3 startPos;
     int walkPaternIndex = 0;

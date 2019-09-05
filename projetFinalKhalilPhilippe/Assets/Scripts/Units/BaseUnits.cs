@@ -126,6 +126,10 @@ public class BaseUnit : MonoBehaviour
             currentSpeed = speed;
             rot = Mathf.Atan2(_dir.x, _dir.z) * Mathf.Rad2Deg;
         }
+        else
+        {
+            currentSpeed = 0;
+        }
         _dir.y = 0;
         Vector3 _dir2 = new Vector3(0, rb.velocity.y, 0);
         if (!isDashing)
@@ -175,7 +179,7 @@ public class BaseUnit : MonoBehaviour
                 isAlive = false;
                 Death();
             }
-            Debug.Log("basic takedamage " + dmg + " Remaining health : " + health + " Name : " + name);
+            //Debug.Log("basic takedamage " + dmg + " Remaining health : " + health + " Name : " + name);
         }
     }
 

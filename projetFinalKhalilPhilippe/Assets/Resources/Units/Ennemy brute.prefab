@@ -1971,7 +1971,7 @@ MonoBehaviour:
   isAlive: 0
   playerId: 0
   range: 3
-  dmg: 5
+  dmg: 1
   attackCD: 1
   width: 0
   targetedByPlayer: 0
