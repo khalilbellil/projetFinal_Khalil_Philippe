@@ -24,6 +24,7 @@ public class Ennemy : BaseUnit
     Vector3 wanderPos;
     public float sightRange;
     public LayerMask sightLayer;
+    Animator anim;
 
     public void EnnemyInit()
     {

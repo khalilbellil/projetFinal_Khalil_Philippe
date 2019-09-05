@@ -11,7 +11,7 @@ public class Player : BaseUnit
     float jumpCD = 0.5f;
     bool isJumping = false;
     float timeOfNextValidJump = 0;
-    bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position, new Vector3(0, -1, 0), 2); } }
+    bool canJump { get { return Time.time >= timeOfNextValidJump && Physics.Raycast(gameObject.transform.position + new Vector3(0,.1f,0), new Vector3(0, -1, 0), 2,LayerMask.GetMask("Ground")); } }
 
     public GameObject target;
     bool targetSetted = false;
@@ -75,7 +75,7 @@ public class Player : BaseUnit
     void InitAnimator() //Set of all animator variables
     {
         animator = GetComponent<Animator>();
-        animator.SetBool("runBool", isRunning);
+        animator.SetFloat("RunFloat",currentSpeed);
         animator.SetFloat("PlayerHp", health);
         //animator.SetBool("isJumping", isJumping);
         //animator.SetFloat("forward", InputManager.Instance.fixedInputPressed.dirPressed.y);

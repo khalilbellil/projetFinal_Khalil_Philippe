@@ -22048,6 +22048,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain
       objectReference: {fileID: 0}
+    - target: {fileID: 2809074969515941718, guid: d3ab11cb6201e254eb2db46a4bf74b65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2392494696787500520, guid: d3ab11cb6201e254eb2db46a4bf74b65,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -48200,6 +48205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159226018334496175, guid: f2013de04be076a48bbd1a40fba1e40a,
+        type: 3}
+      propertyPath: health
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4159226018341227219, guid: f2013de04be076a48bbd1a40fba1e40a, type: 3}

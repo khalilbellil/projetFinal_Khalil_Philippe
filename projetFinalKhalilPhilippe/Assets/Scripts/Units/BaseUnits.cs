@@ -23,6 +23,7 @@ public class BaseUnit : MonoBehaviour
     public float range;
     public float dmg;
     protected bool isRunning;
+    protected float currentSpeed;
 
     bool canAttack { get { return Time.time - timeLastAttack >= attackCD; } }
     float timeLastAttack;
@@ -122,6 +123,7 @@ public class BaseUnit : MonoBehaviour
         _dir = Camera.main.transform.TransformDirection(_dir);
         if(_dir != new Vector3())
         {
+            currentSpeed = speed;
             rot = Mathf.Atan2(_dir.x, _dir.z) * Mathf.Rad2Deg;
         }
         _dir.y = 0;
