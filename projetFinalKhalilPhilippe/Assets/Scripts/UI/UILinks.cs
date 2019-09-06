@@ -26,6 +26,8 @@ public class UILinks : MonoBehaviour
     public Image characterPic;
     public Image Ability;
     public Text targetUI;
+    public Text notifyUIText;
+    public Image notifyUI;
 
     [Header("Others :")]
     public GameObject pressKeyUI;

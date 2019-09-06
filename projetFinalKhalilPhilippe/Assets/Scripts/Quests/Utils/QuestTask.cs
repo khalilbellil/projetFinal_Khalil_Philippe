@@ -12,11 +12,14 @@ public class QuestTask
 
     public void SubTaskCompleted()
     {
-        //increase triggerExpected
+        //decrease triggerExpected
         triggerExpected--;
 
         //if bypass triggerexpceted, tell quest?
-
+        if (triggerExpected == 0)
+        {
+            QuestManager.Instance.CompleteQuest(0);
+        }
     }
 
 }

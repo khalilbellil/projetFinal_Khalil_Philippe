@@ -4,17 +4,21 @@ using UnityEngine.UI;
 public class MenuFlow : Flow
 {
     Canvas menuCanvas;
-    Button playButton, optionsButton, exitButton;
+    Button playButton, exitButton;
     MainEntry mainEntry;
+    MenuUILinks menuUILinks;
 
     public override void Initialize()
     {
-
+        mainEntry = GameObject.FindObjectOfType<MainEntry>();
+        menuUILinks = GameObject.FindObjectOfType<MenuUILinks>();
+        menuUILinks.playButton.onClick.AddListener(PlayButton);
+        menuUILinks.exitButton.onClick.AddListener(ExitButton);
     }
 
     public override void Update(float dt)
     {
-
+        Debug.Log("MENUFLOW Update");
     }
 
     public override void FixedUpdate(float dt)
@@ -33,15 +37,11 @@ public class MenuFlow : Flow
         mainEntry.GoToNextFlow(CurrentState.Menu);//Switch to Game Scene/Flow.
     }
 
-    void OptionsButton()
-    {
-        Debug.Log("OPTIONS");
-    }
 
     public void ExitButton()
     {
-        Application.Quit();
         Debug.Log("EXIT");
+        Application.Quit();
     }
 
 }

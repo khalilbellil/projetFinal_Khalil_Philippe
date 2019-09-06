@@ -78,10 +78,10 @@ public class DialogueManager
         }
     }
     
-    public void LaunchQuestDialogue(string pnjName, string questText)
+    public void LaunchQuestDialogue(string questTitle, string questText)
     {
         UIManager.Instance.CloseDialogueUI();
-        UIManager.Instance.SetDialogueUI(pnjName, questText);
+        UIManager.Instance.SetDialogueUI(questTitle, questText);
         UIManager.Instance.OpenDialogueUI();
     }
 

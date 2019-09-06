@@ -162,6 +162,19 @@ public class UIManager
         uiLinks.pressKeyUI.SetActive(true);
     }
 
+    // NOTIFICATION FUNCTIONS //
+
+    public IEnumerator LaunchNotifyUI(string txt, float time)
+    {
+        uiLinks.notifyUIText.text = txt;
+        uiLinks.notifyUI.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(time);
+
+        uiLinks.notifyUIText.text = "NOTIFICATION";
+        uiLinks.notifyUI.gameObject.SetActive(false);
+    }
+
 
     //DEBUG FUNCTIONS //
 

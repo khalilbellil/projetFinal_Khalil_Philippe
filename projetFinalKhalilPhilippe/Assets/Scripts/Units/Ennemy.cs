@@ -26,6 +26,8 @@ public class Ennemy : BaseUnit
     public LayerMask sightLayer;
     Animator anim;
 
+    public TaskEventHandler OnDeathEventHandler;
+
     public void EnnemyInit()
     {
         base.Init();
@@ -191,5 +193,6 @@ public class Ennemy : BaseUnit
     {
         base.Death();
         anim.SetTrigger("DeathTrigger");
+        OnDeathEventHandler?.Invoke(); //notify
     }
 }

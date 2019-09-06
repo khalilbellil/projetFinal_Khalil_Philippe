@@ -50,6 +50,7 @@ public class Player : BaseUnit
 
             //UpdateTarget();
             UpdateInteractions();
+
         }
     }
 
@@ -73,6 +74,11 @@ public class Player : BaseUnit
 
 
     // FUNCTIONS //
+
+    public void NotifyPlayer(string txt, int time)
+    {
+        StartCoroutine(UIManager.Instance.LaunchNotifyUI(txt, time));
+    }
 
     public void Jump()
     {
