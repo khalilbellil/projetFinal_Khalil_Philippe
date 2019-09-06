@@ -218,6 +218,8 @@ public class Ennemy : BaseUnit
     public override void Death()
     {
         base.Death();
+        EnnemyManager.Instance.LostTarget(this);
+        agent.SetDestination(transform.position);
         anim.SetTrigger("DeathTrigger");
         OnDeathEventHandler?.Invoke(); //notify
     }
