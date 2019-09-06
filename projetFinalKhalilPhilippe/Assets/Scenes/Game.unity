@@ -4775,6 +4775,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1781150038973758007, guid: f7674366cf6a0e846a827f17be8d59cb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.020004272
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8834894928729408244, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
@@ -8028,6 +8033,11 @@ PrefabInstance:
         type: 3}
       propertyPath: unitName
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124587491214221846, guid: db718aaba4e301d4784427889cf8bbb5,
+        type: 3}
+      propertyPath: sightRange
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8140386211094916070, guid: db718aaba4e301d4784427889cf8bbb5,
         type: 3}

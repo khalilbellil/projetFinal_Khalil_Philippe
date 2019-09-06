@@ -7,9 +7,9 @@ public class Ennemy : BaseUnit
 {
     // BASIC FUNCTIONS //
 
-    enum States
+    public enum States
     {
-        Wander, Chase, Attack
+        Wander, Chase, Attack ,Find
     }
 
     RaycastHit hit;
@@ -23,6 +23,7 @@ public class Ennemy : BaseUnit
     States currentAction;
     Vector3 wanderPos;
     public float sightRange;
+    float lockOnRange;
     public LayerMask sightLayer;
     Animator anim;
 
@@ -31,6 +32,7 @@ public class Ennemy : BaseUnit
     public void EnnemyInit()
     {
         base.Init();
+        lockOnRange = sightRange * 3;
         Debug.Log("Ennemy Init");
         agent = GetComponent<NavMeshAgent>();
         InitializeWalkPatern();
@@ -61,6 +63,13 @@ public class Ennemy : BaseUnit
                 currentAction = States.Attack;
             }
 
+            if(target != null && currentAction != States.Chase && currentAction != States.Attack)
+            {
+                if(unitName == "1")
+                    Debug.Log("was in mode: " + currentAction);
+                currentAction = States.Find;
+            }
+
             if(unitName == "1")
             Debug.Log(currentAction);
             UpdateAnims();
@@ -72,16 +81,23 @@ public class Ennemy : BaseUnit
                     UseWeapon(transform.forward);
                     currentSpeed = 0;
                     anim.SetTrigger("AttackTrigger");
+                    UpdateSight();
                     break;
                 case States.Chase:
                     UpdateMovement(((transform.position - target.position).normalized * (range - .02f)) + target.position);
+                    UpdateSight();
                     break;
 
                 case States.Wander:
                     UpdateMovement(WalkToBalise());
+                    UpdateSight();
+                    break;
+
+                case States.Find:
+                    UpdateMovement(((transform.position - target.position).normalized * (range - .02f)) + target.position);
                     break;
             }
-            UpdateSight();
+           
 
         }
     }
@@ -98,48 +114,60 @@ public class Ennemy : BaseUnit
         }
         else
         {
-            if (unitName == "1")
-                Debug.Log("b");
             currentSpeed = speed;
         }
     }
 
     bool SensesCheck()
     {
+        if (unitName == "1" && States.Chase == currentAction)
+            Debug.Log("Sense check, target: " + target + ", in chase");
         Vector3 rayDir = (target) ? (target.position - transform.position).normalized : transform.forward;
-
-        if (Physics.Raycast(transform.position, rayDir, out hit, sightRange, sightLayer) && (hitableLayer == (hitableLayer | (1 << hit.transform.gameObject.layer))))
-        {
-            target = hit.transform;
-            return true;
-        }
+        //float Iseerange = (target) ? sightRange : lockOnRange;
 
         Collider[] temp = Physics.OverlapSphere(transform.position, 3, hitableLayer);
         if (temp.Length > 0)
         {
             target = temp[0].transform;
+            EnnemyManager.Instance.SeeTarget(target, this);
             return true;
         }
 
-        return false;
+
+        if (!target)
+        {
+            if (Physics.Raycast(transform.position, rayDir, out hit, sightRange, sightLayer) && (hitableLayer == (hitableLayer | (1 << hit.transform.gameObject.layer))))
+            {
+                target = hit.transform;
+                EnnemyManager.Instance.SeeTarget(target, this);
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            Physics.Raycast(transform.position, rayDir, out hit, lockOnRange, LayerMask.GetMask("Obstacle", "Player"));
+            if (Vector2.Distance(target.position, transform.position) > lockOnRange || (hit.transform && hit.transform.tag != "Player"))
+            {
+                target = null;
+                EnnemyManager.Instance.LostTarget(this);
+                return false;
+            }
+            return true;   
+        }
+        
     }
 
     public void UpdateSight()
     {
-        Vector3 rayDir = (target) ? (target.position - transform.position).normalized : transform.forward;
-
         if (SensesCheck())
         {
-            currentAction = States.Chase;
+            
+                currentAction = States.Chase;
         }
         else
         {
             target = null;
-            if (currentAction == States.Chase)
-            {
-                Debug.Log("yolo");
-            }
-
             currentAction = States.Wander;
         }
 
@@ -156,8 +184,6 @@ public class Ennemy : BaseUnit
 
     void UpdateAnims()
     {
-        if (unitName == "1")
-            Debug.Log(currentSpeed);
         anim.SetFloat("forward", currentSpeed);
     }
 
@@ -194,5 +220,12 @@ public class Ennemy : BaseUnit
         base.Death();
         anim.SetTrigger("DeathTrigger");
         OnDeathEventHandler?.Invoke(); //notify
+    }
+
+    public void setStates(States s)
+    {
+        currentAction = s;
+        if (s == States.Chase && target == null)
+            currentAction = States.Wander;
     }
 }
