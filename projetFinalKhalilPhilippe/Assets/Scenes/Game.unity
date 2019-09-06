@@ -8045,6 +8045,11 @@ PrefabInstance:
       propertyPath: unitName
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5124587491214221846, guid: db718aaba4e301d4784427889cf8bbb5,
+        type: 3}
+      propertyPath: sightRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8140386211094916070, guid: db718aaba4e301d4784427889cf8bbb5,
         type: 3}
       propertyPath: m_Layer

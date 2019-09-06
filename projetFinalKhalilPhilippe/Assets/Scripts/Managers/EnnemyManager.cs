@@ -22,11 +22,13 @@ public class EnnemyManager
     #endregion
 
     public List<Ennemy> ennemy;
+    HashSet<Ennemy> seePlayer;
     Transform _target;
 
     public void Initialize()
     {
         SpawnEnnemy();
+        seePlayer = new HashSet<Ennemy>();
     }
 
     public void UpdateManager(float dt)
@@ -35,11 +37,9 @@ public class EnnemyManager
         {
             foreach (Ennemy e in ennemy)
             {
+                
+               
                 e.EnnemyUpdate();
-                //if(e.target != null && _target == null)
-                //{
-                   // _target = e.target;
-                //}
             }
         }
     }
@@ -102,6 +102,36 @@ public class EnnemyManager
     {
         Debug.Log("Cleanup quest enemies");
         //delete the remaining enmies if exist
+    }
+
+    public void SeeTarget(Transform target , Ennemy e)
+    {
+        if(seePlayer.Count == 0)
+        {
+            foreach (Ennemy en in ennemy)
+            {
+               en.target = target;               
+            }
+        }
+
+
+        if (!seePlayer.Contains(e))
+        {
+            _target = target;
+            seePlayer.Add(e);
+        }
+    }
+
+    public void LostTarget(Ennemy e)
+    {
+        _target = null;
+        seePlayer.Remove(e);
+        if(seePlayer.Count == 0)
+            for (int i = 0; i < ennemy.Count; i++)
+            {
+                ennemy[i].setStates(Ennemy.States.Chase);
+            }
+
     }
 
 }
