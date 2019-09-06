@@ -191,8 +191,11 @@ public class Ennemy : BaseUnit
 
     public override void Death()
     {
+        QuestManager.Instance.NotifyQuestThatEnnemyWasKilled();
         base.Death();
         anim.SetTrigger("DeathTrigger");
-        OnDeathEventHandler?.Invoke(); //notify
+        //OnDeathEventHandler?.Invoke(); //notify
+
+        
     }
 }

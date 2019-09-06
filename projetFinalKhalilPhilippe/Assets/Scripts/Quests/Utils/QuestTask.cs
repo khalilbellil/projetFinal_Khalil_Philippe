@@ -18,8 +18,10 @@ public class QuestTask
         //if bypass triggerexpceted, tell quest?
         if (triggerExpected == 0)
         {
-            QuestManager.Instance.CompleteQuest(0);
+            QuestManager.Instance.CompleteQuest();
         }
+
+        Debug.Log("Subtask completed");
     }
 
 }

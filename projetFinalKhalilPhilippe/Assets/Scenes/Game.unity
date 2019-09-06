@@ -1618,7 +1618,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3936214506151552358}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &74016044
+--- !u!114 &74016038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1627,14 +1627,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 74016037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728166f7e90b1b84582ae4ce0e7d041d, type: 3}
+  m_Script: {fileID: 11500000, guid: 376848bd44e04b24eb1bd2707b9221c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isAchieved: 0
+  questStarted: 0
   questName: Triple Kill
-  description: Kill 3 Vikings
-  requiredLvl: 0
-  nbOfEnnemies: 3
+  description: Kill 3 ennemies, then talk to Carl
+  requiredLvl: 1
+  killEnnemyTaskActive: 1
+  nbEnnemiesToKill: 3
+  talkToTaskActive: 1
+  pnjNamesToTalk:
+  - Carl
+  talkToDone: 0
 --- !u!1 &76123717
 GameObject:
   m_ObjectHideFlags: 0
@@ -4770,10 +4776,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.3000183
       objectReference: {fileID: 0}
+    - target: {fileID: 7132884920039330104, guid: f7674366cf6a0e846a827f17be8d59cb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.7999878
+      objectReference: {fileID: 0}
     - target: {fileID: 3197155140343588860, guid: f7674366cf6a0e846a827f17be8d59cb,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781150038973758007, guid: f7674366cf6a0e846a827f17be8d59cb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.020004272
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8834894928729408244, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
@@ -29273,6 +29289,150 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625802687}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1639633012
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3938046926780370740, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_Name
+      value: PNJKnight2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 85.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 107.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0077413823
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 179.113
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940637585483744356, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: dialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: dialogue.Array.data[0]
+      value: Hey
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: dialogue.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: isAlive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: dialogue.Array.data[2]
+      value: Hey
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: dialogue.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: questAccepted
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: myQuest
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: pnjName
+      value: Carl
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
+        type: 3}
+      propertyPath: talkToPNJ
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e9d38eee145760a4ca2965a397a1b754, type: 3}
+--- !u!1 &1639633013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3938046926780370740, guid: e9d38eee145760a4ca2965a397a1b754,
+    type: 3}
+  m_PrefabInstance: {fileID: 1639633012}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1639633014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639633013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970323289736f2e4daac7347b0b8fe7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachedQuest: {fileID: 74016038}
+  description: Congratulation ! You completed the quest.
 --- !u!1 &1640866415
 GameObject:
   m_ObjectHideFlags: 0
@@ -47763,7 +47923,7 @@ PrefabInstance:
     - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
         type: 3}
       propertyPath: dialogue.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
         type: 3}
@@ -47793,7 +47953,7 @@ PrefabInstance:
     - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
         type: 3}
       propertyPath: dialogue.Array.data[3]
-      value: Here is the mission...
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
         type: 3}
@@ -47804,7 +47964,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myQuest
       value: 
-      objectReference: {fileID: 74016044}
+      objectReference: {fileID: 74016038}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9d38eee145760a4ca2965a397a1b754, type: 3}
 --- !u!1001 &4095575002043615644
@@ -49073,8 +49233,7 @@ PrefabInstance:
       propertyPath: width
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4159226018341227219, guid: f2013de04be076a48bbd1a40fba1e40a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2013de04be076a48bbd1a40fba1e40a, type: 3}
 --- !u!1001 &5925767731552372747
 PrefabInstance:

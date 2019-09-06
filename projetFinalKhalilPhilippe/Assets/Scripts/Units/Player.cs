@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : BaseUnit
 {
+    public Quest trackedQuest;
+
     Level lvl;
     CameraControler cam;
     Animator animator;
@@ -49,7 +51,7 @@ public class Player : BaseUnit
             cam.CameraUpdate();
 
             //UpdateTarget();
-            UpdateInteractions();
+            UpdateDialogue();
 
         }
     }
@@ -105,8 +107,9 @@ public class Player : BaseUnit
 
     // Interaction Functions //
 
-    public void UpdateInteractions()
+    public void UpdateDialogue()
     {
+        //Check if Quest was proposed To Accept or Decline:
         if (InputManager.Instance.inputPressed.leftMouseButtonPressed)
         {
             if (DialogueManager.Instance.questWasProposed)
@@ -124,11 +127,12 @@ public class Player : BaseUnit
             }
         }
 
+        //Dialogue System:
         if (InputManager.Instance.inputPressed.interactPressed)
         {
             if (target != null)
             {
-                if (pressKeyAvailable)
+                if (pressKeyAvailable) //Launch dialogue
                 {
                     DialogueManager.Instance.SetNewDialogue(target.GetComponent<PNJ>().dialogue, target.GetComponent<PNJ>().pnjName);
                     DialogueManager.Instance.LaunchDialogue();
@@ -141,14 +145,20 @@ public class Player : BaseUnit
                     {
                         DialogueManager.Instance.LaunchDialogue();
                     }
-                    else
+                    else //Dialogue was finished -> now display the quest proposition
                     {
-                        if (target.GetComponent<PNJ>().thereIsQuestToPropose && !DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questAccepted)
+                        if (target.GetComponent<PNJ>().talkToPNJ && target.GetComponent<PNJ>().questTracker.attachedQuest.nbEnnemiesToKill == 0 && !target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone)
+                        {
+                            DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
+
+                            target.GetComponent<PNJ>().questTracker.attachedQuest.pnjNamesToTalk.Remove(target.GetComponent<PNJ>().pnjName); //Notify quest that talkTo is done
+                        }
+                        if (!target.GetComponent<PNJ>().talkToPNJ && target.GetComponent<PNJ>().thereIsQuestToPropose && !DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questAccepted)
                         {
                             DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().myQuest.questName, target.GetComponent<PNJ>().myQuest.description);
                             DialogueManager.Instance.questWasProposed = true;
                         }
-                        else
+                        else //Stop Dialogue
                         {
                             DialogueManager.Instance.FinishDialogue();
                         }

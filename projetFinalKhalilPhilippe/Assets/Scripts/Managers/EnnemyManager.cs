@@ -92,10 +92,10 @@ public class EnnemyManager
             //ennemy[i].OnDeathEventHandler += funcToInvoke; //add to enemies onDeathEvent the funcToInvoke
         }
 
-        foreach (Ennemy e in ennemy)
-        {
-            e.OnDeathEventHandler += funcToInvoke; //add to enemies onDeathEvent the funcToInvoke
-        }
+        //foreach (Ennemy e in ennemy)
+        //{
+        //    e.OnDeathEventHandler += funcToInvoke; //add to enemies onDeathEvent the funcToInvoke
+        //}
     }
 
     public void CleanUpQuestEnemies()

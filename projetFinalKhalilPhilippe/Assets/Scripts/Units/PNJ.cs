@@ -14,8 +14,12 @@ public class PNJ : BaseUnit
 
     public TaskEventHandler talkTo;
 
+    public QuestTracker questTracker;
+    public bool talkToPNJ;
+
     private void Start()
     {
+        Debug.Log("INIT PNJ");
         base.Init();
         unitName = pnjName;
         if (myQuest != null)
@@ -28,6 +32,15 @@ public class PNJ : BaseUnit
         }
 
         myQuest = GetComponent<Quest>();
+        questTracker = GetComponent<QuestTracker>();
+        if (questTracker)
+        {
+            talkToPNJ = true;
+        }
+        else
+        {
+            talkToPNJ = false;
+        }
     }
 
     private void Update()
