@@ -27,8 +27,6 @@ public class Ennemy : BaseUnit
     public LayerMask sightLayer;
     Animator anim;
 
-    public TaskEventHandler OnDeathEventHandler;
-
     public void EnnemyInit()
     {
         base.Init();

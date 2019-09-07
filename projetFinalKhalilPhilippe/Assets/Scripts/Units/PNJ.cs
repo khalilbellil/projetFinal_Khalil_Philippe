@@ -12,8 +12,6 @@ public class PNJ : BaseUnit
     public bool questAccepted;
     public LayerMask talkableLayer;
 
-    public TaskEventHandler talkTo;
-
     public QuestTracker questTracker;
     public bool talkToPNJ;
 
@@ -46,11 +44,6 @@ public class PNJ : BaseUnit
     private void Update()
     {
         
-    }
-
-    public void WasTalkedTo()
-    {
-        talkTo?.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)

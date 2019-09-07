@@ -1633,10 +1633,10 @@ MonoBehaviour:
   isAchieved: 0
   questStarted: 0
   questName: Triple Kill
-  description: Kill 3 ennemies, then talk to Carl
+  description: Kill 1 ennemies, then talk to Carl
   requiredLvl: 1
   killEnnemyTaskActive: 1
-  nbEnnemiesToKill: 3
+  nbEnnemiesToKill: 1
   talkToTaskActive: 1
   pnjNamesToTalk:
   - Carl
@@ -47928,7 +47928,7 @@ PrefabInstance:
     - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
         type: 3}
       propertyPath: dialogue.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
         type: 3}
@@ -47958,7 +47958,7 @@ PrefabInstance:
     - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
         type: 3}
       propertyPath: dialogue.Array.data[3]
-      value: 
+      value: TEST
       objectReference: {fileID: 0}
     - target: {fileID: 7244376325025058748, guid: e9d38eee145760a4ca2965a397a1b754,
         type: 3}

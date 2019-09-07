@@ -80,24 +80,6 @@ public class EnnemyManager
         return eToReturn;
     }
 
-    public void AddQuestEnemies(int num, TaskEventHandler funcToInvoke)
-    {
-        //spawn enemies
-        Debug.Log("Quest ennemies spawned");
-
-        Ennemy[] ennemiesToAdd = SpawnEnnemiesCloseToPlayer(num);
-        for (int i = 0; i < num; i++)
-        {
-            ennemy.Add(ennemiesToAdd[i]); //add instantiated ennemies to the track list
-            //ennemy[i].OnDeathEventHandler += funcToInvoke; //add to enemies onDeathEvent the funcToInvoke
-        }
-
-        //foreach (Ennemy e in ennemy)
-        //{
-        //    e.OnDeathEventHandler += funcToInvoke; //add to enemies onDeathEvent the funcToInvoke
-        //}
-    }
-
     public void CleanUpQuestEnemies()
     {
         Debug.Log("Cleanup quest enemies");
