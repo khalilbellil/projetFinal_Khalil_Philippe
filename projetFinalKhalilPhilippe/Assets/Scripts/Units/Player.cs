@@ -147,13 +147,13 @@ public class Player : BaseUnit
                     }
                     else //Dialogue was finished -> now display the quest proposition
                     {
-                        if (target.GetComponent<PNJ>().talkToPNJ && target.GetComponent<PNJ>().questTracker.attachedQuest.nbEnnemiesToKill == 0 && !target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone)
+                        if (target.GetComponent<PNJ>().pnjToTalk && target.GetComponent<PNJ>().questTracker.attachedQuest.nbEnnemiesToKill == 0 && !target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone)
                         {
                             DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
 
                             target.GetComponent<PNJ>().questTracker.attachedQuest.pnjNamesToTalk.Remove(target.GetComponent<PNJ>().pnjName); //Notify quest that talkTo is done
                         }
-                        if (!target.GetComponent<PNJ>().talkToPNJ && target.GetComponent<PNJ>().thereIsQuestToPropose && !DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questAccepted)
+                        if (!target.GetComponent<PNJ>().pnjToTalk && target.GetComponent<PNJ>().thereIsQuestToPropose && !DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questAccepted)
                         {
                             DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().myQuest.questName, target.GetComponent<PNJ>().myQuest.description);
                             DialogueManager.Instance.questWasProposed = true;

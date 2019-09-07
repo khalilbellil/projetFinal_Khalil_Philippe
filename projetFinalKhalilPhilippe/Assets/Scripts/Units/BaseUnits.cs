@@ -12,6 +12,7 @@ public class BaseUnit : MonoBehaviour
 
     #region VARIABLES
     public string unitName;
+    [HideInInspector]
     public bool isAlive;
     protected bool isDashing;
     protected bool isHolding;
@@ -27,9 +28,11 @@ public class BaseUnit : MonoBehaviour
 
     bool canAttack { get { return Time.time - timeLastAttack >= attackCD; } }
     float timeLastAttack;
+    [HideInInspector]
     public float attackCD;
+    [HideInInspector]
     public float width;
-
+    [HideInInspector]
     public bool targetedByPlayer = false;
 
     #endregion
@@ -40,9 +43,9 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] public float health;
     [SerializeField] public float maxHealth;
     [SerializeField] protected int speed;
-    [SerializeField] private float dashingSpeed;
-    [SerializeField] private float dashTimer;       //set the time of the dash
-    [SerializeField] private float dashCDTimer;     //set the time for after the dash
+    private float dashingSpeed;
+    private float dashTimer;       //set the time of the dash
+    private float dashCDTimer;     //set the time for after the dash
     [SerializeField] protected LayerMask hitableLayer;
     [HideInInspector] public float speedMultiplier = 1;
     #endregion

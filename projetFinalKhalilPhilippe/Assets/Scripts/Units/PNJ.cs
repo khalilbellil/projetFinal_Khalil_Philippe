@@ -4,22 +4,39 @@ using UnityEngine;
 
 public class PNJ : BaseUnit
 {
+    public bool pnjToTalk;
     public string pnjName;
-    public Quest myQuest;
-    public bool thereIsQuestToPropose;
     public List<string> dialogue;
+    [HideInInspector]
+    public Quest myQuest;
+    [HideInInspector]
+    public bool thereIsQuestToPropose;
+    [HideInInspector]
     public bool dialogueIsOpen;
+    [HideInInspector]
     public bool questAccepted;
-    public LayerMask talkableLayer;
-
+    [HideInInspector]
     public QuestTracker questTracker;
-    public bool talkToPNJ;
+    
 
     private void Start()
     {
-        Debug.Log("INIT PNJ");
         base.Init();
         unitName = pnjName;
+
+        InitQuest();
+        InitQuestTracker();
+        
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    void InitQuest()
+    {
+        myQuest = GetComponent<Quest>();
         if (myQuest != null)
         {
             thereIsQuestToPropose = true;
@@ -28,22 +45,23 @@ public class PNJ : BaseUnit
         {
             thereIsQuestToPropose = false;
         }
-
-        myQuest = GetComponent<Quest>();
-        questTracker = GetComponent<QuestTracker>();
-        if (questTracker)
-        {
-            talkToPNJ = true;
-        }
-        else
-        {
-            talkToPNJ = false;
-        }
     }
 
-    private void Update()
+    void InitQuestTracker()
     {
-        
+        if (pnjToTalk)
+        {
+            questTracker = GetComponent<QuestTracker>();
+            if (questTracker)
+            {
+                pnjToTalk = true;
+            }
+            else
+            {
+                pnjToTalk = false;
+            }
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,6 +79,7 @@ public class PNJ : BaseUnit
         if (other.CompareTag("Player"))
         {
             UIManager.Instance.uiLinks.pressKeyUI.SetActive(false);
+            other.gameObject.GetComponent<Player>().target = null;
             other.gameObject.GetComponent<Player>().pressKeyAvailable = false;
         }
     }

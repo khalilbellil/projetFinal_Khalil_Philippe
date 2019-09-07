@@ -4,7 +4,9 @@ using UnityEngine;
 using System;
 public class Quest : MonoBehaviour
 {
+    [HideInInspector]
     public bool isAchieved;
+    [HideInInspector]
     public bool questStarted;
 
     public string questName;
@@ -18,6 +20,7 @@ public class Quest : MonoBehaviour
     [Header("Talk To Task:")]
     public bool talkToTaskActive;
     public List<string> pnjNamesToTalk;
+    [HideInInspector]
     public bool talkToDone;
 
 

@@ -1632,7 +1632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAchieved: 0
   questStarted: 0
-  questName: Triple Kill
+  questName: First Kill
   description: Kill 1 ennemies, then talk to Carl
   requiredLvl: 1
   killEnnemyTaskActive: 1

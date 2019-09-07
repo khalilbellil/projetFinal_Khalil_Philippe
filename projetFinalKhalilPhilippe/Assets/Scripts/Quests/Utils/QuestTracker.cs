@@ -6,8 +6,6 @@ public class QuestTracker : MonoBehaviour
 {
 
     public Quest attachedQuest;
-
     public string description;
-
-
+    
 }
