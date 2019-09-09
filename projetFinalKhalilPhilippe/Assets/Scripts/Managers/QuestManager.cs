@@ -60,25 +60,6 @@ public class QuestManager
         activeQuest = pnj.myQuest;
         pnj.questAccepted = true;
         PlayerManager.Instance.player.NotifyPlayer(pnj.myQuest.questName + " Quest ACCEPTED", 4); //Notify the player with UI
-
-        //if (!myActiveQuests.ContainsKey(0))
-        //{
-        //    myActiveQuests[0] = pnj.myQuest;
-        //    pnj.questAccepted = true;
-        //    PlayerManager.Instance.player.NotifyPlayer("Quest ACCEPTED", 4); //Notify the player with UI
-        //}
-        //else if (!myActiveQuests.ContainsKey(1))
-        //{
-        //    myActiveQuests[1] = pnj.myQuest;
-        //    pnj.questAccepted = true;
-        //    PlayerManager.Instance.player.NotifyPlayer("Quest ACCEPTED", 4); //Notify the player with UI
-        //}
-        //else if (!myActiveQuests.ContainsKey(2))
-        //{
-        //    myActiveQuests[2] = pnj.myQuest;
-        //    pnj.questAccepted = true;
-        //    PlayerManager.Instance.player.NotifyPlayer("Quest ACCEPTED", 4); //Notify the player with UI
-        //}
     }
 
     public void DeclineQuest(Quest questToDecline)
@@ -92,14 +73,6 @@ public class QuestManager
         myAchivedQuests.Add(myAchivedQuests.Count, activeQuest);
         PlayerManager.Instance.player.NotifyPlayer(activeQuest.questName + " Quest COMPLETED !", 4); //Notify the player with UI
         activeQuest = null;
-
-        //myActiveQuests[questKey].isAchieved = true;
-
-        ////Transfering the quest from myActiveQuest to MyAchivedQuests:
-        //myAchivedQuests.Add(myAchivedQuests.Count, myActiveQuests[questKey]);
-        //myActiveQuests.Remove(questKey);
-
-        //PlayerManager.Instance.player.NotifyPlayer("Quest COMPLETED !", 4); //Notify the player with UI
     }
 
     public void NotifyQuestThatEnnemyWasKilled()
@@ -111,10 +84,5 @@ public class QuestManager
                 activeQuest.nbEnnemiesToKill--;
             }
         }
-    }
-
-    public void NotifyQuestThatPnjWasTalkedTo()
-    {
-
     }
 }

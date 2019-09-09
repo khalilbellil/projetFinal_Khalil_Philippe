@@ -66,12 +66,30 @@ public class PNJ : BaseUnit
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (pnjToTalk)
         {
-            UIManager.Instance.uiLinks.pressKeyUI.SetActive(true);
-            other.gameObject.GetComponent<Player>().target = this.gameObject;
-            other.gameObject.GetComponent<Player>().pressKeyAvailable = true;
+            if (!questTracker.attachedQuest.talkToDone)
+            {
+                if (other.CompareTag("Player"))
+                {
+
+                    UIManager.Instance.uiLinks.pressKeyUI.SetActive(true);
+                    other.gameObject.GetComponent<Player>().target = this.gameObject;
+                    other.gameObject.GetComponent<Player>().pressKeyAvailable = true;
+                }
+            }
         }
+        else
+        {
+            if (other.CompareTag("Player") && !questAccepted)
+            {
+
+                UIManager.Instance.uiLinks.pressKeyUI.SetActive(true);
+                other.gameObject.GetComponent<Player>().target = this.gameObject;
+                other.gameObject.GetComponent<Player>().pressKeyAvailable = true;
+            }
+        }
+
     }
 
     private void OnTriggerExit(Collider other)

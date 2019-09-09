@@ -42,7 +42,7 @@ public class BaseUnit : MonoBehaviour
 
     [SerializeField] public float health;
     [SerializeField] public float maxHealth;
-    [SerializeField] protected int speed;
+    [SerializeField] public int speed;
     private float dashingSpeed;
     private float dashTimer;       //set the time of the dash
     private float dashCDTimer;     //set the time for after the dash

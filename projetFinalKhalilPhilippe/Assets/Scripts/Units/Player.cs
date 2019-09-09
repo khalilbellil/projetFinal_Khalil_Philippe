@@ -40,19 +40,17 @@ public class Player : BaseUnit
 
         target = null;
         pressKeyAvailable = false;
+
+        
     }
 
     public void PlayerUpdate()
     {
         if (isAlive)
         {
-
             base.UnitUpdate();
             cam.CameraUpdate();
-
-            //UpdateTarget();
             UpdateDialogue();
-
         }
     }
 
@@ -60,9 +58,7 @@ public class Player : BaseUnit
     {
         if (isAlive)
         {
-
             base.UnitFixedUpdate();
-
             Jump();
             UpdateMovement(InputManager.Instance.fixedInputPressed.dirPressed);
             UpdateAnims();
@@ -149,11 +145,15 @@ public class Player : BaseUnit
                     {
                         if (target.GetComponent<PNJ>().pnjToTalk && target.GetComponent<PNJ>().questTracker.attachedQuest.nbEnnemiesToKill == 0 && !target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone)
                         {
-                            DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
+                            //DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
+                            UIManager.Instance.CloseDialogueUI();
+                            UIManager.Instance.SetDialogueUI(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
+                            UIManager.Instance.OpenDialogueUI();
 
+                            target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone = true;
                             target.GetComponent<PNJ>().questTracker.attachedQuest.pnjNamesToTalk.Remove(target.GetComponent<PNJ>().pnjName); //Notify quest that talkTo is done
                         }
-                        if (!target.GetComponent<PNJ>().pnjToTalk && target.GetComponent<PNJ>().thereIsQuestToPropose && !DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questAccepted)
+                        else if (!target.GetComponent<PNJ>().pnjToTalk && target.GetComponent<PNJ>().thereIsQuestToPropose && !DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questAccepted)
                         {
                             DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().myQuest.questName, target.GetComponent<PNJ>().myQuest.description);
                             DialogueManager.Instance.questWasProposed = true;

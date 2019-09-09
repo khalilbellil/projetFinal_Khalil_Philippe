@@ -27,14 +27,13 @@ public class UIManager
     public void Initialize()
     {
         uiLinks = GameObject.FindObjectOfType<UILinks>();
-
-        dialogueUIActive = false;
     }
 
     public void UpdateManager()
     {
         TestDamage();
         OpenCloseQuestsUI();
+        OpenCloseInventoryUI();
     }
 
     public void FixedUpdateManager()
@@ -46,6 +45,41 @@ public class UIManager
     {//Reset everything
         instance = null;
     }
+
+    // INVENTORY FUNCTIONS //
+
+    public void OpenCloseInventoryUI()
+    {
+        if (InputManager.Instance.inputPressed.inventoryPressed)
+        {
+            if (!uiLinks.inventoryUI.activeSelf)
+            {
+                UIManager.Instance.SetStatsValuesInventoryUI(PlayerManager.Instance.player.range, PlayerManager.Instance.player.dmg, PlayerManager.Instance.player.speed, PlayerManager.Instance.player.maxHealth);
+
+                uiLinks.inventoryUI.SetActive(true);
+            }
+            else
+            {
+                uiLinks.inventoryUI.SetActive(false);
+            }
+
+        }
+
+    }
+
+    public void SetStatsValuesInventoryUI(float range, float dammage, float speed, float maxHealth)
+    {
+        uiLinks.rangeValue.text = range.ToString();
+        uiLinks.dammageValue.text = dammage.ToString();
+        uiLinks.speedValue.text = speed.ToString();
+        uiLinks.maxHealthValue.text = maxHealth.ToString();
+    }
+
+    public void LoadInventoryItemsUI()
+    {
+
+    }
+
 
     // QUESTS FUNCTIONS //
 
@@ -90,28 +124,15 @@ public class UIManager
             //UIManager.instance.uiLinks.quest1Title.text = QuestManager.Instance.activeQuest.questName;
             UIManager.instance.uiLinks.quest1Text.text = QuestManager.Instance.activeQuest.description;
         }
-
-        //if (QuestManager.Instance.myActiveQuests.ContainsKey(0))
-        //{
-        //    //UIManager.instance.uiLinks.quest1Title.text = QuestManager.Instance.myActiveQuests[0].questName;
-        //    UIManager.instance.uiLinks.quest1Text.text = QuestManager.Instance.myActiveQuests[0].description;
-        //}
-
-        //if (QuestManager.Instance.myActiveQuests.ContainsKey(1))
-        //{
-        //    //UIManager.instance.uiLinks.quest2Title.text = QuestManager.Instance.myActiveQuests[1].questName;
-        //    UIManager.instance.uiLinks.quest2Text.text = QuestManager.Instance.myActiveQuests[1].description;
-        //}
-
-        //if (QuestManager.Instance.myActiveQuests.ContainsKey(2))
-        //{
-        //    //UIManager.instance.uiLinks.quest3Title.text = QuestManager.Instance.myActiveQuests[2].questName;
-        //    UIManager.instance.uiLinks.quest3Text.text = QuestManager.Instance.myActiveQuests[2].description;
-        //}
     }
 
 
     //DIALOGUE FUNCTIONS //
+
+    public void OpenCloseYesOrNoUI()
+    {
+
+    }
 
     public void SetDialogueUI(string title, string dialogueText)
     {
