@@ -55,16 +55,20 @@ public class QuestManager
 
     // FUNCTIONS //
 
-    public void AcceptQuest(PNJ pnj)
+    public void AcceptQuest()
     {
-        activeQuest = pnj.myQuest;
-        pnj.questAccepted = true;
-        PlayerManager.Instance.player.NotifyPlayer(pnj.myQuest.questName + " Quest ACCEPTED", 4); //Notify the player with UI
+        activeQuest = PlayerManager.Instance.player.target.GetComponent<PNJ>().myQuest;
+        PlayerManager.Instance.player.target.GetComponent<PNJ>().questAccepted = true;
+        PlayerManager.Instance.player.NotifyPlayer(PlayerManager.Instance.player.target.GetComponent<PNJ>().myQuest.questName + " Quest ACCEPTED", 4); //Notify the player with UI
+        UIManager.Instance.CloseYesOrNoUI();
+        DialogueManager.Instance.FinishDialogue();
     }
 
-    public void DeclineQuest(Quest questToDecline)
+    public void DeclineQuest()
     {
-        PlayerManager.Instance.player.NotifyPlayer(questToDecline.questName + " Quest DECLINED", 4); //Notify the player with UI
+        PlayerManager.Instance.player.NotifyPlayer(PlayerManager.Instance.player.target.GetComponent<PNJ>().myQuest.questName + " Quest DECLINED", 4); //Notify the player with UI
+        UIManager.Instance.CloseYesOrNoUI();
+        DialogueManager.Instance.FinishDialogue();
     }
 
     public void CompleteQuest()

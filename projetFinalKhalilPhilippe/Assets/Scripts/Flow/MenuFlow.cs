@@ -28,7 +28,7 @@ public class MenuFlow : Flow
 
     public override void EndFlow()
     {
-
+        base.EndFlow();
     }
 
     public void PlayButton()

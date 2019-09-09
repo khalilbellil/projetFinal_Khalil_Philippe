@@ -5,7 +5,7 @@ public enum CurrentState { Game, Menu, End }
 
 public class MainEntry : MonoBehaviour
 {
-    bool flowInitialized = false;
+    protected bool flowInitialized = false;
     CurrentState currentState;
 
     public Flow curFlow;
@@ -133,6 +133,16 @@ public class MainEntry : MonoBehaviour
         currentState = cs;
         //Initialize the flow script for the scene
         curFlow = InitializeFlowScript(cs, false);
+    }
+
+    public void RestartGame()
+    {
+        GoToNextFlow(CurrentState.Menu);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
 }

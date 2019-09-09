@@ -21,12 +21,19 @@ public class UIManager
     #endregion
 
     public UILinks uiLinks;
+    public MainEntry mainEntry;
 
     public bool dialogueUIActive;
 
     public void Initialize()
     {
+        mainEntry = GameObject.FindObjectOfType<MainEntry>();
         uiLinks = GameObject.FindObjectOfType<UILinks>();
+        uiLinks.acceptButton.onClick.AddListener(QuestManager.Instance.AcceptQuest);
+        uiLinks.declineButton.onClick.AddListener(QuestManager.Instance.DeclineQuest);
+        uiLinks.restartButton.onClick.AddListener(mainEntry.RestartGame);
+        uiLinks.exitButton.onClick.AddListener(mainEntry.ExitGame);
+        
     }
 
     public void UpdateManager()
@@ -45,6 +52,15 @@ public class UIManager
     {//Reset everything
         instance = null;
     }
+
+    // GAMEOVER FUNCTIONS //
+
+    public void OpenGameOverUI()
+    {
+        uiLinks.gameOverUI.SetActive(true);
+        UnlockMouse();
+    }
+
 
     // INVENTORY FUNCTIONS //
 
@@ -129,9 +145,17 @@ public class UIManager
 
     //DIALOGUE FUNCTIONS //
 
-    public void OpenCloseYesOrNoUI()
+    public void OpenYesOrNoUI(string question)
     {
+        uiLinks.yesOrNoText.text = question;
+        uiLinks.yesOrNoUI.SetActive(true);
+        UnlockMouse();
+    }
 
+    public void CloseYesOrNoUI()
+    {
+        uiLinks.yesOrNoUI.SetActive(false);
+        LockMouse();
     }
 
     public void SetDialogueUI(string title, string dialogueText)
@@ -189,6 +213,7 @@ public class UIManager
         uiLinks.pressKeyUI.SetActive(true);
     }
 
+
     // NOTIFICATION FUNCTIONS //
 
     public IEnumerator LaunchNotifyUI(string txt, float time)
@@ -203,10 +228,22 @@ public class UIManager
     }
 
 
-    //DEBUG FUNCTIONS //
+    //MOUSE FUNCTIONS //
 
-    //Temporary HealthBar for an Ennemi
-    
+    public void LockMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void UnlockMouse()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+
+    //DEBUG FUNCTIONS //
 
     void TestDamage()
     {
@@ -219,5 +256,6 @@ public class UIManager
 
         uiLinks.healthBar.fillAmount = a;
     }
+
 
 }

@@ -48,10 +48,9 @@ public class DialogueManager
     {//Reset everything
         instance = null;
     }
+    
 
-    // END //
-
-    //DIALOGUE SYSTEM FUNCTIONS:
+    //DIALOGUE SYSTEM FUNCTIONS //
 
     public void SetNewDialogue(List<string> newDialogue, string dialogueTitle)
     {
@@ -83,6 +82,8 @@ public class DialogueManager
         UIManager.Instance.CloseDialogueUI();
         UIManager.Instance.SetDialogueUI(questTitle, questText);
         UIManager.Instance.OpenDialogueUI();
+
+        UIManager.Instance.OpenYesOrNoUI("Do you accept the quest ?");
     }
 
     public void FinishDialogue()

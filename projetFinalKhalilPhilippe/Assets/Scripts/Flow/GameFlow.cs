@@ -40,6 +40,7 @@ public class GameFlow : Flow
         PlayerManager.Instance.StopManager();
         EnnemyManager.Instance.StopManager();
         QuestManager.Instance.StopManager();
+        base.EndFlow();
     }
 
 

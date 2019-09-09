@@ -29,16 +29,23 @@ public class UILinks : MonoBehaviour
     public Text notifyUIText;
     public Image notifyUI;
 
-    [Header("Inventory")]
+    [Header("Inventory UI :")]
     public GameObject inventoryUI;
     public Text rangeValue;
     public Text dammageValue;
     public Text speedValue;
     public Text maxHealthValue;
 
+    [Header("GameOver UI :")]
+    public GameObject gameOverUI;
+    public Button restartButton;
+    public Button exitButton;
+
     [Header("Others :")]
     public GameObject pressKeyUI;
     public GameObject yesOrNoUI;
+    public Button acceptButton;
+    public Button declineButton;
     public Text yesOrNoText;
 
 }

@@ -52,6 +52,11 @@ public class Player : BaseUnit
             cam.CameraUpdate();
             UpdateDialogue();
         }
+        else
+        {
+            //GAMEOVER UI
+            UIManager.Instance.OpenGameOverUI();
+        }
     }
 
     public void PlayerFixedUpdate()
@@ -105,23 +110,6 @@ public class Player : BaseUnit
 
     public void UpdateDialogue()
     {
-        //Check if Quest was proposed To Accept or Decline:
-        if (InputManager.Instance.inputPressed.leftMouseButtonPressed)
-        {
-            if (DialogueManager.Instance.questWasProposed)
-            {
-                QuestManager.Instance.AcceptQuest(target.GetComponent<PNJ>());
-                DialogueManager.Instance.FinishDialogue();
-            }
-        }
-        else if (InputManager.Instance.inputPressed.rightMouseButtonPressed)
-        {
-            if (DialogueManager.Instance.questWasProposed)
-            {
-                QuestManager.Instance.DeclineQuest(target.GetComponent<PNJ>().myQuest);
-                DialogueManager.Instance.FinishDialogue();
-            }
-        }
 
         //Dialogue System:
         if (InputManager.Instance.inputPressed.interactPressed)
