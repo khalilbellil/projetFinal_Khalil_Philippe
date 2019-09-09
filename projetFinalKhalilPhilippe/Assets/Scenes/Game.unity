@@ -1659,12 +1659,16 @@ MonoBehaviour:
   questName: First Kill
   description: Kill 1 ennemies, then talk to Carl
   requiredLvl: 1
+  itemToGive: {fileID: 0}
   killEnnemyTaskActive: 1
   nbEnnemiesToKill: 1
   talkToTaskActive: 1
   pnjNamesToTalk:
   - Carl
   talkToDone: 0
+  pickUpItemTaskActive: 0
+  itemToPickUp: {fileID: 0}
+  itemPickedUpDone: 0
 --- !u!1 &76123717
 GameObject:
   m_ObjectHideFlags: 0
@@ -4724,7 +4728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1993398045, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.0860176
+      value: -1.0860138
       objectReference: {fileID: 0}
     - target: {fileID: 1716010999336193035, guid: f7674366cf6a0e846a827f17be8d59cb,
         type: 3}
@@ -12252,14 +12256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestsUI: {fileID: 836025400}
-  titleText: {fileID: 1366583056}
-  activeQuestsTitleText: {fileID: 1034399194}
-  quest1Title: {fileID: 0}
-  quest1Text: {fileID: 1814468017}
-  quest2Title: {fileID: 0}
-  quest2Text: {fileID: 1852356418}
-  quest3Title: {fileID: 0}
-  quest3Text: {fileID: 1454703930}
+  questText: {fileID: 1814468017}
+  achivedQuestsText: {fileID: 1852356418}
   dialogueUI: {fileID: 851601854}
   dialogueText: {fileID: 417590427}
   PnjNameText: {fileID: 1116610471}
@@ -12292,6 +12290,7 @@ MonoBehaviour:
   gameOverUI: {fileID: 263491475}
   restartButton: {fileID: 263491474}
   exitButton: {fileID: 263491473}
+  gameOverText: {fileID: 1852826723}
   pressKeyUI: {fileID: 1113567264}
   yesOrNoUI: {fileID: 1522324773}
   acceptButton: {fileID: 1791219515}
@@ -19167,18 +19166,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &1034399194 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8834894927282384463, guid: f7674366cf6a0e846a827f17be8d59cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 263491471}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1038023412
 GameObject:
   m_ObjectHideFlags: 0
@@ -25454,18 +25441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef32aca5605775648898b3555656e436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1366583056 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6587467492984653421, guid: f7674366cf6a0e846a827f17be8d59cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 263491471}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1366718100
 GameObject:
   m_ObjectHideFlags: 0
@@ -26488,18 +26463,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447236909}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1454703930 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8834894927673924598, guid: f7674366cf6a0e846a827f17be8d59cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 263491471}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1456111845
 GameObject:
   m_ObjectHideFlags: 0
@@ -34056,6 +34019,18 @@ MeshFilter:
 --- !u!114 &1852356418 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8834894927419807893, guid: f7674366cf6a0e846a827f17be8d59cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 263491471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1852826723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1715389468654624787, guid: f7674366cf6a0e846a827f17be8d59cb,
     type: 3}
   m_PrefabInstance: {fileID: 263491471}
   m_PrefabAsset: {fileID: 0}
