@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         myItems = new List<Item>();
+
     }
 
     public void AddItem(Item itemToAdd)
@@ -20,13 +21,13 @@ public class Inventory : MonoBehaviour
             if (myItems.Count < slotNb)
             {
                 myItems.Add(itemToAdd);
+                itemToAdd.gameObject.SetActive(false);
                 UIManager.Instance.LaunchNotifyUI("You've picked up an item", 2);
             }
             else
             {
                 UIManager.Instance.LaunchNotifyUI("Inventory is full !", 4);
             }
-           
         }
         else
         {
@@ -39,6 +40,22 @@ public class Inventory : MonoBehaviour
     {
         myItems.Remove(itemToRemove);
         UIManager.Instance.LaunchNotifyUI("You've droped an item", 2);
+    }
+
+    public void DropItem(SlotUI slot)
+    {
+
+        Item removedItem = slot.storedItem;
+        Vector3 newPos = PlayerManager.Instance.player.transform.position + PlayerManager.Instance.player.transform.forward;
+        removedItem.transform.position = new Vector3(newPos.x, .5f, newPos.z);
+        removedItem.transform.rotation = PlayerManager.Instance.player.transform.localRotation;
+        removedItem.gameObject.SetActive(true);
+
+        slot.storedItem.addedToUI = false;
+        slot.empty = true;
+        PlayerManager.Instance.player.inventory.RemoveItem(slot.storedItem);
+        slot.slotImage.texture = null;
+        slot.slotImage.gameObject.SetActive(false);
     }
 
 }

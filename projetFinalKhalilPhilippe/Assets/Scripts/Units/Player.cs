@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : BaseUnit
 {
     public Quest trackedQuest;
-
+    public Inventory inventory;
     Level lvl;
     CameraControler cam;
     Animator animator;
@@ -41,6 +41,7 @@ public class Player : BaseUnit
         target = null;
         pressKeyAvailable = false;
 
+        inventory = GetComponent<Inventory>();
         
     }
 
@@ -116,6 +117,12 @@ public class Player : BaseUnit
         {
             if (target != null)
             {
+                if (target.CompareTag("Item"))
+                {
+                    inventory.AddItem(target.GetComponent<Item>());
+                    UIManager.Instance.ClosePressKeyUI();
+                }
+
                 if (pressKeyAvailable) //Launch dialogue
                 {
                     DialogueManager.Instance.SetNewDialogue(target.GetComponent<PNJ>().dialogue, target.GetComponent<PNJ>().pnjName);
@@ -133,7 +140,6 @@ public class Player : BaseUnit
                     {
                         if (target.GetComponent<PNJ>().pnjToTalk && target.GetComponent<PNJ>().questTracker.attachedQuest.nbEnnemiesToKill == 0 && !target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone)
                         {
-                            //DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
                             UIManager.Instance.CloseDialogueUI();
                             UIManager.Instance.SetDialogueUI(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
                             UIManager.Instance.OpenDialogueUI();
@@ -153,7 +159,10 @@ public class Player : BaseUnit
                     }
                 }
             }
-
+            else
+            {
+                UIManager.Instance.CloseDialogueUI();
+            }
         }
     }
 

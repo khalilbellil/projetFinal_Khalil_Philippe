@@ -22,6 +22,7 @@ public class UIManager
 
     public UILinks uiLinks;
     public MainEntry mainEntry;
+    public List<SlotUI> mySlots;
 
     public bool dialogueUIActive;
 
@@ -33,7 +34,11 @@ public class UIManager
         uiLinks.declineButton.onClick.AddListener(QuestManager.Instance.DeclineQuest);
         uiLinks.restartButton.onClick.AddListener(mainEntry.RestartGame);
         uiLinks.exitButton.onClick.AddListener(mainEntry.ExitGame);
-        
+        mySlots = uiLinks.slotsUI;
+        foreach (SlotUI slotUI in mySlots)
+        {
+            slotUI.button.onClick.AddListener(() => { PlayerManager.Instance.player.inventory.DropItem(slotUI); });
+        }
     }
 
     public void UpdateManager()
@@ -70,13 +75,15 @@ public class UIManager
         {
             if (!uiLinks.inventoryUI.activeSelf)
             {
-                UIManager.Instance.SetStatsValuesInventoryUI(PlayerManager.Instance.player.range, PlayerManager.Instance.player.dmg, PlayerManager.Instance.player.speed, PlayerManager.Instance.player.maxHealth);
-
+                SetStatsValuesInventoryUI(PlayerManager.Instance.player.range, PlayerManager.Instance.player.dmg, PlayerManager.Instance.player.speed, PlayerManager.Instance.player.maxHealth);
+                LoadInventoryItemsUI();
                 uiLinks.inventoryUI.SetActive(true);
+                UnlockMouse();
             }
             else
             {
                 uiLinks.inventoryUI.SetActive(false);
+                LockMouse();
             }
 
         }
@@ -93,8 +100,23 @@ public class UIManager
 
     public void LoadInventoryItemsUI()
     {
+        foreach (Item item in PlayerManager.Instance.player.inventory.myItems)
+        {
+            foreach (SlotUI slotUI in mySlots)
+            {
+                if (slotUI.empty == true && item.addedToUI == false)
+                {
+                    item.addedToUI = true;
+                    slotUI.empty = false;
+                    slotUI.slotImage.gameObject.SetActive(true);
+                    slotUI.slotImage.texture = item.slotImage.texture;
+                    slotUI.storedItem = item;
 
+                }
+            }
+        }
     }
+
 
 
     // QUESTS FUNCTIONS //
