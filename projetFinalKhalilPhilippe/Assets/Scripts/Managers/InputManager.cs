@@ -56,8 +56,8 @@ public class InputManager
 
         //Interactions inputs:
         inputPressed.anyKeyPressed = Input.anyKeyDown;
-        inputPressed.inventoryPressed = Input.GetButtonDown("Inventory");
-        inputPressed.interactPressed = Input.GetButtonDown("Interaction");
+        inputPressed.inventoryPressed = rewiredPlayer.GetButtonDown("Inventory");
+        inputPressed.interactPressed = rewiredPlayer.GetButtonDown("Interaction");
         inputPressed.previousSpellPressed = Input.GetButtonDown("Previous Spell");
         inputPressed.nextSpellPressed = Input.GetButtonDown("Next Spell");
         inputPressed.questsPressed = rewiredPlayer.GetButtonDown("OpenQuests");

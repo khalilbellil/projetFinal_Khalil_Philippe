@@ -109,16 +109,25 @@ public class BaseUnit : MonoBehaviour
         if (canAttack)
         {
             Debug.Log("hit");
+            StartCoroutine(PreformDelayAttack(dir));
+            timeLastAttack = Time.time;
+        }       
+    }
+
+    private IEnumerator PreformDelayAttack(Vector3 dir)
+    {
+        yield return new WaitForSeconds(.5f);
+        if(isAlive)
+        {
             Vector3 hitbox = transform.position + dir;
-            RaycastHit[] hits =Physics.BoxCastAll(hitbox,new Vector3(1,1,width),transform.forward,new Quaternion(),range,hitableLayer);
+            RaycastHit[] hits = Physics.BoxCastAll(hitbox, new Vector3(1, 1, width), transform.forward, new Quaternion(), range, hitableLayer);
             foreach (RaycastHit target in hits)
             {
                 target.transform.gameObject.GetComponent<BaseUnit>()?.TakeDamage(dmg);
             }
-            timeLastAttack = Time.time;
         }
-       
     }
+
 
     virtual public void UpdateMovement(Vector3 dir)
     {
