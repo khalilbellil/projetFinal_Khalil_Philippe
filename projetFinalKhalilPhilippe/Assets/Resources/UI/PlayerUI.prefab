@@ -2168,7 +2168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.563266, y: 0.2}
   m_AnchorMax: {x: 0.91600007, y: 0.46842936}
-  m_AnchoredPosition: {x: 0.20000458, y: -0.29999924}
+  m_AnchoredPosition: {x: 0.20000458, y: -0.30000305}
   m_SizeDelta: {x: -0.6800003, y: 1.4300003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1125360739
@@ -3627,7 +3627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.089265935, y: 0.2}
   m_AnchorMax: {x: 0.4314682, y: 0.46842936}
-  m_AnchoredPosition: {x: -0.2999878, y: -0.29999924}
+  m_AnchoredPosition: {x: -0.2999878, y: -0.30000305}
   m_SizeDelta: {x: 1.3199997, y: 1.4300003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1791219517
@@ -4237,85 +4237,6 @@ MonoBehaviour:
   storedItem: {fileID: 0}
   slotImage: {fileID: 1859939071}
   button: {fileID: 1859939070}
---- !u!1 &369620471085202308
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1192667245159246740}
-  - component: {fileID: 6225726005483641666}
-  - component: {fileID: 7499571537113983817}
-  m_Layer: 5
-  m_Name: Quest1Title
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1192667245159246740
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369620471085202308}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2401595744905744789}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.083620235, y: 0.70484024}
-  m_AnchorMax: {x: 0.4144306, y: 0.75600004}
-  m_AnchoredPosition: {x: 0.39001465, y: 0.32000732}
-  m_SizeDelta: {x: 0.7900009, y: 1.24}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &6225726005483641666
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369620471085202308}
-  m_CullTransparentMesh: 0
---- !u!114 &7499571537113983817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369620471085202308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9094448, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 3
-    m_BestFit: 1
-    m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 
 --- !u!1 &1630545676913984845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4526,7 +4447,7 @@ GameObject:
   - component: {fileID: 347639379193844722}
   - component: {fileID: 1833587900069310135}
   m_Layer: 5
-  m_Name: Quest2Title
+  m_Name: AchivedQuestTitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4544,12 +4465,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2401595744905744789}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.083620235, y: 0.51142013}
-  m_AnchorMax: {x: 0.4144306, y: 0.56356764}
-  m_AnchoredPosition: {x: 0.47000122, y: 0.19000053}
-  m_SizeDelta: {x: 0.63, y: -0.51}
+  m_AnchorMin: {x: 0.3338587, y: 0.38185725}
+  m_AnchorMax: {x: 0.66800004, y: 0.42600003}
+  m_AnchoredPosition: {x: -0.25239563, y: -1}
+  m_SizeDelta: {x: 0.6300049, y: 1.4899979}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &347639379193844722
 CanvasRenderer:
@@ -4581,7 +4502,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 16
     m_FontStyle: 3
     m_BestFit: 1
     m_MinSize: 1
@@ -4592,7 +4513,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'ACHIVED QUESTS:'
 --- !u!1 &4588559396309450118
 GameObject:
   m_ObjectHideFlags: 0
@@ -4746,12 +4667,9 @@ RectTransform:
   m_Children:
   - {fileID: 2200994146158812718}
   - {fileID: 8834894927282384462}
-  - {fileID: 1192667245159246740}
   - {fileID: 8834894929152652077}
   - {fileID: 3065588440321732030}
   - {fileID: 8834894927419807892}
-  - {fileID: 5540664812688853559}
-  - {fileID: 8834894927673924597}
   m_Father: {fileID: 8834894928729408243}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4889,7 +4807,7 @@ GameObject:
   - component: {fileID: 4440910513988376450}
   - component: {fileID: 1715389468654624787}
   m_Layer: 5
-  m_Name: TitleText
+  m_Name: gameOverText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5069,7 +4987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41500002, y: 0.11750633}
   m_AnchorMax: {x: 0.5913949, y: 0.24060833}
-  m_AnchoredPosition: {x: -2.3894958, y: -0.05001831}
+  m_AnchoredPosition: {x: -2.3894958, y: -0.050048828}
   m_SizeDelta: {x: 2.7789898, y: 5.526001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6379361284994571329
@@ -5152,85 +5070,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &7267635422525475395
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5540664812688853559}
-  - component: {fileID: 2390714582612848395}
-  - component: {fileID: 6979969794252388693}
-  m_Layer: 5
-  m_Name: Quest3Title
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5540664812688853559
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267635422525475395}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2401595744905744789}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.083620235, y: 0.31755027}
-  m_AnchorMax: {x: 0.4144306, y: 0.37424856}
-  m_AnchoredPosition: {x: 0.17300415, y: 0.5200043}
-  m_SizeDelta: {x: 1.22, y: -0.5}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2390714582612848395
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267635422525475395}
-  m_CullTransparentMesh: 0
---- !u!114 &6979969794252388693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267635422525475395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9094448, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 3
-    m_BestFit: 1
-    m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 
 --- !u!1 &7737990212444883562
 GameObject:
   m_ObjectHideFlags: 0
@@ -5712,7 +5551,7 @@ GameObject:
   - component: {fileID: 8834894927419807894}
   - component: {fileID: 8834894927419807893}
   m_Layer: 5
-  m_Name: Quest2Text
+  m_Name: AchivedQuestText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5730,12 +5569,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2401595744905744789}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.083620235, y: 0.38881627}
-  m_AnchorMax: {x: 0.9278405, y: 0.51142013}
-  m_AnchoredPosition: {x: 0.2000122, y: 0.099998474}
-  m_SizeDelta: {x: 0.19000244, y: -0.38999987}
+  m_AnchorMin: {x: 0.083620235, y: 0.19000001}
+  m_AnchorMax: {x: 0.9278405, y: 0.37}
+  m_AnchoredPosition: {x: 0.2000122, y: 0.20999146}
+  m_SizeDelta: {x: 0.19000006, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8834894927419807894
 CanvasRenderer:
@@ -5929,85 +5768,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &8834894927673924596
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8834894927673924597}
-  - component: {fileID: 8834894927673924599}
-  - component: {fileID: 8834894927673924598}
-  m_Layer: 5
-  m_Name: Quest3Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8834894927673924597
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8834894927673924596}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2401595744905744789}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.083620235, y: 0.19700001}
-  m_AnchorMax: {x: 0.9278405, y: 0.31755027}
-  m_AnchoredPosition: {x: 0.2000122, y: 0.5999756}
-  m_SizeDelta: {x: -0.80999756, y: 0.6100006}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8834894927673924599
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8834894927673924596}
-  m_CullTransparentMesh: 0
---- !u!114 &8834894927673924598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8834894927673924596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9094448, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 10
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 
 --- !u!1 &8834894928049070517
 GameObject:
   m_ObjectHideFlags: 0
@@ -6511,7 +6271,7 @@ GameObject:
   - component: {fileID: 8834894929152652079}
   - component: {fileID: 8834894929152652078}
   m_Layer: 5
-  m_Name: Quest1Text
+  m_Name: QuestText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6529,7 +6289,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2401595744905744789}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.083620235, y: 0.5843265}
   m_AnchorMax: {x: 0.9278405, y: 0.70484024}

@@ -13,6 +13,8 @@ public class Quest : MonoBehaviour
     public string description;
     public int requiredLvl;
 
+    public Item itemToGive;
+
     [Header("Kill Ennemy Task:")]
     public bool killEnnemyTaskActive;
     public int nbEnnemiesToKill;
@@ -23,38 +25,64 @@ public class Quest : MonoBehaviour
     [HideInInspector]
     public bool talkToDone;
 
+    [Header("PickUp Item Task:")]
+    public bool pickUpItemTaskActive;
+    public Item itemToPickUp;
+    [HideInInspector]
+    public bool itemPickedUpDone;
+
 
     private void Start()
     {
         //Init:
         isAchieved = false;
         questStarted = false;
+        InitTasks();
     }
 
     private void Update()
     {
-        UpdateTasks();
+        UpdateTasksStatus();
     }
 
-    public void UpdateTasks()
+    public void InitTasks()
     {
-        if (!isAchieved &&killEnnemyTaskActive)
+        if (!killEnnemyTaskActive)
         {
-            if (nbEnnemiesToKill == 0)
+            nbEnnemiesToKill = 0;
+        }
+        if (!talkToTaskActive)
+        {
+            talkToDone = true;
+
+        }
+        if (!pickUpItemTaskActive)
+        {
+            itemPickedUpDone = true;
+        }
+    }
+
+    public void UpdateTasksStatus()
+    {
+        if (!isAchieved)
+        {
+            if (nbEnnemiesToKill == 0 && talkToDone && itemPickedUpDone)
             {
-                if (!talkToTaskActive)
-                {
-                    QuestManager.Instance.CompleteQuest();
-                }
-                else
-                {
-                    if (pnjNamesToTalk.Count == 0)
-                    {
-                        QuestManager.Instance.CompleteQuest();
-                    }
-                }
+                QuestManager.Instance.CompleteQuest(itemToGive);
             }
         }
     }
 
+    public bool IsOtherTasksDone()
+    {
+        if (nbEnnemiesToKill == 0 && itemPickedUpDone)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
 }

@@ -7,14 +7,8 @@ public class UILinks : MonoBehaviour
 {
     [Header("Quests UI :")]
     public GameObject QuestsUI;
-    public Text titleText;
-    public Text activeQuestsTitleText;
-    public Text quest1Title;
-    public Text quest1Text;
-    public Text quest2Title;
-    public Text quest2Text;
-    public Text quest3Title;
-    public Text quest3Text;
+    public Text questText;
+    public Text achivedQuestsText;
 
     [Header("PNJ UI :")]
     public GameObject dialogueUI;
@@ -42,6 +36,7 @@ public class UILinks : MonoBehaviour
     public GameObject gameOverUI;
     public Button restartButton;
     public Button exitButton;
+    public Text gameOverText;
 
     [Header("Others :")]
     public GameObject pressKeyUI;

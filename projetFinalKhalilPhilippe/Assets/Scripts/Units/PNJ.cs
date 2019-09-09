@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PNJ : BaseUnit
 {
+    public TextMesh textMesh;
     public bool pnjToTalk;
+    public bool pnjWithQuest;
     public string pnjName;
     public List<string> dialogue;
     [HideInInspector]
@@ -23,10 +25,10 @@ public class PNJ : BaseUnit
     {
         base.Init();
         unitName = pnjName;
+        textMesh.text = pnjName;
 
         InitQuest();
         InitQuestTracker();
-        
     }
 
     private void Update()
@@ -68,11 +70,10 @@ public class PNJ : BaseUnit
     {
         if (pnjToTalk)
         {
-            if (!questTracker.attachedQuest.talkToDone)
+            if (!questTracker.attachedQuest.talkToDone || thereIsQuestToPropose)
             {
                 if (other.CompareTag("Player"))
                 {
-
                     UIManager.Instance.uiLinks.pressKeyUI.SetActive(true);
                     other.gameObject.GetComponent<Player>().target = this.gameObject;
                     other.gameObject.GetComponent<Player>().pressKeyAvailable = true;

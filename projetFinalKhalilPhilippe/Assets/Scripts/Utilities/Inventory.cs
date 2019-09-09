@@ -22,17 +22,17 @@ public class Inventory : MonoBehaviour
                 myItems.Add(itemToAdd);
                 itemToAdd.ActivateEffects();
                 itemToAdd.gameObject.SetActive(false);
-                UIManager.Instance.LaunchNotifyUI("You've picked up an item", 2);
+                PlayerManager.Instance.player.NotifyPlayer("You've picked up an item", 2);
             }
             else
             {
-                UIManager.Instance.LaunchNotifyUI("Inventory is full !", 4);
+                PlayerManager.Instance.player.NotifyPlayer("Inventory is full !", 4);
             }
         }
         else
         {
             //add item in the same slot that the existing one (and increment the nb of units of this item)
-            UIManager.Instance.LaunchNotifyUI("Inventory already contains this item !", 4);
+            PlayerManager.Instance.player.NotifyPlayer("Inventory already contains this item !", 4);
         }
     }
 
@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
     {
         myItems.Remove(itemToRemove);
         itemToRemove.DesactivateEffects();
-        UIManager.Instance.LaunchNotifyUI("You've droped an item", 2);
+        PlayerManager.Instance.player.NotifyPlayer("You've droped an item", 2);
     }
 
     public void DropItem(SlotUI slot)

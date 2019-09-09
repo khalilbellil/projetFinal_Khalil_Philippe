@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4328082111572308525
 Transform:
   m_ObjectHideFlags: 0
@@ -123,16 +123,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfa95f89bc819a46bf8fd97293d233d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotImage: {fileID: 0}
+  slotImage: {fileID: 21300000, guid: 3cc211087e543b8478d19b9ad28c65eb, type: 3}
   prefabDir: Items/Cube
   id: 0
   itemName: cube
   description: it's a cube
-  itemType: 0
-  multiplySpeedBy: 0
-  multiplyDmgBy: 0
-  healthToAdd: 20
-  maxHealthToAdd: 0
+  itemType: 1
+  multiplySpeedBy: 1
+  multiplyDmgBy: 2
+  maxHealthToAdd: 2
+  healthToAdd: 0
   addedToUI: 0
 --- !u!135 &1124261707
 SphereCollider:

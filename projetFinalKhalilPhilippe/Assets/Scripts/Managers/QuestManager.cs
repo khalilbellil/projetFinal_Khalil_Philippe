@@ -26,15 +26,18 @@ public class QuestManager
     }
     #endregion
 
+    public int nbOfQuestsToWin;
+
     //public Dictionary<int, Quest> myActiveQuests;
     public Quest activeQuest;
-    public Dictionary<int, Quest> myAchivedQuests;
+    public List<Quest> myAchivedQuests;
 
     public void Initialize()
     {
         //myActiveQuests = new Dictionary<int, Quest>();
         activeQuest = null;
-        myAchivedQuests = new Dictionary<int, Quest>();
+        myAchivedQuests = new List<Quest>();
+        nbOfQuestsToWin = GameObject.FindObjectsOfType<Quest>().Length;
         
     }
 
@@ -57,11 +60,21 @@ public class QuestManager
 
     public void AcceptQuest()
     {
-        activeQuest = PlayerManager.Instance.player.target.GetComponent<PNJ>().myQuest;
-        PlayerManager.Instance.player.target.GetComponent<PNJ>().questAccepted = true;
-        PlayerManager.Instance.player.NotifyPlayer(PlayerManager.Instance.player.target.GetComponent<PNJ>().myQuest.questName + " Quest ACCEPTED", 4); //Notify the player with UI
-        UIManager.Instance.CloseYesOrNoUI();
-        DialogueManager.Instance.FinishDialogue();
+        if (activeQuest == null)
+        {
+            activeQuest = PlayerManager.Instance.player.target.GetComponent<PNJ>().myQuest;
+            PlayerManager.Instance.player.target.GetComponent<PNJ>().questAccepted = true;
+            PlayerManager.Instance.player.NotifyPlayer(PlayerManager.Instance.player.target.GetComponent<PNJ>().myQuest.questName + " Quest ACCEPTED", 4); //Notify the player with UI
+            UIManager.Instance.CloseYesOrNoUI();
+            DialogueManager.Instance.FinishDialogue();
+            PlayerManager.Instance.player.target.GetComponent<PNJ>().thereIsQuestToPropose = false;
+        }
+        else
+        {
+            PlayerManager.Instance.player.NotifyPlayer("You already have an active quest !", 4);
+            PlayerManager.Instance.player.target.GetComponent<PNJ>().thereIsQuestToPropose = true;
+        }
+
     }
 
     public void DeclineQuest()
@@ -71,12 +84,18 @@ public class QuestManager
         DialogueManager.Instance.FinishDialogue();
     }
 
-    public void CompleteQuest()
+    public void CompleteQuest(Item itemToAdd)
     {
         activeQuest.isAchieved = true;
-        myAchivedQuests.Add(myAchivedQuests.Count, activeQuest);
+        myAchivedQuests.Add(activeQuest);
         PlayerManager.Instance.player.NotifyPlayer(activeQuest.questName + " Quest COMPLETED !", 4); //Notify the player with UI
+        UIManager.Instance.uiLinks.questText.text = "";
         activeQuest = null;
+
+        if (itemToAdd != null)
+        {
+            PlayerManager.Instance.player.inventory.AddItem(itemToAdd);
+        }
     }
 
     public void NotifyQuestThatEnnemyWasKilled()

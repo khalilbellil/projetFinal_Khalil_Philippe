@@ -60,8 +60,9 @@ public class UIManager
 
     // GAMEOVER FUNCTIONS //
 
-    public void OpenGameOverUI()
+    public void OpenGameOverUI(string _gameOverText)
     {
+        uiLinks.gameOverText.text = _gameOverText;
         uiLinks.gameOverUI.SetActive(true);
         UnlockMouse();
     }
@@ -120,22 +121,6 @@ public class UIManager
 
     // QUESTS FUNCTIONS //
 
-    public void AddQuestToUI(Quest _quest)
-    {
-        if (uiLinks.quest1Text.text != "")
-        {
-            uiLinks.quest1Text.text = _quest.description;
-        }
-        else if (uiLinks.quest2Text.text != "")
-        {
-            uiLinks.quest2Text.text = _quest.description;
-        }
-        else if (uiLinks.quest3Text.text != "")
-        {
-            uiLinks.quest3Text.text = _quest.description;
-        }
-    }
-
     public void OpenCloseQuestsUI()
     {
         if (InputManager.Instance.inputPressed.questsPressed)
@@ -158,8 +143,15 @@ public class UIManager
     {
         if (QuestManager.Instance.activeQuest != null)
         {
-            //UIManager.instance.uiLinks.quest1Title.text = QuestManager.Instance.activeQuest.questName;
-            UIManager.instance.uiLinks.quest1Text.text = QuestManager.Instance.activeQuest.description;
+            uiLinks.questText.text = QuestManager.Instance.activeQuest.questName + ":  " + QuestManager.Instance.activeQuest.description;
+        }
+        if ((QuestManager.Instance.myAchivedQuests.Count != 0))
+        {
+            uiLinks.achivedQuestsText.text = QuestManager.Instance.myAchivedQuests[0].questName + "  //  ";
+            for (int i = 1; i < QuestManager.Instance.myAchivedQuests.Count; i++)
+            {
+                uiLinks.achivedQuestsText.text += QuestManager.Instance.myAchivedQuests[i].questName + "  //  ";
+            }
         }
     }
 

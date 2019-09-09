@@ -20,6 +20,8 @@ public class Player : BaseUnit
 
     public bool pressKeyAvailable;
 
+    bool playerWin;
+
 
     // BASIC FUNCTIONS //
 
@@ -52,11 +54,20 @@ public class Player : BaseUnit
             base.UnitUpdate();
             cam.CameraUpdate();
             UpdateDialogue();
+            UpdateWin();
         }
         else
         {
             //GAMEOVER UI
-            UIManager.Instance.OpenGameOverUI();
+            if (playerWin)
+            {
+                UIManager.Instance.OpenGameOverUI("YOU WIN !");
+            }
+            else
+            {
+                UIManager.Instance.OpenGameOverUI("GAME OVER");
+            }
+            
         }
     }
 
@@ -120,6 +131,13 @@ public class Player : BaseUnit
                 if (target.CompareTag("Item"))
                 {
                     inventory.AddItem(target.GetComponent<Item>());
+                    if (QuestManager.Instance.activeQuest != null)
+                    {
+                        if (QuestManager.Instance.activeQuest.pickUpItemTaskActive)
+                        {
+                            QuestManager.Instance.activeQuest.itemPickedUpDone = true;
+                        }
+                    }
                     UIManager.Instance.ClosePressKeyUI();
                 }
 
@@ -138,19 +156,29 @@ public class Player : BaseUnit
                     }
                     else //Dialogue was finished -> now display the quest proposition
                     {
-                        if (target.GetComponent<PNJ>().pnjToTalk && target.GetComponent<PNJ>().questTracker.attachedQuest.nbEnnemiesToKill == 0 && !target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone)
+                        if (target.GetComponent<PNJ>().pnjToTalk)
                         {
-                            UIManager.Instance.CloseDialogueUI();
-                            UIManager.Instance.SetDialogueUI(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
-                            UIManager.Instance.OpenDialogueUI();
+                            if (!target.GetComponent<PNJ>().thereIsQuestToPropose && target.GetComponent<PNJ>().questTracker.attachedQuest.IsOtherTasksDone())
+                            {
+                                UIManager.Instance.CloseDialogueUI();
+                                UIManager.Instance.SetDialogueUI(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
+                                UIManager.Instance.OpenDialogueUI();
 
-                            target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone = true;
-                            target.GetComponent<PNJ>().questTracker.attachedQuest.pnjNamesToTalk.Remove(target.GetComponent<PNJ>().pnjName); //Notify quest that talkTo is done
+                                target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone = true;
+                                target.GetComponent<PNJ>().questTracker.attachedQuest.pnjNamesToTalk.Remove(target.GetComponent<PNJ>().pnjName); //Notify quest that talkTo is done
+                            }
+                            else if (target.GetComponent<PNJ>().thereIsQuestToPropose) //if pnjToTalk and has a quest, propose the quest first
+                            {
+                                DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().myQuest.questName, target.GetComponent<PNJ>().myQuest.description);
+                                DialogueManager.Instance.questWasProposed = true;
+                            }
+
                         }
                         else if (!target.GetComponent<PNJ>().pnjToTalk && target.GetComponent<PNJ>().thereIsQuestToPropose && !DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questAccepted)
                         {
                             DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().myQuest.questName, target.GetComponent<PNJ>().myQuest.description);
                             DialogueManager.Instance.questWasProposed = true;
+                            target.GetComponent<PNJ>().thereIsQuestToPropose = false;
                         }
                         else //Stop Dialogue
                         {
@@ -206,5 +234,16 @@ public class Player : BaseUnit
         base.Death();
         animator.SetTrigger("DeathTrigger");
         transform.position = new Vector3(transform.position.x, -1, transform.position.z);
+        playerWin = false;
     }
+
+    public void UpdateWin()
+    {
+        if (QuestManager.Instance.myAchivedQuests.Count == QuestManager.Instance.nbOfQuestsToWin)
+        {
+            playerWin = true;
+            isAlive = false;
+        }
+    }
+
 }
