@@ -58,6 +58,15 @@ public class UIManager
         instance = null;
     }
 
+    //HealthBarUI //
+
+    void UpdateHealthBarUI()
+    {
+        float a = (float)PlayerManager.Instance.player.health / PlayerManager.Instance.player.maxHealth;
+        uiLinks.healthBar.fillAmount = a;
+    }
+
+
     // GAMEOVER FUNCTIONS //
 
     public void OpenGameOverUI(string _gameOverText)
@@ -258,10 +267,5 @@ public class UIManager
 
     //DEBUG FUNCTIONS //
 
-    void UpdateHealthBarUI()
-    {
-        float a = (float)PlayerManager.Instance.player.health / PlayerManager.Instance.player.maxHealth;
-        uiLinks.healthBar.fillAmount = a;
-    }
-    
+
 }

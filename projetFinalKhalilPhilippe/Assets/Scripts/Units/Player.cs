@@ -150,7 +150,7 @@ public class Player : BaseUnit
                 }
                 else if (UIManager.Instance.dialogueUIActive)
                 {
-                    if (DialogueManager.Instance.thereIsTextToShow)
+                    if (DialogueManager.Instance.thereIsTextToShow && DialogueManager.Instance.thereIsTextToShow)
                     {
                         DialogueManager.Instance.LaunchDialogue();
                     }
@@ -158,19 +158,26 @@ public class Player : BaseUnit
                     {
                         if (target.GetComponent<PNJ>().pnjToTalk)
                         {
-                            if (!target.GetComponent<PNJ>().thereIsQuestToPropose && target.GetComponent<PNJ>().questTracker.attachedQuest.IsOtherTasksDone())
+                            if (target.GetComponent<PNJ>().questTracker.attachedQuest.IsOtherTasksDone())
                             {
-                                UIManager.Instance.CloseDialogueUI();
-                                UIManager.Instance.SetDialogueUI(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
-                                UIManager.Instance.OpenDialogueUI();
+                                if (target.GetComponent<PNJ>().thereIsQuestToPropose)
+                                {
+                                    if (!DialogueManager.Instance.questWasProposed && !target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone)
+                                    {
+                                        UIManager.Instance.CloseDialogueUI();
+                                        UIManager.Instance.SetDialogueUI(target.GetComponent<PNJ>().questTracker.attachedQuest.questName, target.GetComponent<PNJ>().questTracker.description);
+                                        UIManager.Instance.OpenDialogueUI();
 
-                                target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone = true;
-                                target.GetComponent<PNJ>().questTracker.attachedQuest.pnjNamesToTalk.Remove(target.GetComponent<PNJ>().pnjName); //Notify quest that talkTo is done
-                            }
-                            else if (target.GetComponent<PNJ>().thereIsQuestToPropose) //if pnjToTalk and has a quest, propose the quest first
-                            {
-                                DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().myQuest.questName, target.GetComponent<PNJ>().myQuest.description);
-                                DialogueManager.Instance.questWasProposed = true;
+                                        target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone = true;
+                                        target.GetComponent<PNJ>().questTracker.attachedQuest.pnjNamesToTalk.Remove(target.GetComponent<PNJ>().pnjName); //Notify quest that talkTo is done
+                                    }
+                                    else if (target.GetComponent<PNJ>().questTracker.attachedQuest.talkToDone)
+                                    {
+                                        DialogueManager.Instance.LaunchQuestDialogue(target.GetComponent<PNJ>().myQuest.questName, target.GetComponent<PNJ>().myQuest.description);
+                                        DialogueManager.Instance.questWasProposed = true;
+                                        target.GetComponent<PNJ>().thereIsQuestToPropose = false;
+                                    }
+                                }
                             }
 
                         }
