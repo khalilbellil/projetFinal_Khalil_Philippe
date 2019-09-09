@@ -4713,6 +4713,24 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.30000305
       objectReference: {fileID: 0}
+    - target: {fileID: 8084060304107974022, guid: f7674366cf6a0e846a827f17be8d59cb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448302496, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.114990234
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993398045, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.0860176
+      objectReference: {fileID: 0}
+    - target: {fileID: 1716010999336193035, guid: f7674366cf6a0e846a827f17be8d59cb,
+        type: 3}
+      propertyPath: m_Text
+      value: Press "F"/"B" to interact
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
 --- !u!114 &263491472 stripped
@@ -16089,9 +16107,18 @@ MonoBehaviour:
       _userAssignable: 1
       _categoryId: 0
     - _id: 7
-      _name: OpenDialogueTemp
+      _name: Interaction
       _type: 1
       _descriptiveName: OpenDialogueTemp
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 8
+      _name: Inventory
+      _type: 1
+      _descriptiveName: inventory
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
@@ -16106,7 +16133,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 0000000001000000020000000300000004000000050000000600000007000000
+        actionIds: 000000000100000002000000030000000400000005000000060000000700000008000000
     inputBehaviors:
     - _id: 0
       _name: Default
@@ -16210,7 +16237,7 @@ MonoBehaviour:
       - _actionCategoryId: 0
         _actionId: 4
         _elementType: 1
-        _elementIdentifierId: 5
+        _elementIdentifierId: 7
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
@@ -16243,7 +16270,18 @@ MonoBehaviour:
       - _actionCategoryId: 0
         _actionId: 7
         _elementType: 1
-        _elementIdentifierId: 8
+        _elementIdentifierId: 5
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 0
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 8
+        _elementType: 1
+        _elementIdentifierId: 15
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
@@ -16343,7 +16381,18 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 101
+        _keyboardKeyCode: 102
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 8
+        _elementType: 1
+        _elementIdentifierId: -1
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 105
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -16382,7 +16431,7 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 2
-    actionIdCounter: 8
+    actionIdCounter: 9
     actionCategoryIdCounter: 1
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 1

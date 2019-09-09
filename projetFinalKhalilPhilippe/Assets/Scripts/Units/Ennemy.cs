@@ -71,14 +71,13 @@ public class Ennemy : BaseUnit
             if(unitName == "1")
             Debug.Log(currentAction);
             UpdateAnims();
-
             switch (currentAction)
             {
                 case States.Attack:
                     transform.LookAt(target);
+                    anim.SetTrigger("AttackTrigger");
                     UseWeapon(transform.forward);
                     currentSpeed = 0;
-                    anim.SetTrigger("AttackTrigger");
                     UpdateSight();
                     break;
                 case States.Chase:
@@ -120,7 +119,7 @@ public class Ennemy : BaseUnit
     {
         if (unitName == "1" && States.Chase == currentAction)
             Debug.Log("Sense check, target: " + target + ", in chase");
-        Vector3 rayDir = (target) ? (target.position - transform.position).normalized : transform.forward;
+        Vector3 rayDir = (PlayerManager.Instance.player.transform.position - transform.position).normalized;// : transform.forward;
         //float Iseerange = (target) ? sightRange : lockOnRange;
 
         Collider[] temp = Physics.OverlapSphere(transform.position, 3, hitableLayer);
@@ -134,12 +133,18 @@ public class Ennemy : BaseUnit
 
         if (!target)
         {
-            if (Physics.Raycast(transform.position, rayDir, out hit, sightRange, sightLayer) && (hitableLayer == (hitableLayer | (1 << hit.transform.gameObject.layer))))
-            {
-                target = hit.transform;
-                EnnemyManager.Instance.SeeTarget(target, this);
-                return true;
-            }
+            Vector2 pV2 = new Vector2(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.z);
+            Vector2 eV2 = new Vector2(transform.position.x, transform.position.z);
+            float angToPlayer = Vector2.Angle(transform.forward,(eV2-pV2).normalized);
+            if (unitName == "1")
+                Debug.Log(angToPlayer);
+            if (angToPlayer> 140)
+                if (Physics.Raycast(transform.position, rayDir, out hit, sightRange, sightLayer) && (hitableLayer == (hitableLayer | (1 << hit.transform.gameObject.layer))))
+                {
+                    target = hit.transform;
+                    EnnemyManager.Instance.SeeTarget(target, this);
+                    return true;
+                }
             return false;
         }
         else
