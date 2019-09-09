@@ -35,6 +35,7 @@ public class UILinks : MonoBehaviour
     public Text dammageValue;
     public Text speedValue;
     public Text maxHealthValue;
+    public Text healthValue;
     public List<SlotUI> slotsUI;
 
     [Header("GameOver UI :")]

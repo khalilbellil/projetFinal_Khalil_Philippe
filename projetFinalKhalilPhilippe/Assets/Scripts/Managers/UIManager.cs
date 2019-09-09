@@ -43,7 +43,7 @@ public class UIManager
 
     public void UpdateManager()
     {
-        TestDamage();
+        UpdateHealthBarUI();
         OpenCloseQuestsUI();
         OpenCloseInventoryUI();
     }
@@ -75,7 +75,7 @@ public class UIManager
         {
             if (!uiLinks.inventoryUI.activeSelf)
             {
-                SetStatsValuesInventoryUI(PlayerManager.Instance.player.range, PlayerManager.Instance.player.dmg, PlayerManager.Instance.player.speed, PlayerManager.Instance.player.maxHealth);
+                SetStatsValuesInventoryUI(PlayerManager.Instance.player.range, PlayerManager.Instance.player.dmg, PlayerManager.Instance.player.speed, PlayerManager.Instance.player.maxHealth, PlayerManager.Instance.player.health);
                 LoadInventoryItemsUI();
                 uiLinks.inventoryUI.SetActive(true);
                 UnlockMouse();
@@ -85,17 +85,16 @@ public class UIManager
                 uiLinks.inventoryUI.SetActive(false);
                 LockMouse();
             }
-
         }
-
     }
 
-    public void SetStatsValuesInventoryUI(float range, float dammage, float speed, float maxHealth)
+    public void SetStatsValuesInventoryUI(float range, float dammage, float speed, float maxHealth, float health)
     {
         uiLinks.rangeValue.text = range.ToString();
         uiLinks.dammageValue.text = dammage.ToString();
         uiLinks.speedValue.text = speed.ToString();
         uiLinks.maxHealthValue.text = maxHealth.ToString();
+        uiLinks.healthValue.text = health.ToString();
     }
 
     public void LoadInventoryItemsUI()
@@ -267,17 +266,10 @@ public class UIManager
 
     //DEBUG FUNCTIONS //
 
-    void TestDamage()
+    void UpdateHealthBarUI()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            PlayerManager.Instance.player.TakeDamage(10);
-            Debug.Log("new hp amount: " + PlayerManager.Instance.player.health);
-        }
         float a = (float)PlayerManager.Instance.player.health / PlayerManager.Instance.player.maxHealth;
-
         uiLinks.healthBar.fillAmount = a;
     }
-
-
+    
 }

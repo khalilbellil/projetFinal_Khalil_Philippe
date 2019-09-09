@@ -11,7 +11,6 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         myItems = new List<Item>();
-
     }
 
     public void AddItem(Item itemToAdd)
@@ -21,6 +20,7 @@ public class Inventory : MonoBehaviour
             if (myItems.Count < slotNb)
             {
                 myItems.Add(itemToAdd);
+                itemToAdd.ActivateEffects();
                 itemToAdd.gameObject.SetActive(false);
                 UIManager.Instance.LaunchNotifyUI("You've picked up an item", 2);
             }
@@ -39,6 +39,7 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(Item itemToRemove)
     {
         myItems.Remove(itemToRemove);
+        itemToRemove.DesactivateEffects();
         UIManager.Instance.LaunchNotifyUI("You've droped an item", 2);
     }
 
@@ -47,8 +48,8 @@ public class Inventory : MonoBehaviour
 
         Item removedItem = slot.storedItem;
         Vector3 newPos = PlayerManager.Instance.player.transform.position + PlayerManager.Instance.player.transform.forward;
-        removedItem.transform.position = new Vector3(newPos.x, .5f, newPos.z);
         removedItem.transform.rotation = PlayerManager.Instance.player.transform.localRotation;
+        removedItem.transform.position = new Vector3(newPos.x, newPos.y + .5f, newPos.z);
         removedItem.gameObject.SetActive(true);
 
         slot.storedItem.addedToUI = false;

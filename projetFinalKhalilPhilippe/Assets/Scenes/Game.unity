@@ -4700,6 +4700,19 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8187688510970262647, guid: f7674366cf6a0e846a827f17be8d59cb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.050048828
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791219514, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.30000305
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125360736, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.30000305
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7674366cf6a0e846a827f17be8d59cb, type: 3}
 --- !u!114 &263491472 stripped
@@ -12244,6 +12257,7 @@ MonoBehaviour:
   dammageValue: {fileID: 1555426708}
   speedValue: {fileID: 1552869392}
   maxHealthValue: {fileID: 28433849}
+  healthValue: {fileID: 1500105409}
   slotsUI:
   - {fileID: 953394903}
   - {fileID: 358682027}
@@ -27239,6 +27253,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498888906}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1500105409 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1500105409, guid: f7674366cf6a0e846a827f17be8d59cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 263491471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1502392899
 GameObject:
   m_ObjectHideFlags: 0
@@ -49485,6 +49511,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3cc211087e543b8478d19b9ad28c65eb,
         type: 3}
+    - target: {fileID: 4328082111572308521, guid: 54d021d8aa248df479d54c68dc941e47,
+        type: 3}
+      propertyPath: healthToAdd
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328082111572308521, guid: 54d021d8aa248df479d54c68dc941e47,
+        type: 3}
+      propertyPath: maxHealthToAdd
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328082111572308521, guid: 54d021d8aa248df479d54c68dc941e47,
+        type: 3}
+      propertyPath: itemType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328082111572308521, guid: 54d021d8aa248df479d54c68dc941e47,
+        type: 3}
+      propertyPath: multiplySpeedBy
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328082111572308521, guid: 54d021d8aa248df479d54c68dc941e47,
+        type: 3}
+      propertyPath: multiplyDmgBy
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54d021d8aa248df479d54c68dc941e47, type: 3}
 --- !u!1001 &5925767731552372747
